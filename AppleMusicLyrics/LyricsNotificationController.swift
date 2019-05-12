@@ -101,16 +101,16 @@ class LyricsNotificationController : NSObject {
     }
     
     func postIfNeeded(lyricsLine: LyricsLine) {
+        if previousLine == lyricsLine {
+            return
+        }
+        previousLine = lyricsLine
+        
         if !isPostable {
             pendingInfo = PendingLyricsInfo(line: lyricsLine)
             return
         }
         pendingInfo = nil
-        
-        if previousLine == lyricsLine {
-            return
-        }
-        previousLine = lyricsLine
         
         let lyricsLineContent = lyricsLine.content.trimmingCharacters(in: .whitespacesAndNewlines)
         guard !lyricsLineContent.isEmpty else {
