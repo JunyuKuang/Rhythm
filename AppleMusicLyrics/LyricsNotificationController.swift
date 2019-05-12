@@ -101,6 +101,7 @@ class LyricsNotificationController {
         content.threadIdentifier = identifier // avoid automatic grouping
         
         let request = UNNotificationRequest(identifier: identifier, content: content, trigger: nil)
+        center.add(request)
         
         if maximumNotificationCount > 1 {
             if notificationIndex >= maximumNotificationCount {
@@ -109,7 +110,6 @@ class LyricsNotificationController {
             }
             notificationIndex += 1
         }
-        center.add(request)
     }
     
     func clearNotifications() {
