@@ -105,13 +105,10 @@ class SystemPlayerLyricsController {
             player.playbackState == .playing,
             nowPlaying.item == player.nowPlayingItem else { return }
         
-        let currentPosition = player.currentPlaybackTime + 0.25
+        let currentPosition = player.currentPlaybackTime + 0.25 // add 0.25 second to compensate notification animation
         
-        for line in nowPlaying.lyrics.lines.reversed() {
-            if line.position < currentPosition {
-                notificationController.postIfNeeded(lyricsLine: line)
-                break
-            }
+        if let line = nowPlaying.lyrics.lines.reversed().first(where: { $0.position < currentPosition }) {
+            notificationController.postIfNeeded(lyricsLine: line)
         }
     }
 }
