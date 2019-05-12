@@ -15,6 +15,8 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nonatomic) BOOL isCoverSheetVisible;
 @property (nonatomic, class, readonly) DarwinNotificationObserver *shared;
 
+- (instancetype)init NS_SWIFT_UNAVAILABLE("Use DarwinNotificationObserver.shared instead.");
+
 @end
 
 NS_ASSUME_NONNULL_END
