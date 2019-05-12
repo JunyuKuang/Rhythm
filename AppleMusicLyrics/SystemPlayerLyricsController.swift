@@ -14,12 +14,6 @@ class SystemPlayerLyricsController {
     
     static let shared = SystemPlayerLyricsController()
     
-    private var timer: Timer? {
-        didSet {
-            oldValue?.invalidate()
-        }
-    }
-    
     private init() {
         _ = LyricsNotificationController.shared
         
@@ -43,16 +37,8 @@ class SystemPlayerLyricsController {
             default:
                 break
             }
-            switch player.playbackState {
-            case .playing:
-                self.timer = Timer.scheduledTimer(withTimeInterval: 0.1, repeats: true) { _ in
-                    self.updateLyricsNotificationIfNeeded()
-                }
-            default:
-                self.timer = nil
-            }
         }
-        timer = Timer.scheduledTimer(withTimeInterval: 0.1, repeats: true) { _ in
+        Timer.scheduledTimer(withTimeInterval: 0.1, repeats: true) { _ in
             self.updateLyricsNotificationIfNeeded()
         }
     }
