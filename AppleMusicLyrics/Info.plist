@@ -18,8 +18,27 @@
 	<string>1.0</string>
 	<key>CFBundleVersion</key>
 	<string>1</string>
+	<key>ITSAppUsesNonExemptEncryption</key>
+	<false/>
 	<key>LSRequiresIPhoneOS</key>
 	<true/>
+	<key>NSAppTransportSecurity</key>
+	<dict>
+		<key>NSAllowsArbitraryLoads</key>
+		<true/>
+	</dict>
+	<key>NSAppleMusicUsageDescription</key>
+	<string>This allows the app to get information about currently playing music, so the app can display related lyrics for you.</string>
+	<key>NSLocationAlwaysAndWhenInUseUsageDescription</key>
+	<string>This allows the app to keep running and update lyrics in background. The app won't store or upload your location data. Please select Always Allow.</string>
+	<key>NSLocationAlwaysUsageDescription</key>
+	<string>This allows the app to keep running and update lyrics in background. The app won't store or upload your location data.</string>
+	<key>NSLocationWhenInUseUsageDescription</key>
+	<string>This allows the app to keep running and update lyrics in background. The app won't store or upload your location data.</string>
+	<key>UIBackgroundModes</key>
+	<array>
+		<string>location</string>
+	</array>
 	<key>UILaunchStoryboardName</key>
 	<string>LaunchScreen</string>
 	<key>UIMainStoryboardFile</key>
