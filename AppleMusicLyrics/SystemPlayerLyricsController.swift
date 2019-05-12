@@ -47,14 +47,15 @@ class SystemPlayerLyricsController {
     
     private struct NowPlaying {
         let item: MPMediaItem
-        let lyrics: Lyrics
+        var lyrics: Lyrics
     }
     private var nowPlaying: NowPlaying?
     
     private func update(for nowPlayingItem: MPMediaItem) {
+        guard nowPlayingItem != nowPlaying?.item else { return }
+        
         LyricsNotificationController.shared.clearNotifications()
         
-        guard nowPlayingItem != nowPlaying?.item else { return }
         let title = (nowPlayingItem.title ?? "").trimmingCharacters(in: .whitespacesAndNewlines)
         let artist = (nowPlayingItem.artist ?? "").trimmingCharacters(in: .whitespacesAndNewlines)
         
@@ -72,7 +73,7 @@ class SystemPlayerLyricsController {
             if let nowPlaying = self.nowPlaying, nowPlaying.item == nowPlayingItem {
                 if lyrics.quality > nowPlaying.lyrics.quality {
                     LyricsNotificationController.shared.clearNotifications()
-                    self.nowPlaying = NowPlaying(item: nowPlayingItem, lyrics: lyrics)
+                    self.nowPlaying?.lyrics = lyrics
                     self.updateLyricsNotificationIfNeeded()
                 }
             } else {
