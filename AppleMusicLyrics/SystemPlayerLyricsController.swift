@@ -15,7 +15,11 @@ class SystemPlayerLyricsController {
     static let shared = SystemPlayerLyricsController()
     
     private init() {
-        _ = LyricsNotificationController.shared
+        LyricsNotificationController.shared.lyricsProviderChangeRequestHandler = { source in
+            DispatchQueue.main.async {
+                self.updateNowPlaying(withUserSpecifiedSource: source)
+            }
+        }
         
         let player = MPMusicPlayerController.systemMusicPlayer
         if let nowPlayingItem = player.nowPlayingItem {
@@ -45,9 +49,17 @@ class SystemPlayerLyricsController {
     
     private let lyricsManager = LyricsProviderManager()
     
-    private struct NowPlaying {
+    private class NowPlaying {
         let item: MPMediaItem
+        let searchRequest: LyricsSearchRequest
         var lyrics: Lyrics
+        var userSpecifiedSource: LyricsProviderSource?
+        
+        init(item: MPMediaItem, searchRequest: LyricsSearchRequest, lyrics: Lyrics) {
+            self.item = item
+            self.searchRequest = searchRequest
+            self.lyrics = lyrics
+        }
     }
     private var nowPlaying: NowPlaying?
     
@@ -67,19 +79,33 @@ class SystemPlayerLyricsController {
         
         let request = LyricsSearchRequest(searchTerm: .info(title: title, artist: artist), title: title, artist: artist, duration: duration)
         
-        _ = lyricsManager.searchLyrics(request: request) { lyrics in
+        _ = lyricsManager.searchLyrics(withRequest: request) { lyrics in
             guard nowPlayingItem == MPMusicPlayerController.systemMusicPlayer.nowPlayingItem else { return }
             
             if let nowPlaying = self.nowPlaying, nowPlaying.item == nowPlayingItem {
-                if lyrics.quality > nowPlaying.lyrics.quality {
+                if nowPlaying.userSpecifiedSource == nil, lyrics.quality > nowPlaying.lyrics.quality {
                     LyricsNotificationController.shared.clearNotifications()
-                    self.nowPlaying?.lyrics = lyrics
+                    nowPlaying.lyrics = lyrics
                     self.updateLyricsNotificationIfNeeded()
                 }
             } else {
-                self.nowPlaying = NowPlaying(item: nowPlayingItem, lyrics: lyrics)
+                self.nowPlaying = NowPlaying(item: nowPlayingItem, searchRequest: request, lyrics: lyrics)
                 self.updateLyricsNotificationIfNeeded()
             }
+        }
+    }
+    
+    private func updateNowPlaying(withUserSpecifiedSource source: LyricsProviderSource) {
+        guard let nowPlaying = nowPlaying else { return }
+        nowPlaying.userSpecifiedSource = source
+        
+        guard nowPlaying.lyrics.metadata.source != source else { return }
+        
+        _ = lyricsManager.searchLyrics(withRequest: nowPlaying.searchRequest, sources: [source]) { lyrics in
+            guard self.nowPlaying === nowPlaying else { return }
+            LyricsNotificationController.shared.clearNotifications()
+            nowPlaying.lyrics = lyrics
+            self.updateLyricsNotificationIfNeeded()
         }
     }
     

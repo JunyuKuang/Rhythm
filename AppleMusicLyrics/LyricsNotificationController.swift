@@ -10,7 +10,7 @@ import Foundation
 import UserNotifications
 import LyricsProvider
 
-class LyricsNotificationController {
+class LyricsNotificationController : NSObject {
     
     private struct PendingLyricsInfo {
         let line: LyricsLine
@@ -24,7 +24,12 @@ class LyricsNotificationController {
     
     static let shared = LyricsNotificationController()
     
-    private init() {
+    /// Called when user specify a lyrics provider via notification action.
+    var lyricsProviderChangeRequestHandler: ((LyricsProviderSource) -> Void)?
+    
+    private override init() {
+        super.init()
+        
         let observer = DarwinNotificationObserver.shared
         
         kvoObservers = [
@@ -36,13 +41,18 @@ class LyricsNotificationController {
             },
         ]
         
+        center.delegate = self
+        
         let category: UNNotificationCategory = {
+            let actions = LyricsProviderSource.allCases.map {
+                UNNotificationAction(identifier: $0.rawValue, title: $0.rawValue)
+            }
             let options: UNNotificationCategoryOptions = [.hiddenPreviewsShowTitle, .hiddenPreviewsShowSubtitle]
             
             if #available(iOS 12.0, *) {
                 return UNNotificationCategory(
                     identifier: categoryIdentifier,
-                    actions: [],
+                    actions: actions,
                     intentIdentifiers: [],
                     hiddenPreviewsBodyPlaceholder: "lyricsNotificationHiddenPreview",
                     categorySummaryFormat: "lyricsNotificationSummary",
@@ -51,7 +61,7 @@ class LyricsNotificationController {
             } else {
                 return UNNotificationCategory(
                     identifier: categoryIdentifier,
-                    actions: [],
+                    actions: actions,
                     intentIdentifiers: [],
                     options: options
                 )
@@ -134,5 +144,20 @@ class LyricsNotificationController {
     
     func clearNotifications() {
         center.removeAllDeliveredNotifications()
+    }
+}
+
+
+extension LyricsNotificationController : UNUserNotificationCenterDelegate {
+    
+    func userNotificationCenter(_ center: UNUserNotificationCenter, willPresent notification: UNNotification, withCompletionHandler completionHandler: @escaping (UNNotificationPresentationOptions) -> Void) {
+        completionHandler(.alert)
+    }
+    
+    func userNotificationCenter(_ center: UNUserNotificationCenter, didReceive response: UNNotificationResponse, withCompletionHandler completionHandler: @escaping () -> Void) {
+        if let source = LyricsProviderSource(rawValue: response.actionIdentifier) {
+            lyricsProviderChangeRequestHandler?(source)
+        }
+        completionHandler()
     }
 }
