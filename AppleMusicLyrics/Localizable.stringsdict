@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>lyricsNotificationHiddenPreview</key>
+	<dict>
+		<key>NSStringLocalizedFormatKey</key>
+		<string>%#@preview@</string>
+		<key>preview</key>
+		<dict>
+			<key>NSStringFormatSpecTypeKey</key>
+			<string>NSStringPluralRuleType</string>
+			<key>NSStringFormatValueTypeKey</key>
+			<string>u</string>
+			<key>one</key>
+			<string>Lyrics</string>
+			<key>other</key>
+			<string>%u Lyrics</string>
+		</dict>
+	</dict>
+	<key>lyricsNotificationSummary</key>
+	<dict>
+		<key>NSStringLocalizedFormatKey</key>
+		<string>%#@summary@</string>
+		<key>summary</key>
+		<dict>
+			<key>NSStringFormatSpecTypeKey</key>
+			<string>NSStringPluralRuleType</string>
+			<key>NSStringFormatValueTypeKey</key>
+			<string>u</string>
+			<key>other</key>
+			<string>%u more lyrics</string>
+		</dict>
+	</dict>
+</dict>
+</plist>

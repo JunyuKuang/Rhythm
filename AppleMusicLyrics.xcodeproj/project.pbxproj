@@ -66,6 +66,7 @@
 		FB8A1CF022882BAD00571A63 /* DebugPrint.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB8A1CEF22882BAC00571A63 /* DebugPrint.swift */; };
 		FB8A1CF22288327500571A63 /* LyricsNotificationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB8A1CF12288327500571A63 /* LyricsNotificationController.swift */; };
 		FB8A1CF42288366100571A63 /* SystemPlayerLyricsController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB8A1CF32288366100571A63 /* SystemPlayerLyricsController.swift */; };
+		FB8A1CF6228844D200571A63 /* Localizable.stringsdict in Resources */ = {isa = PBXBuildFile; fileRef = FB8A1CF5228844D200571A63 /* Localizable.stringsdict */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -156,6 +157,7 @@
 		FB8A1CEF22882BAC00571A63 /* DebugPrint.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DebugPrint.swift; sourceTree = "<group>"; };
 		FB8A1CF12288327500571A63 /* LyricsNotificationController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LyricsNotificationController.swift; sourceTree = "<group>"; };
 		FB8A1CF32288366100571A63 /* SystemPlayerLyricsController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SystemPlayerLyricsController.swift; sourceTree = "<group>"; };
+		FB8A1CF5228844D200571A63 /* Localizable.stringsdict */ = {isa = PBXFileReference; lastKnownFileType = text.plist.stringsdict; path = Localizable.stringsdict; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -206,6 +208,7 @@
 				FB8A1CEB22882B8F00571A63 /* LocationManager.swift */,
 				FB8A1C5022871C5700571A63 /* ViewController.swift */,
 				FB8A1CEF22882BAC00571A63 /* DebugPrint.swift */,
+				FB8A1CF5228844D200571A63 /* Localizable.stringsdict */,
 				FB8A1C5222871C5700571A63 /* Main.storyboard */,
 				FB8A1C5522871C5700571A63 /* Assets.xcassets */,
 				FB8A1C5722871C5700571A63 /* LaunchScreen.storyboard */,
@@ -482,6 +485,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				FB8A1C5922871C5700571A63 /* LaunchScreen.storyboard in Resources */,
+				FB8A1CF6228844D200571A63 /* Localizable.stringsdict in Resources */,
 				FB8A1C5622871C5700571A63 /* Assets.xcassets in Resources */,
 				FB8A1C5422871C5700571A63 /* Main.storyboard in Resources */,
 			);

@@ -36,7 +36,27 @@ class LyricsNotificationController {
             },
         ]
         
-        let category = UNNotificationCategory(identifier: categoryIdentifier, actions: [], intentIdentifiers: [], options: [.hiddenPreviewsShowTitle, .hiddenPreviewsShowSubtitle])
+        let category: UNNotificationCategory = {
+            let options: UNNotificationCategoryOptions = [.hiddenPreviewsShowTitle, .hiddenPreviewsShowSubtitle]
+            
+            if #available(iOS 12.0, *) {
+                return UNNotificationCategory(
+                    identifier: categoryIdentifier,
+                    actions: [],
+                    intentIdentifiers: [],
+                    hiddenPreviewsBodyPlaceholder: "lyricsNotificationHiddenPreview",
+                    categorySummaryFormat: "lyricsNotificationSummary",
+                    options: options
+                )
+            } else {
+                return UNNotificationCategory(
+                    identifier: categoryIdentifier,
+                    actions: [],
+                    intentIdentifiers: [],
+                    options: options
+                )
+            }
+        }()
         center.setNotificationCategories([category])
     }
     
@@ -91,9 +111,9 @@ class LyricsNotificationController {
         let content = UNMutableNotificationContent()
         if !translation.isEmpty {
             content.title = lyricsLineContent
-            content.body = translation
+            content.subtitle = translation
         } else {
-            content.body = lyricsLineContent
+            content.title = lyricsLineContent
         }
         content.categoryIdentifier = categoryIdentifier
         
