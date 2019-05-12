@@ -64,6 +64,8 @@
 		FB8A1CED22882B9000571A63 /* LocationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB8A1CEB22882B8F00571A63 /* LocationManager.swift */; };
 		FB8A1CEE22882B9000571A63 /* DarwinNotificationObserver.m in Sources */ = {isa = PBXBuildFile; fileRef = FB8A1CEC22882B9000571A63 /* DarwinNotificationObserver.m */; };
 		FB8A1CF022882BAD00571A63 /* DebugPrint.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB8A1CEF22882BAC00571A63 /* DebugPrint.swift */; };
+		FB8A1CF22288327500571A63 /* LyricsNotificationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB8A1CF12288327500571A63 /* LyricsNotificationController.swift */; };
+		FB8A1CF42288366100571A63 /* SystemPlayerLyricsController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB8A1CF32288366100571A63 /* SystemPlayerLyricsController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -152,6 +154,8 @@
 		FB8A1CEB22882B8F00571A63 /* LocationManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LocationManager.swift; sourceTree = "<group>"; };
 		FB8A1CEC22882B9000571A63 /* DarwinNotificationObserver.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DarwinNotificationObserver.m; sourceTree = "<group>"; };
 		FB8A1CEF22882BAC00571A63 /* DebugPrint.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DebugPrint.swift; sourceTree = "<group>"; };
+		FB8A1CF12288327500571A63 /* LyricsNotificationController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LyricsNotificationController.swift; sourceTree = "<group>"; };
+		FB8A1CF32288366100571A63 /* SystemPlayerLyricsController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SystemPlayerLyricsController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -195,6 +199,8 @@
 			isa = PBXGroup;
 			children = (
 				FB8A1C4E22871C5700571A63 /* AppDelegate.swift */,
+				FB8A1CF32288366100571A63 /* SystemPlayerLyricsController.swift */,
+				FB8A1CF12288327500571A63 /* LyricsNotificationController.swift */,
 				FB8A1CEA22882B8F00571A63 /* DarwinNotificationObserver.h */,
 				FB8A1CEC22882B9000571A63 /* DarwinNotificationObserver.m */,
 				FB8A1CEB22882B8F00571A63 /* LocationManager.swift */,
@@ -497,8 +503,10 @@
 			files = (
 				FB8A1C5122871C5700571A63 /* ViewController.swift in Sources */,
 				FB8A1C4F22871C5700571A63 /* AppDelegate.swift in Sources */,
+				FB8A1CF42288366100571A63 /* SystemPlayerLyricsController.swift in Sources */,
 				FB8A1CED22882B9000571A63 /* LocationManager.swift in Sources */,
 				FB8A1CEE22882B9000571A63 /* DarwinNotificationObserver.m in Sources */,
+				FB8A1CF22288327500571A63 /* LyricsNotificationController.swift in Sources */,
 				FB8A1CF022882BAD00571A63 /* DebugPrint.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

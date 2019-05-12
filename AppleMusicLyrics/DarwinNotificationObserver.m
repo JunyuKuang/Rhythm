@@ -16,8 +16,6 @@
     static dispatch_once_t onceToken;
     dispatch_once(&onceToken, ^{
         instance = [[DarwinNotificationObserver alloc] init];
-        [instance registerBlankScreenObserver];
-        [instance registerLockStateObserver];
     });
     return instance;
 }
@@ -28,6 +26,8 @@
     if (self) {
         self.isDeviceSleepModeEnabled = NO;
         self.isCoverSheetVisible = NO;
+        [self registerBlankScreenObserver];
+        [self registerLockStateObserver];
     }
     return self;
 }
