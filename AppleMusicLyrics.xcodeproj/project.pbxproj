@@ -61,6 +61,9 @@
 		FB8A1CE322882B2800571A63 /* NetEaseResponseSearchResult.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB8A1CB422882B2800571A63 /* NetEaseResponseSearchResult.swift */; };
 		FB8A1CE422882B2800571A63 /* QQResponseSingleLyrics.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB8A1CB622882B2800571A63 /* QQResponseSingleLyrics.swift */; };
 		FB8A1CE522882B2800571A63 /* QQResponseSearchResult.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB8A1CB722882B2800571A63 /* QQResponseSearchResult.swift */; };
+		FB8A1CED22882B9000571A63 /* LocationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB8A1CEB22882B8F00571A63 /* LocationManager.swift */; };
+		FB8A1CEE22882B9000571A63 /* DarwinNotificationObserver.m in Sources */ = {isa = PBXBuildFile; fileRef = FB8A1CEC22882B9000571A63 /* DarwinNotificationObserver.m */; };
+		FB8A1CF022882BAD00571A63 /* DebugPrint.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB8A1CEF22882BAC00571A63 /* DebugPrint.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -145,6 +148,10 @@
 		FB8A1CB622882B2800571A63 /* QQResponseSingleLyrics.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = QQResponseSingleLyrics.swift; sourceTree = "<group>"; };
 		FB8A1CB722882B2800571A63 /* QQResponseSearchResult.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = QQResponseSearchResult.swift; sourceTree = "<group>"; };
 		FB8A1CE622882B5600571A63 /* AppleMusicLyrics-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "AppleMusicLyrics-Bridging-Header.h"; sourceTree = "<group>"; };
+		FB8A1CEA22882B8F00571A63 /* DarwinNotificationObserver.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DarwinNotificationObserver.h; sourceTree = "<group>"; };
+		FB8A1CEB22882B8F00571A63 /* LocationManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LocationManager.swift; sourceTree = "<group>"; };
+		FB8A1CEC22882B9000571A63 /* DarwinNotificationObserver.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DarwinNotificationObserver.m; sourceTree = "<group>"; };
+		FB8A1CEF22882BAC00571A63 /* DebugPrint.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DebugPrint.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -188,7 +195,11 @@
 			isa = PBXGroup;
 			children = (
 				FB8A1C4E22871C5700571A63 /* AppDelegate.swift */,
+				FB8A1CEA22882B8F00571A63 /* DarwinNotificationObserver.h */,
+				FB8A1CEC22882B9000571A63 /* DarwinNotificationObserver.m */,
+				FB8A1CEB22882B8F00571A63 /* LocationManager.swift */,
 				FB8A1C5022871C5700571A63 /* ViewController.swift */,
+				FB8A1CEF22882BAC00571A63 /* DebugPrint.swift */,
 				FB8A1C5222871C5700571A63 /* Main.storyboard */,
 				FB8A1C5522871C5700571A63 /* Assets.xcassets */,
 				FB8A1C5722871C5700571A63 /* LaunchScreen.storyboard */,
@@ -486,6 +497,9 @@
 			files = (
 				FB8A1C5122871C5700571A63 /* ViewController.swift in Sources */,
 				FB8A1C4F22871C5700571A63 /* AppDelegate.swift in Sources */,
+				FB8A1CED22882B9000571A63 /* LocationManager.swift in Sources */,
+				FB8A1CEE22882B9000571A63 /* DarwinNotificationObserver.m in Sources */,
+				FB8A1CF022882BAD00571A63 /* DebugPrint.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
