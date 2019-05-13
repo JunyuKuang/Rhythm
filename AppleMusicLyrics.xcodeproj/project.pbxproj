@@ -9,7 +9,6 @@
 /* Begin PBXBuildFile section */
 		FB8A1C4F22871C5700571A63 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB8A1C4E22871C5700571A63 /* AppDelegate.swift */; };
 		FB8A1C5122871C5700571A63 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB8A1C5022871C5700571A63 /* ViewController.swift */; };
-		FB8A1C5422871C5700571A63 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = FB8A1C5222871C5700571A63 /* Main.storyboard */; };
 		FB8A1C5622871C5700571A63 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = FB8A1C5522871C5700571A63 /* Assets.xcassets */; };
 		FB8A1C5922871C5700571A63 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = FB8A1C5722871C5700571A63 /* LaunchScreen.storyboard */; };
 		FB8A1C7322882ABC00571A63 /* LyricsProvider.h in Headers */ = {isa = PBXBuildFile; fileRef = FB8A1C7122882ABB00571A63 /* LyricsProvider.h */; settings = {ATTRIBUTES = (Public, ); }; };
@@ -67,6 +66,9 @@
 		FB8A1CF22288327500571A63 /* LyricsNotificationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB8A1CF12288327500571A63 /* LyricsNotificationController.swift */; };
 		FB8A1CF42288366100571A63 /* SystemPlayerLyricsController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB8A1CF32288366100571A63 /* SystemPlayerLyricsController.swift */; };
 		FB8A1CF6228844D200571A63 /* Localizable.stringsdict in Resources */ = {isa = PBXBuildFile; fileRef = FB8A1CF5228844D200571A63 /* Localizable.stringsdict */; };
+		FB8A1D00228955CA00571A63 /* LyricsUI.h in Headers */ = {isa = PBXBuildFile; fileRef = FB8A1CFE228955CA00571A63 /* LyricsUI.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		FB8A1D03228955CA00571A63 /* LyricsUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FB8A1CFC228955CA00571A63 /* LyricsUI.framework */; };
+		FB8A1D04228955CA00571A63 /* LyricsUI.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = FB8A1CFC228955CA00571A63 /* LyricsUI.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -77,6 +79,13 @@
 			remoteGlobalIDString = FB8A1C6E22882ABB00571A63;
 			remoteInfo = LyricsProvider;
 		};
+		FB8A1D01228955CA00571A63 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = FB8A1C4322871C5700571A63 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = FB8A1CFB228955CA00571A63;
+			remoteInfo = LyricsUI;
+		};
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -86,6 +95,7 @@
 			dstPath = "";
 			dstSubfolderSpec = 10;
 			files = (
+				FB8A1D04228955CA00571A63 /* LyricsUI.framework in Embed Frameworks */,
 				FB8A1C7722882ABC00571A63 /* LyricsProvider.framework in Embed Frameworks */,
 			);
 			name = "Embed Frameworks";
@@ -97,7 +107,6 @@
 		FB8A1C4B22871C5700571A63 /* AppleMusicLyrics.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = AppleMusicLyrics.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		FB8A1C4E22871C5700571A63 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		FB8A1C5022871C5700571A63 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
-		FB8A1C5322871C5700571A63 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		FB8A1C5522871C5700571A63 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		FB8A1C5822871C5700571A63 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		FB8A1C5A22871C5700571A63 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -158,6 +167,9 @@
 		FB8A1CF12288327500571A63 /* LyricsNotificationController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LyricsNotificationController.swift; sourceTree = "<group>"; };
 		FB8A1CF32288366100571A63 /* SystemPlayerLyricsController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SystemPlayerLyricsController.swift; sourceTree = "<group>"; };
 		FB8A1CF5228844D200571A63 /* Localizable.stringsdict */ = {isa = PBXFileReference; lastKnownFileType = text.plist.stringsdict; path = Localizable.stringsdict; sourceTree = "<group>"; };
+		FB8A1CFC228955CA00571A63 /* LyricsUI.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = LyricsUI.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		FB8A1CFE228955CA00571A63 /* LyricsUI.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = LyricsUI.h; sourceTree = "<group>"; };
+		FB8A1CFF228955CA00571A63 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -165,11 +177,19 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				FB8A1D03228955CA00571A63 /* LyricsUI.framework in Frameworks */,
 				FB8A1C7622882ABC00571A63 /* LyricsProvider.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 		FB8A1C6C22882ABB00571A63 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		FB8A1CF9228955CA00571A63 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -184,6 +204,7 @@
 			children = (
 				FB8A1C4D22871C5700571A63 /* AppleMusicLyrics */,
 				FB8A1C7022882ABB00571A63 /* LyricsProvider */,
+				FB8A1CFD228955CA00571A63 /* LyricsUI */,
 				FB8A1C4C22871C5700571A63 /* Products */,
 			);
 			sourceTree = "<group>";
@@ -193,6 +214,7 @@
 			children = (
 				FB8A1C4B22871C5700571A63 /* AppleMusicLyrics.app */,
 				FB8A1C6F22882ABB00571A63 /* LyricsProvider.framework */,
+				FB8A1CFC228955CA00571A63 /* LyricsUI.framework */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -209,7 +231,6 @@
 				FB8A1C5022871C5700571A63 /* ViewController.swift */,
 				FB8A1CEF22882BAC00571A63 /* DebugPrint.swift */,
 				FB8A1CF5228844D200571A63 /* Localizable.stringsdict */,
-				FB8A1C5222871C5700571A63 /* Main.storyboard */,
 				FB8A1C5522871C5700571A63 /* Assets.xcassets */,
 				FB8A1C5722871C5700571A63 /* LaunchScreen.storyboard */,
 				FB8A1C5A22871C5700571A63 /* Info.plist */,
@@ -385,6 +406,15 @@
 			path = QQ;
 			sourceTree = "<group>";
 		};
+		FB8A1CFD228955CA00571A63 /* LyricsUI */ = {
+			isa = PBXGroup;
+			children = (
+				FB8A1CFE228955CA00571A63 /* LyricsUI.h */,
+				FB8A1CFF228955CA00571A63 /* Info.plist */,
+			);
+			path = LyricsUI;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXHeadersBuildPhase section */
@@ -393,6 +423,14 @@
 			buildActionMask = 2147483647;
 			files = (
 				FB8A1C7322882ABC00571A63 /* LyricsProvider.h in Headers */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		FB8A1CF7228955CA00571A63 /* Headers */ = {
+			isa = PBXHeadersBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				FB8A1D00228955CA00571A63 /* LyricsUI.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -412,6 +450,7 @@
 			);
 			dependencies = (
 				FB8A1C7522882ABC00571A63 /* PBXTargetDependency */,
+				FB8A1D02228955CA00571A63 /* PBXTargetDependency */,
 			);
 			name = AppleMusicLyrics;
 			productName = AppleMusicLyrics;
@@ -436,6 +475,24 @@
 			productReference = FB8A1C6F22882ABB00571A63 /* LyricsProvider.framework */;
 			productType = "com.apple.product-type.framework";
 		};
+		FB8A1CFB228955CA00571A63 /* LyricsUI */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = FB8A1D05228955CA00571A63 /* Build configuration list for PBXNativeTarget "LyricsUI" */;
+			buildPhases = (
+				FB8A1CF7228955CA00571A63 /* Headers */,
+				FB8A1CF8228955CA00571A63 /* Sources */,
+				FB8A1CF9228955CA00571A63 /* Frameworks */,
+				FB8A1CFA228955CA00571A63 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = LyricsUI;
+			productName = LyricsUI;
+			productReference = FB8A1CFC228955CA00571A63 /* LyricsUI.framework */;
+			productType = "com.apple.product-type.framework";
+		};
 /* End PBXNativeTarget section */
 
 /* Begin PBXProject section */
@@ -458,6 +515,9 @@
 					FB8A1C6E22882ABB00571A63 = {
 						CreatedOnToolsVersion = 10.2.1;
 					};
+					FB8A1CFB228955CA00571A63 = {
+						CreatedOnToolsVersion = 10.2.1;
+					};
 				};
 			};
 			buildConfigurationList = FB8A1C4622871C5700571A63 /* Build configuration list for PBXProject "AppleMusicLyrics" */;
@@ -475,6 +535,7 @@
 			targets = (
 				FB8A1C4A22871C5700571A63 /* AppleMusicLyrics */,
 				FB8A1C6E22882ABB00571A63 /* LyricsProvider */,
+				FB8A1CFB228955CA00571A63 /* LyricsUI */,
 			);
 		};
 /* End PBXProject section */
@@ -487,11 +548,17 @@
 				FB8A1C5922871C5700571A63 /* LaunchScreen.storyboard in Resources */,
 				FB8A1CF6228844D200571A63 /* Localizable.stringsdict in Resources */,
 				FB8A1C5622871C5700571A63 /* Assets.xcassets in Resources */,
-				FB8A1C5422871C5700571A63 /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 		FB8A1C6D22882ABB00571A63 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		FB8A1CFA228955CA00571A63 /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -568,6 +635,13 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		FB8A1CF8228955CA00571A63 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
@@ -576,17 +650,14 @@
 			target = FB8A1C6E22882ABB00571A63 /* LyricsProvider */;
 			targetProxy = FB8A1C7422882ABC00571A63 /* PBXContainerItemProxy */;
 		};
+		FB8A1D02228955CA00571A63 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = FB8A1CFB228955CA00571A63 /* LyricsUI */;
+			targetProxy = FB8A1D01228955CA00571A63 /* PBXContainerItemProxy */;
+		};
 /* End PBXTargetDependency section */
 
 /* Begin PBXVariantGroup section */
-		FB8A1C5222871C5700571A63 /* Main.storyboard */ = {
-			isa = PBXVariantGroup;
-			children = (
-				FB8A1C5322871C5700571A63 /* Base */,
-			);
-			name = Main.storyboard;
-			sourceTree = "<group>";
-		};
 		FB8A1C5722871C5700571A63 /* LaunchScreen.storyboard */ = {
 			isa = PBXVariantGroup;
 			children = (
@@ -813,6 +884,62 @@
 			};
 			name = Release;
 		};
+		FB8A1D06228955CA00571A63 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_IDENTITY = "";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEFINES_MODULE = YES;
+				DEVELOPMENT_TEAM = FF973S8UP2;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				INFOPLIST_FILE = LyricsUI/Info.plist;
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = com.jonny.LyricsUI;
+				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
+				SKIP_INSTALL = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VERSIONING_SYSTEM = "apple-generic";
+				VERSION_INFO_PREFIX = "";
+			};
+			name = Debug;
+		};
+		FB8A1D07228955CA00571A63 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_IDENTITY = "";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEFINES_MODULE = YES;
+				DEVELOPMENT_TEAM = FF973S8UP2;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				INFOPLIST_FILE = LyricsUI/Info.plist;
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = com.jonny.LyricsUI;
+				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
+				SKIP_INSTALL = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VERSIONING_SYSTEM = "apple-generic";
+				VERSION_INFO_PREFIX = "";
+			};
+			name = Release;
+		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
@@ -839,6 +966,15 @@
 			buildConfigurations = (
 				FB8A1C7922882ABC00571A63 /* Debug */,
 				FB8A1C7A22882ABC00571A63 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		FB8A1D05228955CA00571A63 /* Build configuration list for PBXNativeTarget "LyricsUI" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				FB8A1D06228955CA00571A63 /* Debug */,
+				FB8A1D07228955CA00571A63 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
