@@ -6,7 +6,8 @@
 //  Copyright © 2019 Jonny Kuang. All rights reserved.
 //
 
-#import <UIKit/UIKit.h>
+@import UIKit;
+@import LyricsProvider;
 
 //! Project version number for LyricsUI.
 FOUNDATION_EXPORT double LyricsUIVersionNumber;
