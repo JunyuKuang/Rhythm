@@ -11,6 +11,9 @@ public class LyricsTableViewController: UITableViewController {
     public var lyrics: Lyrics? {
         didSet {
             tableView.reloadData()
+            if tableView.numberOfRows(inSection: 0) > 0 {
+                tableView.selectRow(at: IndexPath(row: 0, section: 0), animated: false, scrollPosition: .middle)
+            }
         }
     }
     
@@ -31,17 +34,11 @@ public class LyricsTableViewController: UITableViewController {
     public override func viewDidLoad() {
         super.viewDidLoad()
         
-        tableView.allowsSelection = false
+        tableView.separatorStyle = .none
         tableView.estimatedRowHeight = 56
         tableView.rowHeight = UITableView.automaticDimension
         
-        Timer.scheduledTimer(withTimeInterval: 0.1, repeats: true) { [weak self] timer in
-            if let self = self {
-                self.scrollToSelectedRowWhenIdle()
-            } else {
-                timer.invalidate()
-            }
-        }
+        configureObservers()
     }
 
     
@@ -67,7 +64,11 @@ public class LyricsTableViewController: UITableViewController {
         
         cell.textLabel?.font = UIFont.preferredFont(forTextStyle: .headline)
         cell.detailTextLabel?.font = UIFont.preferredFont(forTextStyle: .subheadline)
-        cell.detailTextLabel?.alpha = 0.7
+        
+        cell.textLabel?.numberOfLines = 0
+        cell.detailTextLabel?.numberOfLines = 0
+        
+        cell.selectionStyle = .none
         
         return cell
     }
@@ -105,16 +106,57 @@ public class LyricsTableViewController: UITableViewController {
             lastInteractionDate = Date()
         }
     }
+    
+    // forbidden user interaction initiated selection.
+    public override func tableView(_ tableView: UITableView, willSelectRowAt indexPath: IndexPath) -> IndexPath? {
+        return nil
+    }
 }
 
 
-private class LyricsTableViewCell : UITableViewCell {
+class LyricsTableViewCell : UITableViewCell {
     
-    override var isSelected: Bool {
-        didSet {
-            let textColor = isSelected ? UIColor(red: 0, green: 122/255, blue: 1, alpha: 1) : .darkText
-            textLabel?.textColor = textColor
-            detailTextLabel?.textColor = textColor
+    override func setSelected(_ selected: Bool, animated: Bool) {
+        super.setSelected(selected, animated: animated)
+        
+        let textColor = selected ? tintColor! : .darkText
+        textLabel?.textColor = textColor
+        detailTextLabel?.textColor = textColor
+    }
+}
+
+
+private extension LyricsTableViewController {
+    
+    func configureObservers() {
+        let playerController = SystemPlayerLyricsController.shared
+        playerController.nowPlayingUpdateHandler = { [weak self] nowPlaying in
+            DispatchQueue.main.async {
+                if let nowPlaying = nowPlaying {
+                    self?.lyrics = nowPlaying.lyrics
+                    self?.title = nowPlaying.item.title
+                } else {
+                    self?.lyrics = nil
+                    self?.title = "Not Playing"
+                }
+            }
         }
+        playerController.lyricsLineUpdateHandler = { [weak self] line in
+            DispatchQueue.main.async {
+                self?.moveFocus(to: line)
+            }
+        }
+        playerController.nowPlayingUpdateHandler?(playerController.nowPlaying)
+    }
+    
+    func moveFocus(to line: LyricsLine) {
+        guard let lyrics = lyrics,
+            let index = lyrics.lines.firstIndex(where: { $0.position == line.position }) else { return }
+        
+        let indexPath = IndexPath(row: index, section: 0)
+        guard indexPath != tableView.indexPathForSelectedRow else { return }
+        
+        tableView.selectRow(at: indexPath, animated: false, scrollPosition: .none)
+        self.scrollToSelectedRowWhenIdle()
     }
 }

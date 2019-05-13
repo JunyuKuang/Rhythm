@@ -8,6 +8,7 @@
 
 @import UIKit;
 @import LyricsProvider;
+@import LyricsCore;
 
 //! Project version number for LyricsUI.
 FOUNDATION_EXPORT double LyricsUIVersionNumber;

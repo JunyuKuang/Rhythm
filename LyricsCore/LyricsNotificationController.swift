@@ -10,7 +10,7 @@ import Foundation
 import UserNotifications
 import LyricsProvider
 
-class LyricsNotificationController : NSObject {
+public class LyricsNotificationController : NSObject {
     
     private struct PendingLyricsInfo {
         let line: LyricsLine
@@ -22,7 +22,7 @@ class LyricsNotificationController : NSObject {
     
     private var kvoObservers = [NSKeyValueObservation]()
     
-    static let shared = LyricsNotificationController()
+    public static let shared = LyricsNotificationController()
     
     /// Called when user specify a lyrics provider via notification action.
     var lyricsProviderChangeRequestHandler: ((LyricsProviderSource) -> Void)?
@@ -150,11 +150,11 @@ class LyricsNotificationController : NSObject {
 
 extension LyricsNotificationController : UNUserNotificationCenterDelegate {
     
-    func userNotificationCenter(_ center: UNUserNotificationCenter, willPresent notification: UNNotification, withCompletionHandler completionHandler: @escaping (UNNotificationPresentationOptions) -> Void) {
+    public func userNotificationCenter(_ center: UNUserNotificationCenter, willPresent notification: UNNotification, withCompletionHandler completionHandler: @escaping (UNNotificationPresentationOptions) -> Void) {
         completionHandler(.alert)
     }
     
-    func userNotificationCenter(_ center: UNUserNotificationCenter, didReceive response: UNNotificationResponse, withCompletionHandler completionHandler: @escaping () -> Void) {
+    public func userNotificationCenter(_ center: UNUserNotificationCenter, didReceive response: UNNotificationResponse, withCompletionHandler completionHandler: @escaping () -> Void) {
         if let source = LyricsProviderSource(rawValue: response.actionIdentifier) {
             lyricsProviderChangeRequestHandler?(source)
         }
