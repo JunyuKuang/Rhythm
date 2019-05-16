@@ -7,27 +7,28 @@
 //
 
 import UIKit
-import MediaPlayer
 import UserNotifications
-
-import LyricsProvider
 import LyricsUI
 
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
     
-    var window: UIWindow?
+    var window: UIWindow? { get { return mainWindow } set {} }
+    
+    private lazy var mainWindow = UIWindow()
     
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
-        _ = LyricsNotificationController.shared
+        _ = LyricsNotificationController.shared // register observers to track the visible state of iOS Notification Center
         
-        let window = UIWindow()
-        self.window = window
-        window.tintColor = UIColor(red: 1, green: 45/255, blue: 85/255, alpha: 1) // match Apple Music
-        window.rootViewController = UIViewController()
-        window.rootViewController?.view.backgroundColor = .white
-        window.makeKeyAndVisible()
+        mainWindow.tintColor = .globalTint
+        
+        let placeholderNavigationController = UINavigationController(rootViewController: UIViewController())
+        placeholderNavigationController.isToolbarHidden = false
+        placeholderNavigationController.view.backgroundColor = .white
+        
+        mainWindow.rootViewController = placeholderNavigationController
+        mainWindow.makeKeyAndVisible()
         
         return true
     }
@@ -37,13 +38,19 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     }
     
     private lazy var requestPermissions: Void = {
-        MPMediaLibrary.requestAuthorization { _ in
-            DispatchQueue.main.async {
-                _ = SystemPlayerLyricsController.shared
-                UNUserNotificationCenter.current().requestAuthorization(options: .alert) { _, _ in
-                    DispatchQueue.main.async {
+        MPMediaLibrary.requestAuthorization { status in
+            let canAccessMediaLibrary = status == .authorized
+            UNUserNotificationCenter.current().requestAuthorization(options: .alert) { canPostNotification, _ in
+                DispatchQueue.main.async {
+                    if canAccessMediaLibrary, canPostNotification {
                         LocationManager.shared.start()
+                        _ = SystemPlayerLyricsController.shared
+                        _ = NowPlayingNotificationManager.shared
                         self.configureWindow()
+                    } else {
+                        UIApplication.shared.open(URL(string: UIApplication.openSettingsURLString)!) { _ in
+                            exit(0)
+                        }
                     }
                 }
             }
@@ -51,8 +58,11 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     }()
     
     private func configureWindow() {
-        let lyricsTVC = LyricsTableViewController()
-        window?.rootViewController = UINavigationController(rootViewController: lyricsTVC)
-        window?.makeKeyAndVisible()
+        let lyricsTVC = LyricsContainerViewController()
+        let navigationController = UINavigationController(rootViewController: lyricsTVC)
+        navigationController.isToolbarHidden = false
+        
+        mainWindow.rootViewController = navigationController
+        mainWindow.makeKeyAndVisible()
     }
 }

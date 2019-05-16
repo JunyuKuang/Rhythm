@@ -1,6 +1,5 @@
 //
 //  DebugPrint.swift
-//  Screenshots
 //
 //  Created by Jonny on 3/13/16.
 //  Copyright © 2016 Jonny. All rights reserved.

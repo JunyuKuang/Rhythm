@@ -24,8 +24,6 @@ public class LyricsNotificationController : NSObject {
     
     public static let shared = LyricsNotificationController()
     
-    /// Called when user specify a lyrics provider via notification action.
-    var lyricsProviderChangeRequestHandler: ((LyricsProviderSource) -> Void)?
     
     private override init() {
         super.init()
@@ -51,7 +49,7 @@ public class LyricsNotificationController : NSObject {
             
             if #available(iOS 12.0, *) {
                 return UNNotificationCategory(
-                    identifier: categoryIdentifier,
+                    identifier: LyricsNotificationController.categoryIdentifier,
                     actions: actions,
                     intentIdentifiers: [],
                     hiddenPreviewsBodyPlaceholder: "lyricsNotificationHiddenPreview",
@@ -60,7 +58,7 @@ public class LyricsNotificationController : NSObject {
                 )
             } else {
                 return UNNotificationCategory(
-                    identifier: categoryIdentifier,
+                    identifier: LyricsNotificationController.categoryIdentifier,
                     actions: actions,
                     intentIdentifiers: [],
                     options: options
@@ -72,11 +70,12 @@ public class LyricsNotificationController : NSObject {
     
     private func postPendingLyricsIfNeeded() {
         if isPostable, let pendingInfo = pendingInfo, Date().timeIntervalSince(pendingInfo.creationDate) < 5 {
-            postIfNeeded(lyricsLine: pendingInfo.line)
+            self.pendingInfo = nil
+            _postIfNeeded(lyricsLine: pendingInfo.line)
         }
     }
     
-    private let categoryIdentifier = "lyrics"
+    static let categoryIdentifier = "lyrics"
     
     /// Can we post lyrics notification right now?
     ///
@@ -88,16 +87,15 @@ public class LyricsNotificationController : NSObject {
     
     private var previousLine: LyricsLine?
     
-    /// Default is true.
-    var showsLyricsTranslationIfAvailable = true
-    
-    /// Default is 5.
-    var maximumNotificationCount = 5
+    /// Default is 1.
+    var maximumNotificationCount = 1
     
     private var notificationIndex = 0
     
+    private let notificationIdentifierPrefix = "lyrics"
+    
     private func notificationIdentifier(withIndex index: Int) -> String {
-        return "lyrics\(index)"
+        return "\(notificationIdentifierPrefix)\(index)"
     }
     
     func postIfNeeded(lyricsLine: LyricsLine) {
@@ -112,11 +110,16 @@ public class LyricsNotificationController : NSObject {
         }
         pendingInfo = nil
         
+        _postIfNeeded(lyricsLine: lyricsLine)
+    }
+    
+    private func _postIfNeeded(lyricsLine: LyricsLine) {
         let lyricsLineContent = lyricsLine.content.trimmingCharacters(in: .whitespacesAndNewlines)
         guard !lyricsLineContent.isEmpty else {
             return
         }
-        let translation = !showsLyricsTranslationIfAvailable ? "" : (lyricsLine.attachments.translation()?.trimmingCharacters(in: .whitespacesAndNewlines) ?? "")
+        let showsTranslation = UserDefaults.appGroup.showsLyricsTranslationIfAvailable
+        let translation = !showsTranslation ? "" : (lyricsLine.attachments.translation()?.trimmingCharacters(in: .whitespacesAndNewlines) ?? "")
         
         let content = UNMutableNotificationContent()
         if !translation.isEmpty {
@@ -125,7 +128,7 @@ public class LyricsNotificationController : NSObject {
         } else {
             content.title = lyricsLineContent
         }
-        content.categoryIdentifier = categoryIdentifier
+        content.categoryIdentifier = LyricsNotificationController.categoryIdentifier
         
         let identifier = notificationIdentifier(withIndex: notificationIndex)
         content.threadIdentifier = identifier // avoid automatic grouping
@@ -143,21 +146,21 @@ public class LyricsNotificationController : NSObject {
     }
     
     func clearNotifications() {
-        center.removeAllDeliveredNotifications()
+        let prefix = notificationIdentifierPrefix
+        center.getDeliveredNotifications { notifications in
+            let lyricsNotifications = notifications.filter { $0.request.identifier.hasPrefix(prefix) }
+            self.center.removeDeliveredNotifications(withIdentifiers: lyricsNotifications.map { $0.request.identifier })
+        }
     }
 }
 
 
 extension LyricsNotificationController : UNUserNotificationCenterDelegate {
     
-    public func userNotificationCenter(_ center: UNUserNotificationCenter, willPresent notification: UNNotification, withCompletionHandler completionHandler: @escaping (UNNotificationPresentationOptions) -> Void) {
-        completionHandler(.alert)
-    }
-    
-    public func userNotificationCenter(_ center: UNUserNotificationCenter, didReceive response: UNNotificationResponse, withCompletionHandler completionHandler: @escaping () -> Void) {
-        if let source = LyricsProviderSource(rawValue: response.actionIdentifier) {
-            lyricsProviderChangeRequestHandler?(source)
-        }
-        completionHandler()
+    public func userNotificationCenter(_ center: UNUserNotificationCenter,
+                                       willPresent notification: UNNotification,
+                                       withCompletionHandler completionHandler: @escaping (UNNotificationPresentationOptions) -> Void)
+    {
+        completionHandler(UIApplication.shared.applicationState != .active ? .alert : [])
     }
 }

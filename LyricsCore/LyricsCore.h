@@ -6,7 +6,9 @@
 //  Copyright © 2019 Jonny Kuang. All rights reserved.
 //
 
-#import <UIKit/UIKit.h>
+@import UIKit;
+@import MediaPlayer;
+@import LyricsProvider;
 
 //! Project version number for LyricsCore.
 FOUNDATION_EXPORT double LyricsCoreVersionNumber;

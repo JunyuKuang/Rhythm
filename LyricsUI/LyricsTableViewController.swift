@@ -11,15 +11,6 @@ public class LyricsTableViewController: UITableViewController {
     public var lyrics: Lyrics? {
         didSet {
             tableView.reloadData()
-            if tableView.numberOfRows(inSection: 0) > 0 {
-                tableView.selectRow(at: IndexPath(row: 0, section: 0), animated: false, scrollPosition: .middle)
-            }
-        }
-    }
-    
-    public var showsLyricsTranslationIfAvailable = true {
-        didSet {
-            tableView.reloadData()
         }
     }
     
@@ -38,8 +29,19 @@ public class LyricsTableViewController: UITableViewController {
         tableView.estimatedRowHeight = 56
         tableView.rowHeight = UITableView.automaticDimension
         
-        configureObservers()
+        configureLyricsChangeObservers()
+        
+        showsTranslationObserver = UserDefaults.appGroup.observe(\.showsLyricsTranslationIfAvailable) { [weak self] _, _ in
+            guard let self = self else { return }
+            DispatchQueue.main.async {
+                let indexPath = self.tableView.indexPathForSelectedRow
+                self.tableView.reloadData()
+                self.tableView.selectRow(at: indexPath, animated: false, scrollPosition: .middle)
+            }
+        }
     }
+    
+    private var showsTranslationObserver: NSKeyValueObservation?
 
     
     // MARK: - UITableViewDataSource
@@ -52,9 +54,11 @@ public class LyricsTableViewController: UITableViewController {
         
         let lyricsLine = lyrics!.lines[indexPath.row]
         let lyricsLineContent = lyricsLine.content.trimmingCharacters(in: .whitespacesAndNewlines)
-        let translation = !showsLyricsTranslationIfAvailable ? "" : (lyricsLine.attachments.translation()?.trimmingCharacters(in: .whitespacesAndNewlines) ?? "")
         
-        let requiresDetailLabel = showsLyricsTranslationIfAvailable && !translation.isEmpty
+        let showsTranslation = UserDefaults.appGroup.showsLyricsTranslationIfAvailable
+        let translation = !showsTranslation ? "" : (lyricsLine.attachments.translation()?.trimmingCharacters(in: .whitespacesAndNewlines) ?? "")
+        
+        let requiresDetailLabel = !translation.isEmpty
         let cellStyle: UITableViewCell.CellStyle = requiresDetailLabel ? .subtitle : .default
         let cellIdentifier = "\(cellStyle.rawValue)"
         
@@ -63,7 +67,7 @@ public class LyricsTableViewController: UITableViewController {
         cell.detailTextLabel?.text = translation
         
         cell.textLabel?.font = UIFont.preferredFont(forTextStyle: .headline)
-        cell.detailTextLabel?.font = UIFont.preferredFont(forTextStyle: .subheadline)
+        cell.detailTextLabel?.font = UIFont.preferredFont(forTextStyle: .body)
         
         cell.textLabel?.numberOfLines = 0
         cell.detailTextLabel?.numberOfLines = 0
@@ -128,25 +132,26 @@ class LyricsTableViewCell : UITableViewCell {
 
 private extension LyricsTableViewController {
     
-    func configureObservers() {
-        let playerController = SystemPlayerLyricsController.shared
-        playerController.nowPlayingUpdateHandler = { [weak self] nowPlaying in
-            DispatchQueue.main.async {
-                if let nowPlaying = nowPlaying {
-                    self?.lyrics = nowPlaying.lyrics
-                    self?.title = nowPlaying.item.title
-                } else {
-                    self?.lyrics = nil
-                    self?.title = "Not Playing"
-                }
+    func configureLyricsChangeObservers() {
+        let lyricsUpdateHandler = { [weak self] in
+            if let nowPlaying = SystemPlayerLyricsController.shared.nowPlaying {
+                self?.lyrics = nowPlaying.lyrics
+                self?.title = [nowPlaying.item.title, nowPlaying.item.artist].compactMap { $0?.trimmingCharacters(in: .whitespacesAndNewlines) }.joined(separator: " - ")
+            } else {
+                self?.lyrics = nil
+                self?.title = "Not Playing"
             }
         }
-        playerController.lyricsLineUpdateHandler = { [weak self] line in
-            DispatchQueue.main.async {
+        lyricsUpdateHandler()
+        
+        NotificationCenter.default.addObserver(forName: SystemPlayerLyricsController.nowPlayingLyricsDidChangeNotification, object: nil, queue: .main) { _ in
+            lyricsUpdateHandler()
+        }
+        NotificationCenter.default.addObserver(forName: SystemPlayerLyricsController.lyricsLineDidChangeNotification, object: nil, queue: .main) { [weak self] _ in
+            if let line = SystemPlayerLyricsController.shared.currentLyricsLine {
                 self?.moveFocus(to: line)
             }
         }
-        playerController.nowPlayingUpdateHandler?(playerController.nowPlaying)
     }
     
     func moveFocus(to line: LyricsLine) {

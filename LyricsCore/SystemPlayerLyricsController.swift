@@ -6,60 +6,50 @@
 //  Copyright © 2019 Jonny Kuang. All rights reserved.
 //
 
-import Foundation
-import MediaPlayer
-import LyricsProvider
-
 public class SystemPlayerLyricsController {
     
     public static let shared = SystemPlayerLyricsController()
     
-    public var nowPlayingUpdateHandler: ((NowPlaying?) -> Void)?
-    public var lyricsLineUpdateHandler: ((LyricsLine) -> Void)?
+    public static let nowPlayingLyricsDidChangeNotification = Notification.Name("SystemPlayerLyricsController.nowPlayingLyricsDidChangeNotification")
+    public static let lyricsLineDidChangeNotification = Notification.Name("SystemPlayerLyricsController.lyricsLineDidChangeNotification")
     
     private init() {
-        LyricsNotificationController.shared.lyricsProviderChangeRequestHandler = { source in
-            DispatchQueue.main.async {
-                self.updateNowPlaying(withUserSpecifiedSource: source)
-            }
-        }
-        
         let player = MPMusicPlayerController.systemMusicPlayer
         if let nowPlayingItem = player.nowPlayingItem {
             self.update(for: nowPlayingItem)
         }
+        player.beginGeneratingPlaybackNotifications()
         NotificationCenter.default.addObserver(forName: .MPMusicPlayerControllerNowPlayingItemDidChange, object: player, queue: .main) { _ in
+            self.nowPlaying = nil
             if let nowPlayingItem = player.nowPlayingItem {
                 self.update(for: nowPlayingItem)
-            } else {
-                LyricsNotificationController.shared.clearNotifications()
-                self.nowPlayingUpdateHandler?(nil)
-            }
-        }
-        NotificationCenter.default.addObserver(forName: .MPMusicPlayerControllerPlaybackStateDidChange, object: player, queue: .main) { _ in
-            switch player.playbackState {
-            case .playing:
-                self.updateLyricsNotificationIfNeeded()
-            case .seekingBackward, .seekingForward, .stopped:
-                LyricsNotificationController.shared.clearNotifications()
-            default:
-                break
             }
         }
         Timer.scheduledTimer(withTimeInterval: 0.1, repeats: true) { _ in
-            self.updateLyricsNotificationIfNeeded()
+            self.updateLyricsLineIfNeeded()
+        }
+        
+        userSpecifiedSourceObserver = UserDefaults.appGroup.observe(\.userSpecifiedSourcesByMediaIDs) { _, _ in
+            DispatchQueue.main.async {
+                guard let nowPlaying = self.nowPlaying,
+                    let source = nowPlaying.item.kjy_userSpecifiedSources,
+                    source != nowPlaying.userSpecifiedSource else { return }
+                self.updateNowPlaying(withUserSpecifiedSource: source)
+            }
         }
     }
+    
+    private var userSpecifiedSourceObserver: NSKeyValueObservation?
     
     private let lyricsManager = LyricsProviderManager()
     
     public class NowPlaying {
         public let item: MPMediaItem
         public let searchRequest: LyricsSearchRequest
-        public var lyrics: Lyrics
-        public var userSpecifiedSource: LyricsProviderSource?
+        public fileprivate(set) var lyrics: Lyrics
+        public fileprivate(set) var userSpecifiedSource: LyricsProviderSource?
         
-        public var availableLyricsArray = [Lyrics]()
+        public fileprivate(set) var availableLyricsArray = [Lyrics]()
         
         fileprivate init(item: MPMediaItem, searchRequest: LyricsSearchRequest, lyrics: Lyrics) {
             self.item = item
@@ -68,11 +58,9 @@ public class SystemPlayerLyricsController {
         }
     }
     public private(set) var nowPlaying: NowPlaying?
+    public private(set) var currentLyricsLine: LyricsLine?
     
     private func update(for nowPlayingItem: MPMediaItem) {
-        guard nowPlayingItem != nowPlaying?.item else { return }
-        
-        LyricsNotificationController.shared.clearNotifications()
         
         let title = (nowPlayingItem.title ?? "").trimmingCharacters(in: .whitespacesAndNewlines)
         let artist = (nowPlayingItem.artist ?? "").trimmingCharacters(in: .whitespacesAndNewlines)
@@ -90,17 +78,17 @@ public class SystemPlayerLyricsController {
             
             if let nowPlaying = self.nowPlaying, nowPlaying.item == nowPlayingItem {
                 if nowPlaying.userSpecifiedSource == nil, lyrics.quality > nowPlaying.lyrics.quality {
-                    LyricsNotificationController.shared.clearNotifications()
                     nowPlaying.lyrics = lyrics
-                    self.updateLyricsNotificationIfNeeded()
+                    NotificationCenter.default.post(name: SystemPlayerLyricsController.nowPlayingLyricsDidChangeNotification, object: self)
+                    self.updateLyricsLineIfNeeded()
                 }
             } else {
                 self.nowPlaying = NowPlaying(item: nowPlayingItem, searchRequest: request, lyrics: lyrics)
-                self.updateLyricsNotificationIfNeeded()
+                NotificationCenter.default.post(name: SystemPlayerLyricsController.nowPlayingLyricsDidChangeNotification, object: self)
+                self.updateLyricsLineIfNeeded()
             }
             if let nowPlaying = self.nowPlaying {
                 nowPlaying.availableLyricsArray.append(lyrics)
-                self.nowPlayingUpdateHandler?(nowPlaying)
             }
         }
     }
@@ -112,9 +100,8 @@ public class SystemPlayerLyricsController {
         guard nowPlaying.lyrics.metadata.source != source else { return }
         
         let update = {
-            LyricsNotificationController.shared.clearNotifications()
-            self.updateLyricsNotificationIfNeeded()
-            self.nowPlayingUpdateHandler?(nowPlaying)
+            NotificationCenter.default.post(name: SystemPlayerLyricsController.nowPlayingLyricsDidChangeNotification, object: self)
+            self.updateLyricsLineIfNeeded()
         }
         
         if let lyrics = nowPlaying.availableLyricsArray.first(where: { $0.metadata.source == source }) {
@@ -129,7 +116,7 @@ public class SystemPlayerLyricsController {
         }
     }
     
-    private func updateLyricsNotificationIfNeeded() {
+    private func updateLyricsLineIfNeeded() {
         let player = MPMusicPlayerController.systemMusicPlayer
         
         guard let nowPlaying = nowPlaying,
@@ -139,8 +126,8 @@ public class SystemPlayerLyricsController {
         let currentPosition = player.currentPlaybackTime + 0.25 // add 0.25 second to compensate notification animation
         
         if let line = nowPlaying.lyrics.lines.reversed().first(where: { $0.position < currentPosition }) {
-            LyricsNotificationController.shared.postIfNeeded(lyricsLine: line)
-            lyricsLineUpdateHandler?(line)
+            currentLyricsLine = line
+            NotificationCenter.default.post(name: SystemPlayerLyricsController.lyricsLineDidChangeNotification, object: self)
         }
     }
 }

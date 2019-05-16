@@ -1,6 +1,5 @@
 //
 //  LocationManager.swift
-//  AutoLookup
 //
 //  Created by Jonny on 5/22/18.
 //  Copyright © 2018 Junyu Kuang <lightscreen.app@gmail.com>. All rights reserved.
@@ -33,19 +32,17 @@ class LocationManager : NSObject {
             fallthrough
             
         case .authorizedAlways, .authorizedWhenInUse:
-            if CLLocationManager.locationServicesEnabled() {
-                isRunning = true
-                
-                manager.allowsBackgroundLocationUpdates = true
-                manager.pausesLocationUpdatesAutomatically = false
-                
-                manager.desiredAccuracy = kCLLocationAccuracyThreeKilometers
-                manager.distanceFilter = CLLocationDistanceMax
-                
-                manager.startUpdatingLocation()
-                
-                dprint("startUpdatingLocation")
-            }
+            isRunning = true
+            
+            manager.allowsBackgroundLocationUpdates = true
+            manager.pausesLocationUpdatesAutomatically = false
+            
+            manager.desiredAccuracy = kCLLocationAccuracyThreeKilometers
+            manager.distanceFilter = CLLocationDistanceMax
+            
+            manager.startUpdatingLocation()
+            
+            dprint("startUpdatingLocation")
             
         default:
             dprint("location services unavailable")
@@ -76,5 +73,6 @@ extension LocationManager : CLLocationManagerDelegate {
     
     func locationManager(_ manager: CLLocationManager, didFailWithError error: Error) {
         dprint(error)
+        isRunning = false
     }
 }
