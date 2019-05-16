@@ -10,9 +10,6 @@ public class SystemPlayerLyricsController {
     
     public static let shared = SystemPlayerLyricsController()
     
-    public static let nowPlayingLyricsDidChangeNotification = Notification.Name("SystemPlayerLyricsController.nowPlayingLyricsDidChangeNotification")
-    public static let lyricsLineDidChangeNotification = Notification.Name("SystemPlayerLyricsController.lyricsLineDidChangeNotification")
-    
     private init() {
         let player = MPMusicPlayerController.systemMusicPlayer
         if let nowPlayingItem = player.nowPlayingItem {
@@ -32,7 +29,7 @@ public class SystemPlayerLyricsController {
         userSpecifiedSourceObserver = UserDefaults.appGroup.observe(\.userSpecifiedSourcesByMediaIDs) { _, _ in
             DispatchQueue.main.async {
                 guard let nowPlaying = self.nowPlaying,
-                    let source = nowPlaying.item.kjy_userSpecifiedSources,
+                    let source = nowPlaying.item.kjy_userSpecifiedSource,
                     source != nowPlaying.userSpecifiedSource else { return }
                 self.updateNowPlaying(withUserSpecifiedSource: source)
             }
@@ -73,22 +70,32 @@ public class SystemPlayerLyricsController {
         
         let request = LyricsSearchRequest(searchTerm: .info(title: title, artist: artist), title: title, artist: artist, duration: duration)
         
-        _ = lyricsManager.searchLyrics(withRequest: request) { lyrics in
+        var sources = LyricsProviderSource.allCases
+        let userSpecifiedSource = nowPlayingItem.kjy_userSpecifiedSource
+        if let userSpecifiedSource = userSpecifiedSource {
+            sources = [userSpecifiedSource]
+        }
+        
+        _ = lyricsManager.searchLyrics(withRequest: request, sources: sources) { lyrics in
             guard nowPlayingItem == MPMusicPlayerController.systemMusicPlayer.nowPlayingItem else { return }
             
             if let nowPlaying = self.nowPlaying, nowPlaying.item == nowPlayingItem {
                 if nowPlaying.userSpecifiedSource == nil, lyrics.quality > nowPlaying.lyrics.quality {
                     nowPlaying.lyrics = lyrics
+                    nowPlaying.availableLyricsArray.append(lyrics)
+                    
                     NotificationCenter.default.post(name: SystemPlayerLyricsController.nowPlayingLyricsDidChangeNotification, object: self)
                     self.updateLyricsLineIfNeeded()
                 }
             } else {
-                self.nowPlaying = NowPlaying(item: nowPlayingItem, searchRequest: request, lyrics: lyrics)
+                let nowPlaying = NowPlaying(item: nowPlayingItem, searchRequest: request, lyrics: lyrics)
+                nowPlaying.userSpecifiedSource = userSpecifiedSource
+                nowPlaying.availableLyricsArray.append(lyrics)
+                
+                self.nowPlaying = nowPlaying
+                
                 NotificationCenter.default.post(name: SystemPlayerLyricsController.nowPlayingLyricsDidChangeNotification, object: self)
                 self.updateLyricsLineIfNeeded()
-            }
-            if let nowPlaying = self.nowPlaying {
-                nowPlaying.availableLyricsArray.append(lyrics)
             }
         }
     }
@@ -132,3 +139,8 @@ public class SystemPlayerLyricsController {
     }
 }
 
+
+public extension SystemPlayerLyricsController {
+    static let nowPlayingLyricsDidChangeNotification = Notification.Name("SystemPlayerLyricsController.nowPlayingLyricsDidChangeNotification")
+    static let lyricsLineDidChangeNotification = Notification.Name("SystemPlayerLyricsController.lyricsLineDidChangeNotification")
+}

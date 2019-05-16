@@ -24,9 +24,9 @@ public extension UserDefaults {
     }
     
     /// KVO observable. Use `MPMediaItem.kjy_userSpecifiedSources` to retrieve latest update.
-    @objc dynamic var userSpecifiedSourcesByMediaIDs: [String : String] {
+    @objc dynamic var userSpecifiedSourcesByMediaIDs: [String : Any] {
         get {
-            return dictionary(forKey: "userSpecifiedSourcesByMediaIDs") as? [String : String] ?? [:]
+            return dictionary(forKey: "userSpecifiedSourcesByMediaIDs") ?? [:]
         }
         set {
             set(newValue, forKey: "userSpecifiedSourcesByMediaIDs")
@@ -37,9 +37,9 @@ public extension UserDefaults {
 
 public extension MPMediaItem {
     
-    var kjy_userSpecifiedSources: LyricsProviderSource? {
+    var kjy_userSpecifiedSource: LyricsProviderSource? {
         get {
-            guard let sourceValue = UserDefaults.appGroup.userSpecifiedSourcesByMediaIDs["\(persistentID)"],
+            guard let sourceValue = UserDefaults.appGroup.userSpecifiedSourcesByMediaIDs["\(persistentID)"] as? String,
                 let source = LyricsProviderSource(rawValue: sourceValue) else { return nil }
             return source
         }

@@ -38,7 +38,7 @@ class NotificationViewController: UIViewController, UNNotificationContentExtensi
     
     func didReceive(_ response: UNNotificationResponse, completionHandler: @escaping (UNNotificationContentExtensionResponseOption) -> Void) {
         if let source = LyricsProviderSource(rawValue: response.actionIdentifier) {
-            MPMusicPlayerController.systemMusicPlayer.nowPlayingItem?.kjy_userSpecifiedSources = source
+            MPMusicPlayerController.systemMusicPlayer.nowPlayingItem?.kjy_userSpecifiedSource = source
         }
         completionHandler(.doNotDismiss)
     }
