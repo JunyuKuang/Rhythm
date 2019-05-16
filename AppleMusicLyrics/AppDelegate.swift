@@ -23,41 +23,33 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         mainWindow.tintColor = .globalTint
         
-        let placeholderNavigationController = UINavigationController(rootViewController: UIViewController())
-        placeholderNavigationController.isToolbarHidden = false
-        placeholderNavigationController.view.backgroundColor = .white
+        let accessSettingsController = SystemAccessSettingsTableViewController()
         
-        mainWindow.rootViewController = placeholderNavigationController
+        accessSettingsController.preparationHandler = { [weak accessSettingsController] in
+            accessSettingsController?.view.isHidden = false
+            accessSettingsController?.title = NSLocalizedString("Permission Settings", comment: "")
+            accessSettingsController?.navigationController?.isToolbarHidden = true
+            accessSettingsController?.navigationController?.navigationBar.prefersLargeTitles = true
+        }
+        accessSettingsController.completionHandler = { [weak self] in
+            LocationManager.shared.start()
+            _ = SystemPlayerLyricsController.shared
+            _ = NowPlayingNotificationManager.shared
+            self?.updateWindowForLyricsUI()
+        }
+        
+        let navigationController = UINavigationController(rootViewController: accessSettingsController)
+        navigationController.isToolbarHidden = false
+        navigationController.view.backgroundColor = .white
+        accessSettingsController.view.isHidden = true
+        
+        mainWindow.rootViewController = navigationController
         mainWindow.makeKeyAndVisible()
         
         return true
     }
     
-    func applicationDidBecomeActive(_ application: UIApplication) {
-        _ = requestPermissions
-    }
-    
-    private lazy var requestPermissions: Void = {
-        MPMediaLibrary.requestAuthorization { status in
-            let canAccessMediaLibrary = status == .authorized
-            UNUserNotificationCenter.current().requestAuthorization(options: .alert) { canPostNotification, _ in
-                DispatchQueue.main.async {
-                    if canAccessMediaLibrary, canPostNotification {
-                        LocationManager.shared.start()
-                        _ = SystemPlayerLyricsController.shared
-                        _ = NowPlayingNotificationManager.shared
-                        self.configureWindow()
-                    } else {
-                        UIApplication.shared.open(URL(string: UIApplication.openSettingsURLString)!) { _ in
-                            exit(0)
-                        }
-                    }
-                }
-            }
-        }
-    }()
-    
-    private func configureWindow() {
+    private func updateWindowForLyricsUI() {
         let lyricsTVC = LyricsContainerViewController()
         let navigationController = UINavigationController(rootViewController: lyricsTVC)
         navigationController.isToolbarHidden = false
