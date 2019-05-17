@@ -9,7 +9,7 @@
 import LyricsUI
 import CoreLocation
 
-class SystemAccessSettingsTableViewController: UITableViewController {
+class SystemAccessSettingsTableViewController : UITableViewController {
     
     var preparationHandler: (() -> Void)?
     var completionHandler: (() -> Void)?

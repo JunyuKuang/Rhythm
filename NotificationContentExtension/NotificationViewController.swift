@@ -9,7 +9,7 @@
 import LyricsUI
 import UserNotificationsUI
 
-class NotificationViewController: UIViewController, UNNotificationContentExtension {
+class NotificationViewController : UIViewController, UNNotificationContentExtension {
     
     private let lyricsController = LyricsTableViewController()
     

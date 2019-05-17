@@ -6,7 +6,7 @@
 //  Copyright © 2019 Jonny Kuang. All rights reserved.
 //
 
-public class LyricsTableViewController: UITableViewController {
+public class LyricsTableViewController : UITableViewController {
 
     public var lyrics: Lyrics? {
         didSet {
