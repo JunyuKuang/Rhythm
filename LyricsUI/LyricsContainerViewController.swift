@@ -48,6 +48,11 @@ public class LyricsContainerViewController : UIViewController {
             progressView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor),
         ])
         
+        navigationItem.leftBarButtonItem = {
+            let item = UIBarButtonItem(image: img("More"), style: .plain, target: self, action: #selector(tapMoreButtonItem))
+            item.hudTitle = localized("More")
+            return item
+        }()
         configureToolbars()
         
         NotificationCenter.default.addObserver(self, selector: #selector(playbackStateDidChange), name: .MPMusicPlayerControllerPlaybackStateDidChange, object: player)
@@ -205,5 +210,9 @@ private extension LyricsContainerViewController {
     
     func toggleTranslation() {
         UserDefaults.appGroup.showsLyricsTranslationIfAvailable.toggle()
+    }
+    
+    func tapMoreButtonItem(_ buttonItem: UIBarButtonItem) {
+        UIApplication.shared.open(URL(string: UIApplication.openSettingsURLString)!)
     }
 }
