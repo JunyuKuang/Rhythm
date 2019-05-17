@@ -143,8 +143,16 @@ class LyricsTableViewCell : UITableViewCell {
     
     override func setSelected(_ selected: Bool, animated: Bool) {
         super.setSelected(selected, animated: animated)
-        
-        let textColor = selected ? tintColor! : .darkText
+        updateTextColor()
+    }
+    
+    override func tintColorDidChange() {
+        super.tintColorDidChange()
+        updateTextColor()
+    }
+    
+    private func updateTextColor() {
+        let textColor = isSelected ? tintColor! : .darkText
         textLabel?.textColor = textColor
         detailTextLabel?.textColor = textColor
     }
