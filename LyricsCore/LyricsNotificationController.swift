@@ -26,6 +26,7 @@ public class LyricsNotificationController : NSObject {
     private var maximumNotificationCount = UserDefaults.appGroup.maximumNotificationCount {
         didSet {
             clearNotifications()
+            notificationIndex = 0
             if maximumNotificationCount == 0 {
                 pendingInfo = nil
             }
