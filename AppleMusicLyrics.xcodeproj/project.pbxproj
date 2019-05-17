@@ -91,6 +91,8 @@
 		FBF08E62228E6B8900383D6D /* UIBarButtonItem+HUD.swift in Sources */ = {isa = PBXBuildFile; fileRef = FBF08E61228E6B8900383D6D /* UIBarButtonItem+HUD.swift */; };
 		FBF08E64228E6BDE00383D6D /* Bundle+.swift in Sources */ = {isa = PBXBuildFile; fileRef = FBF08E63228E6BDE00383D6D /* Bundle+.swift */; };
 		FBF08E66228E714700383D6D /* MailComposeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FBF08E65228E714700383D6D /* MailComposeViewController.swift */; };
+		FBF08E69228E88EB00383D6D /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = FBF08E6B228E88EB00383D6D /* Localizable.strings */; };
+		FBF08E6F228E8AB200383D6D /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = FBF08E71228E8AB200383D6D /* InfoPlist.strings */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -240,6 +242,10 @@
 		FBF08E61228E6B8900383D6D /* UIBarButtonItem+HUD.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIBarButtonItem+HUD.swift"; sourceTree = "<group>"; };
 		FBF08E63228E6BDE00383D6D /* Bundle+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Bundle+.swift"; sourceTree = "<group>"; };
 		FBF08E65228E714700383D6D /* MailComposeViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MailComposeViewController.swift; sourceTree = "<group>"; };
+		FBF08E6A228E88EB00383D6D /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
+		FBF08E6C228E88EC00383D6D /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/Localizable.strings"; sourceTree = "<group>"; };
+		FBF08E70228E8AB200383D6D /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		FBF08E72228E8AB700383D6D /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/InfoPlist.strings"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -321,10 +327,12 @@
 				FBF08E58228DA38F00383D6D /* SystemAccessSettingsTableViewController.swift */,
 				FB8A1CEB22882B8F00571A63 /* LocationManager.swift */,
 				FBF08E5F228E46DE00383D6D /* Settings.bundle */,
+				FBF08E6B228E88EB00383D6D /* Localizable.strings */,
 				FBF08E5D228E45C000383D6D /* Localizable.stringsdict */,
 				FB8A1C5522871C5700571A63 /* Assets.xcassets */,
 				FB8A1C5722871C5700571A63 /* LaunchScreen.storyboard */,
 				FB8A1C5A22871C5700571A63 /* Info.plist */,
+				FBF08E71228E8AB200383D6D /* InfoPlist.strings */,
 				FB8A1CE622882B5600571A63 /* AppleMusicLyrics-Bridging-Header.h */,
 				FBF08E56228D7BB000383D6D /* AppleMusicLyrics.entitlements */,
 			);
@@ -746,6 +754,8 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				FBF08E69228E88EB00383D6D /* Localizable.strings in Resources */,
+				FBF08E6F228E8AB200383D6D /* InfoPlist.strings in Resources */,
 				FBF08E60228E46DE00383D6D /* Settings.bundle in Resources */,
 				FB8A1C5922871C5700571A63 /* LaunchScreen.storyboard in Resources */,
 				FBF08E5B228E45C000383D6D /* Localizable.stringsdict in Resources */,
@@ -945,6 +955,24 @@
 				FBF08E5E228E45C600383D6D /* zh-Hans */,
 			);
 			name = Localizable.stringsdict;
+			sourceTree = "<group>";
+		};
+		FBF08E6B228E88EB00383D6D /* Localizable.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				FBF08E6A228E88EB00383D6D /* en */,
+				FBF08E6C228E88EC00383D6D /* zh-Hans */,
+			);
+			name = Localizable.strings;
+			sourceTree = "<group>";
+		};
+		FBF08E71228E8AB200383D6D /* InfoPlist.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				FBF08E70228E8AB200383D6D /* en */,
+				FBF08E72228E8AB700383D6D /* zh-Hans */,
+			);
+			name = InfoPlist.strings;
 			sourceTree = "<group>";
 		};
 /* End PBXVariantGroup section */

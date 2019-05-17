@@ -27,7 +27,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         accessSettingsController.preparationHandler = { [weak accessSettingsController] in
             accessSettingsController?.view.isHidden = false
-            accessSettingsController?.title = NSLocalizedString("Permission Settings", comment: "")
+            accessSettingsController?.title = NSLocalizedString("permissionSettings", comment: "")
             accessSettingsController?.navigationController?.isToolbarHidden = true
             accessSettingsController?.navigationController?.navigationBar.prefersLargeTitles = true
         }

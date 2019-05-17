@@ -1,0 +1,5 @@
+"permissionSettings" = "权限设置";
+"allowAccessAppleMusic" = "允许访问 Apple Music";
+"enableNotifications" = "开启通知";
+"enableNotificationsDescription" = "此权限允许 app 在“锁定屏幕”和“通知中心”显示歌词。";
+"enableLocation" = "开启定位服务";

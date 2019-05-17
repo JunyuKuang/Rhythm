@@ -1,0 +1,5 @@
+"permissionSettings" = "Permission Settings";
+"allowAccessAppleMusic" = "Allow Access Apple Music";
+"enableNotifications" = "Enable Notifications";
+"enableNotificationsDescription" = "This allows the app to show lyrics on the Lock Screen and Notification Center.";
+"enableLocation" = "Enable Location Services";

@@ -28,13 +28,13 @@
 		<true/>
 	</dict>
 	<key>NSAppleMusicUsageDescription</key>
-	<string>This allows the app to get information about currently playing music, so the app can display related lyrics for you.</string>
+	<string>PRIVACY</string>
 	<key>NSLocationAlwaysAndWhenInUseUsageDescription</key>
-	<string>This allows the app to keep running and update lyrics in background. The app won't store or upload your location data. Please select Always Allow.</string>
+	<string>PRIVACY</string>
 	<key>NSLocationAlwaysUsageDescription</key>
-	<string>This allows the app to keep running and update lyrics in background. The app won't store or upload your location data.</string>
+	<string>PRIVACY</string>
 	<key>NSLocationWhenInUseUsageDescription</key>
-	<string>This allows the app to keep running and update lyrics in background. The app won't store or upload your location data.</string>
+	<string>PRIVACY</string>
 	<key>UIBackgroundModes</key>
 	<array>
 		<string>location</string>

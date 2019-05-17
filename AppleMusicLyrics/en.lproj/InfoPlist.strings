@@ -1,0 +1,9 @@
+"CFBundleName" = "Lyrics";
+
+"NSAppleMusicUsageDescription" = "This allows the app to get information about currently playing music, so the app can display related lyrics for you.";
+
+"NSLocationAlwaysAndWhenInUseUsageDescription" = "This allows the app to keep running in background, so it can dynamically update lyrics on Lock Screen and Notification Center. The app won't store or upload your location data. Select \"Always Allow\" for best experience.";
+
+"NSLocationAlwaysUsageDescription" = "This allows the app to keep running in background, so it can dynamically update lyrics on Lock Screen and Notification Center. The app won't store or upload your location data.";
+
+"NSLocationWhenInUseUsageDescription" = "This allows the app to keep running in background, so it can dynamically update lyrics on Lock Screen and Notification Center. The app won't store or upload your location data.";
