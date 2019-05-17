@@ -11,10 +11,10 @@ public extension UserDefaults {
 }
 
 
-public extension UserDefaults {
+@objc public extension UserDefaults {
     
     /// KVO observable.
-    @objc dynamic var showsLyricsTranslationIfAvailable: Bool {
+    dynamic var showsLyricsTranslationIfAvailable: Bool {
         get {
             return value(forKey: "showsLyricsTranslationIfAvailable") as? Bool ?? true
         }
@@ -24,7 +24,7 @@ public extension UserDefaults {
     }
     
     /// KVO observable. Use `MPMediaItem.kjy_userSpecifiedSources` to retrieve latest update.
-    @objc dynamic var userSpecifiedSourcesByMediaIDs: [String : Any] {
+    dynamic var userSpecifiedSourcesByMediaIDs: [String : Any] {
         get {
             return dictionary(forKey: "userSpecifiedSourcesByMediaIDs") ?? [:]
         }
@@ -33,7 +33,7 @@ public extension UserDefaults {
         }
     }
     
-    @objc dynamic var maximumNotificationCount: Int {
+    dynamic var maximumNotificationCount: Int {
         get {
             return value(forKey: "maximumNotificationCount") as? Int ?? 3
         }
@@ -42,7 +42,7 @@ public extension UserDefaults {
         }
     }
     
-    @objc dynamic var allowsNowPlayingItemNotification: Bool {
+    dynamic var allowsNowPlayingItemNotification: Bool {
         get {
             return value(forKey: "allowsNowPlayingItemNotification") as? Bool ?? true
         }
@@ -51,7 +51,7 @@ public extension UserDefaults {
         }
     }
     
-    @objc dynamic var prefersCenterAlignedLayout: Bool {
+    dynamic var prefersCenterAlignedLayout: Bool {
         get {
             return bool(forKey: "prefersCenterAlignedLayout")
         }
