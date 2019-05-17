@@ -11,19 +11,21 @@ import UserNotificationsUI
 
 class NotificationViewController: UIViewController, UNNotificationContentExtension {
     
+    private let lyricsController = LyricsTableViewController()
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
         view.tintColor = .globalTint
         
-        let controller = LyricsTableViewController()
-        addChild(controller)
-        view.addSubview(controller.view)
-        controller.view.addConstraintsToFitSuperview()
-        controller.didMove(toParent: self)
+        addChild(lyricsController)
+        view.addSubview(lyricsController.view)
+        lyricsController.view.addConstraintsToFitSuperview()
+        lyricsController.didMove(toParent: self)
         
-        title = controller.title
-        titleObserver = controller.observe(\.title) { [weak self] controller, _ in
+        lyricsController.tableView.showsVerticalScrollIndicator = false
+        
+        titleObserver = lyricsController.observe(\.title) { [weak self] controller, _ in
             self?.title = controller.title
         }
     }
@@ -31,6 +33,7 @@ class NotificationViewController: UIViewController, UNNotificationContentExtensi
     private var titleObserver: NSKeyValueObservation?
     
     func didReceive(_ notification: UNNotification) {
+        title = lyricsController.title
     }
     
     func didReceive(_ response: UNNotificationResponse, completionHandler: @escaping (UNNotificationContentExtensionResponseOption) -> Void) {
