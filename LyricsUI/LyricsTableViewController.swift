@@ -23,7 +23,7 @@ public class LyricsTableViewController: UITableViewController {
     }
     
     private struct Configuration {
-        var showsLyricsTranslation = false
+        var showsTranslation = false
         var prefersCenterAlignment = false
     }
     private var configuration = Configuration()
@@ -37,13 +37,13 @@ public class LyricsTableViewController: UITableViewController {
         
         configureLyricsChangeObservers()
         
-        configuration.showsLyricsTranslation = UserDefaults.appGroup.showsLyricsTranslationIfAvailable
+        configuration.showsTranslation = UserDefaults.appGroup.showsLyricsTranslationIfAvailable
         configuration.prefersCenterAlignment = UserDefaults.appGroup.prefersCenterAlignedLayout
         
         let kvoUpdateHandler = { [weak self] in
             DispatchQueue.main.async {
                 guard let self = self else { return }
-                self.configuration.showsLyricsTranslation = UserDefaults.appGroup.showsLyricsTranslationIfAvailable
+                self.configuration.showsTranslation = UserDefaults.appGroup.showsLyricsTranslationIfAvailable
                 self.configuration.prefersCenterAlignment = UserDefaults.appGroup.prefersCenterAlignedLayout
                 
                 let indexPath = self.tableView.indexPathForSelectedRow
@@ -71,7 +71,7 @@ public class LyricsTableViewController: UITableViewController {
         let lyricsLine = lyrics!.lines[indexPath.row]
         let lyricsLineContent = lyricsLine.content.trimmingCharacters(in: .whitespacesAndNewlines)
         
-        let translation = !configuration.showsLyricsTranslation ? "" : (lyricsLine.attachments.translation()?.trimmingCharacters(in: .whitespacesAndNewlines) ?? "")
+        let translation = !configuration.showsTranslation ? "" : (lyricsLine.attachments.translation()?.trimmingCharacters(in: .whitespacesAndNewlines) ?? "")
         
         let requiresDetailLabel = !translation.isEmpty
         let cellStyle: UITableViewCell.CellStyle = requiresDetailLabel ? .subtitle : .default
