@@ -12,6 +12,8 @@ import LyricsProvider
 
 public class LyricsNotificationController : NSObject {
     
+    public static let shared = LyricsNotificationController()
+    
     private struct PendingLyricsInfo {
         let line: LyricsLine
         let creationDate = Date()
@@ -19,22 +21,28 @@ public class LyricsNotificationController : NSObject {
     private var pendingInfo: PendingLyricsInfo?
     
     private let center = UNUserNotificationCenter.current()
-    
     private var kvoObservers = [NSKeyValueObservation]()
     
-    public static let shared = LyricsNotificationController()
-    
+    private var maximumNotificationCount = UserDefaults.appGroup.maximumNotificationCount {
+        didSet {
+            clearNotifications()
+            if maximumNotificationCount == 0 {
+                pendingInfo = nil
+            }
+        }
+    }
     
     private override init() {
         super.init()
         
-        let springboardNotificationObserver = SpringboardNotificationObserver.shared
-        
         kvoObservers = [
-            springboardNotificationObserver.observe(\.isDeviceSleepModeEnabled) { _, _ in
+            UserDefaults.appGroup.observe(\.maximumNotificationCount, options: .new) { _, change in
+                self.maximumNotificationCount = change.newValue ?? 1
+            },
+            SpringboardNotificationObserver.shared.observe(\.isDeviceSleepModeEnabled) { _, _ in
                 self.postPendingLyricsIfNeeded()
             },
-            springboardNotificationObserver.observe(\.isCoverSheetVisible) { _, _ in
+            SpringboardNotificationObserver.shared.observe(\.isCoverSheetVisible) { _, _ in
                 self.postPendingLyricsIfNeeded()
             },
         ]
@@ -87,9 +95,6 @@ public class LyricsNotificationController : NSObject {
     
     private var previousLine: LyricsLine?
     
-    /// Default is 1.
-    var maximumNotificationCount = 1
-    
     private var notificationIndex = 0
     
     private let notificationIdentifierPrefix = "lyrics"
@@ -99,6 +104,8 @@ public class LyricsNotificationController : NSObject {
     }
     
     func postIfNeeded(lyricsLine: LyricsLine) {
+        guard maximumNotificationCount > 0 else { return }
+        
         if previousLine == lyricsLine {
             return
         }
