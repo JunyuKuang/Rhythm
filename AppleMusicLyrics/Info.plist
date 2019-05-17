@@ -58,5 +58,18 @@
 		<string>UIInterfaceOrientationLandscapeLeft</string>
 		<string>UIInterfaceOrientationLandscapeRight</string>
 	</array>
+	<key>CFBundleURLTypes</key>
+	<array>
+		<dict>
+			<key>CFBundleURLName</key>
+			<string>com.jonny.lyrics</string>
+			<key>CFBundleURLSchemes</key>
+			<array>
+				<string>com.jonny.lyrics</string>
+				<string>lyrics</string>
+				<string>rhythm</string>
+			</array>
+		</dict>
+	</array>
 </dict>
 </plist>

@@ -57,4 +57,8 @@ class AppDelegate : UIResponder, UIApplicationDelegate {
         mainWindow.rootViewController = navigationController
         mainWindow.makeKeyAndVisible()
     }
+    
+    func application(_ app: UIApplication, open url: URL, options: [UIApplication.OpenURLOptionsKey : Any]) -> Bool {
+        return true
+    }
 }
