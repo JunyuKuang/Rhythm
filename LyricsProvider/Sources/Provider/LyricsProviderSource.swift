@@ -21,13 +21,13 @@
 import Foundation
 
 public enum LyricsProviderSource: String, CaseIterable {
-    case netease = "163"
-    case qq = "QQMusic"
-    case kugou = "Kugou"
-    case xiami = "Xiami"
-    case gecimi = "Gecimi"
-    case viewLyrics = "ViewLyrics"
-    case syair = "Syair"
+    case netease
+    case qq
+    case kugou
+    case xiami
+    case gecimi
+    case viewLyrics
+    case syair
 }
 
 extension LyricsProviderSource {
