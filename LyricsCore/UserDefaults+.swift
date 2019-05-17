@@ -13,23 +13,12 @@ public extension UserDefaults {
 
 @objc public extension UserDefaults {
     
-    /// KVO observable.
     dynamic var showsLyricsTranslationIfAvailable: Bool {
         get {
             return value(forKey: "showsLyricsTranslationIfAvailable") as? Bool ?? true
         }
         set {
             set(newValue, forKey: "showsLyricsTranslationIfAvailable")
-        }
-    }
-    
-    /// KVO observable. Use `MPMediaItem.kjy_userSpecifiedSources` to retrieve latest update.
-    dynamic var userSpecifiedSourcesByMediaIDs: [String : Any] {
-        get {
-            return dictionary(forKey: "userSpecifiedSourcesByMediaIDs") ?? [:]
-        }
-        set {
-            set(newValue, forKey: "userSpecifiedSourcesByMediaIDs")
         }
     }
     
@@ -57,6 +46,16 @@ public extension UserDefaults {
         }
         set {
             set(newValue, forKey: "prefersCenterAlignedLayout")
+        }
+    }
+    
+    /// Use `MPMediaItem.kjy_userSpecifiedSources` to set and get actual value.
+    fileprivate(set) dynamic var userSpecifiedSourcesByMediaIDs: [String : Any] {
+        get {
+            return dictionary(forKey: "userSpecifiedSourcesByMediaIDs") ?? [:]
+        }
+        set {
+            set(newValue, forKey: "userSpecifiedSourcesByMediaIDs")
         }
     }
 }
