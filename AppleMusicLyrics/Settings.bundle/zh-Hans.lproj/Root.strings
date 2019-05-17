@@ -3,3 +3,4 @@
 "maximumNotificationCountTitle" = "通知条数上限";
 "allowsNowPlayingItemNotificationTitle" = "歌曲名称通知";
 "prefersCenterAlignedLayoutTitle" = "居中显示歌词";
+"maximumNotificationCountFooter" = "在“锁定屏幕”和“通知中心”上最多能显示的歌词通知条数。";
