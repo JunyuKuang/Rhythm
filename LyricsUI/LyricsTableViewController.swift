@@ -22,6 +22,12 @@ public class LyricsTableViewController: UITableViewController {
         fatalError("init(coder:) has not been implemented")
     }
     
+    private struct Configuration {
+        var showsLyricsTranslation = false
+        var prefersCenterAlignment = false
+    }
+    private var configuration = Configuration()
+    
     public override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -31,17 +37,27 @@ public class LyricsTableViewController: UITableViewController {
         
         configureLyricsChangeObservers()
         
-        showsTranslationObserver = UserDefaults.appGroup.observe(\.showsLyricsTranslationIfAvailable) { [weak self] _, _ in
-            guard let self = self else { return }
+        configuration.showsLyricsTranslation = UserDefaults.appGroup.showsLyricsTranslationIfAvailable
+        configuration.prefersCenterAlignment = UserDefaults.appGroup.prefersCenterAlignedLayout
+        
+        let kvoUpdateHandler = { [weak self] in
             DispatchQueue.main.async {
+                guard let self = self else { return }
+                self.configuration.showsLyricsTranslation = UserDefaults.appGroup.showsLyricsTranslationIfAvailable
+                self.configuration.prefersCenterAlignment = UserDefaults.appGroup.prefersCenterAlignedLayout
+                
                 let indexPath = self.tableView.indexPathForSelectedRow
                 self.tableView.reloadData()
                 self.tableView.selectRow(at: indexPath, animated: false, scrollPosition: .middle)
             }
         }
+        kvoObservers = [
+            UserDefaults.appGroup.observe(\.showsLyricsTranslationIfAvailable) { _, _ in kvoUpdateHandler() },
+            UserDefaults.appGroup.observe(\.prefersCenterAlignedLayout) { _, _ in kvoUpdateHandler() },
+        ]
     }
     
-    private var showsTranslationObserver: NSKeyValueObservation?
+    private var kvoObservers = [NSKeyValueObservation]()
 
     
     // MARK: - UITableViewDataSource
@@ -55,8 +71,7 @@ public class LyricsTableViewController: UITableViewController {
         let lyricsLine = lyrics!.lines[indexPath.row]
         let lyricsLineContent = lyricsLine.content.trimmingCharacters(in: .whitespacesAndNewlines)
         
-        let showsTranslation = UserDefaults.appGroup.showsLyricsTranslationIfAvailable
-        let translation = !showsTranslation ? "" : (lyricsLine.attachments.translation()?.trimmingCharacters(in: .whitespacesAndNewlines) ?? "")
+        let translation = !configuration.showsLyricsTranslation ? "" : (lyricsLine.attachments.translation()?.trimmingCharacters(in: .whitespacesAndNewlines) ?? "")
         
         let requiresDetailLabel = !translation.isEmpty
         let cellStyle: UITableViewCell.CellStyle = requiresDetailLabel ? .subtitle : .default
@@ -69,8 +84,14 @@ public class LyricsTableViewController: UITableViewController {
         cell.textLabel?.font = UIFont.preferredFont(forTextStyle: .headline)
         cell.detailTextLabel?.font = UIFont.preferredFont(forTextStyle: .body)
         
-        cell.textLabel?.numberOfLines = 0
-        cell.detailTextLabel?.numberOfLines = 0
+        let labels = [cell.textLabel, cell.detailTextLabel].compactMap { $0 }
+        labels.forEach { $0.numberOfLines = 0 }
+        
+        if configuration.prefersCenterAlignment {
+            labels.forEach { $0.textAlignment = .center }
+        } else {
+            labels.forEach { $0.textAlignment = .natural }
+        }
         
         cell.selectionStyle = .none
         
@@ -126,6 +147,16 @@ class LyricsTableViewCell : UITableViewCell {
         let textColor = selected ? tintColor! : .darkText
         textLabel?.textColor = textColor
         detailTextLabel?.textColor = textColor
+    }
+    
+    override func layoutSubviews() {
+        super.layoutSubviews()
+        
+        let labels = [textLabel, detailTextLabel].compactMap { $0 }
+        labels.forEach {
+            let inset = $0.frame.origin.x
+            $0.frame.size.width = contentView.bounds.width - inset * 2
+        }
     }
 }
 
