@@ -89,10 +89,7 @@ private class LyricsProviderPickerTableViewController : UITableViewController {
     }
 
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        let lyrics = lyricsArray[indexPath.row]
-        if let source = lyrics.metadata.source, let nowPlaying = SystemPlayerLyricsController.shared.nowPlaying {
-            nowPlaying.item.kjy_userSpecifiedSource = source
-        }
+        SystemPlayerLyricsController.shared.nowPlaying?.item.kjy_userSpecifiedLyrics = lyricsArray[indexPath.row]
         dismiss(animated: true)
     }
 }

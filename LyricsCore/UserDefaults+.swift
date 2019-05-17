@@ -50,12 +50,12 @@ public extension UserDefaults {
     }
     
     /// Use `MPMediaItem.kjy_userSpecifiedSources` to set and get actual value.
-    fileprivate(set) dynamic var userSpecifiedSourcesByMediaIDs: [String : Any] {
+    fileprivate(set) dynamic var userSpecifiedLyricsByMediaIDs: [String : Any] {
         get {
-            return dictionary(forKey: "userSpecifiedSourcesByMediaIDs") ?? [:]
+            return dictionary(forKey: "userSpecifiedLyricsByMediaIDs") ?? [:]
         }
         set {
-            set(newValue, forKey: "userSpecifiedSourcesByMediaIDs")
+            set(newValue, forKey: "userSpecifiedLyricsByMediaIDs")
         }
     }
 }
@@ -63,14 +63,14 @@ public extension UserDefaults {
 
 public extension MPMediaItem {
     
-    var kjy_userSpecifiedSource: LyricsProviderSource? {
+    var kjy_userSpecifiedLyrics: Lyrics? {
         get {
-            guard let sourceValue = UserDefaults.appGroup.userSpecifiedSourcesByMediaIDs["\(persistentID)"] as? String,
-                let source = LyricsProviderSource(rawValue: sourceValue) else { return nil }
-            return source
+            guard let rawLyrics = UserDefaults.appGroup.userSpecifiedLyricsByMediaIDs["\(persistentID)"] as? String,
+                let lyrics = Lyrics(rawLyrics) else { return nil }
+            return lyrics
         }
         set {
-            UserDefaults.appGroup.userSpecifiedSourcesByMediaIDs["\(persistentID)"] = newValue?.rawValue
+            UserDefaults.appGroup.userSpecifiedLyricsByMediaIDs["\(persistentID)"] = newValue?.description
         }
     }
 }

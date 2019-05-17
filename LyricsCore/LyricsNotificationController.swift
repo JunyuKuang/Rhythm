@@ -30,6 +30,9 @@ public class LyricsNotificationController : NSObject {
     }
     
     public var openSettingsHandler: ((UNNotification?) -> Void)?
+    public var changeLyricsHandler: ((UNNotificationResponse) -> Void)?
+    
+    private let changeLyricsActionIdentifier = "changeLyrics"
     
     private override init() {
         super.init()
@@ -49,9 +52,9 @@ public class LyricsNotificationController : NSObject {
         center.delegate = self
         
         let category: UNNotificationCategory = {
-            let actions = LyricsProviderSource.allCases.map {
-                UNNotificationAction(identifier: $0.rawValue, title: $0.localizedName)
-            }
+            let actions = [
+                UNNotificationAction(identifier: changeLyricsActionIdentifier, title: NSLocalizedString("changeLyrics", bundle: .current, comment: ""), options: .foreground),
+            ]
             let options: UNNotificationCategoryOptions = [.hiddenPreviewsShowTitle, .hiddenPreviewsShowSubtitle]
             
             if #available(iOS 12.0, *) {
@@ -168,6 +171,16 @@ extension LyricsNotificationController : UNUserNotificationCenterDelegate {
                                        withCompletionHandler completionHandler: @escaping (UNNotificationPresentationOptions) -> Void)
     {
         completionHandler(UIApplication.shared.applicationState != .active ? .alert : [])
+    }
+    
+    public func userNotificationCenter(_ center: UNUserNotificationCenter,
+                                       didReceive response: UNNotificationResponse,
+                                       withCompletionHandler completionHandler: @escaping () -> Void)
+    {
+        if response.actionIdentifier == changeLyricsActionIdentifier {
+            changeLyricsHandler?(response)
+        }
+        completionHandler()
     }
     
     public func userNotificationCenter(_ center: UNUserNotificationCenter, openSettingsFor notification: UNNotification?) {

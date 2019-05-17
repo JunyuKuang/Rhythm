@@ -94,6 +94,21 @@ public class LyricsContainerViewController : UIViewController {
         NotificationCenter.default.addObserver(forName: SystemPlayerLyricsController.nowPlayingLyricsDidChangeNotification, object: nil, queue: .main) { _ in
             translationAvailabilityUpdateHandler()
         }
+        
+        LyricsNotificationController.shared.changeLyricsHandler = { [weak self] _ in
+            DispatchQueue.main.async {
+                guard let self = self else { return }
+                if let presented = self.presentedViewController {
+                    if !(presented is LyricsProviderPickerController) {
+                        self.dismiss(animated: false) {
+                            self.present(LyricsProviderPickerController(), animated: true)
+                        }
+                    }
+                } else {
+                    self.present(LyricsProviderPickerController(), animated: true)
+                }
+            }
+        }
     }
     
     private var showsTranslationObserver: NSKeyValueObservation?

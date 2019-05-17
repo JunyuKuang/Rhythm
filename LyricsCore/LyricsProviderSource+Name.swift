@@ -12,7 +12,7 @@ extension LyricsProviderSource {
     }
 }
 
-private extension Bundle {
+extension Bundle {
     private class Placeholder {}
     static let current = Bundle(for: Placeholder.self)
 }

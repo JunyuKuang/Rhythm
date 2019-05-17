@@ -35,12 +35,5 @@ class NotificationViewController : UIViewController, UNNotificationContentExtens
     func didReceive(_ notification: UNNotification) {
         title = lyricsController.title
     }
-    
-    func didReceive(_ response: UNNotificationResponse, completionHandler: @escaping (UNNotificationContentExtensionResponseOption) -> Void) {
-        if let source = LyricsProviderSource(rawValue: response.actionIdentifier) {
-            MPMusicPlayerController.systemMusicPlayer.nowPlayingItem?.kjy_userSpecifiedSource = source
-        }
-        completionHandler(.doNotDismiss)
-    }
 }
 
