@@ -88,6 +88,7 @@
 		FBF08E59228DA38F00383D6D /* SystemAccessSettingsTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FBF08E58228DA38F00383D6D /* SystemAccessSettingsTableViewController.swift */; };
 		FBF08E5B228E45C000383D6D /* Localizable.stringsdict in Resources */ = {isa = PBXBuildFile; fileRef = FBF08E5D228E45C000383D6D /* Localizable.stringsdict */; };
 		FBF08E60228E46DE00383D6D /* Settings.bundle in Resources */ = {isa = PBXBuildFile; fileRef = FBF08E5F228E46DE00383D6D /* Settings.bundle */; };
+		FBF08E62228E6B8900383D6D /* UIBarButtonItem+HUD.swift in Sources */ = {isa = PBXBuildFile; fileRef = FBF08E61228E6B8900383D6D /* UIBarButtonItem+HUD.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -234,6 +235,7 @@
 		FBF08E5C228E45C000383D6D /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.stringsdict; name = en; path = en.lproj/Localizable.stringsdict; sourceTree = "<group>"; };
 		FBF08E5E228E45C600383D6D /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.stringsdict; name = "zh-Hans"; path = "zh-Hans.lproj/Localizable.stringsdict"; sourceTree = "<group>"; };
 		FBF08E5F228E46DE00383D6D /* Settings.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = Settings.bundle; sourceTree = "<group>"; };
+		FBF08E61228E6B8900383D6D /* UIBarButtonItem+HUD.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIBarButtonItem+HUD.swift"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -500,6 +502,7 @@
 				FB8A1D082289581000571A63 /* LyricsTableViewController.swift */,
 				FB8A1D3C22897F5B00571A63 /* UIColor+globalTint.swift */,
 				FBF08E31228BB9D700383D6D /* UIView+Constraints.swift */,
+				FBF08E61228E6B8900383D6D /* UIBarButtonItem+HUD.swift */,
 				FBF08E2B228B09CA00383D6D /* Assets.xcassets */,
 				FB8A1CFF228955CA00571A63 /* Info.plist */,
 			);
@@ -866,6 +869,7 @@
 			files = (
 				FBF08E30228BB9D000383D6D /* UIColor+globalTint.swift in Sources */,
 				FBF08E2F228BB87500383D6D /* LyricsContainerViewController.swift in Sources */,
+				FBF08E62228E6B8900383D6D /* UIBarButtonItem+HUD.swift in Sources */,
 				FB8A1D092289581000571A63 /* LyricsTableViewController.swift in Sources */,
 				FBF08E32228BB9D700383D6D /* UIView+Constraints.swift in Sources */,
 			);
