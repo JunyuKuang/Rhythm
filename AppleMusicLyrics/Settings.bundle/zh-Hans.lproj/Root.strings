@@ -1,6 +1,6 @@
 /* A single strings file, whose title is specified in your preferences schema. The strings files provide the localized content to display to the user for each of your preferences. */
 
 "maximumNotificationCountTitle" = "通知条数上限";
-"allowsNowPlayingItemNotificationTitle" = "歌曲名称通知";
+"allowsNowPlayingItemNotificationTitle" = "歌曲变更通知";
 "prefersCenterAlignedLayoutTitle" = "居中显示歌词";
 "maximumNotificationCountFooter" = "在“锁定屏幕”和“通知中心”上最多能显示的歌词通知条数。";
