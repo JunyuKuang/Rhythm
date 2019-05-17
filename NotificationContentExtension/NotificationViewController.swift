@@ -6,11 +6,8 @@
 //  Copyright © 2019 Jonny Kuang. All rights reserved.
 //
 
-import UIKit
-import UserNotifications
-import UserNotificationsUI
 import LyricsUI
-
+import UserNotificationsUI
 
 class NotificationViewController: UIViewController, UNNotificationContentExtension {
     

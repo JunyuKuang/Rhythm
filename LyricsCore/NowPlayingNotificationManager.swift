@@ -6,8 +6,6 @@
 //  Copyright © 2019 Jonny Kuang. All rights reserved.
 //
 
-import UserNotifications
-
 public class NowPlayingNotificationManager {
     
     public static let shared = NowPlayingNotificationManager()

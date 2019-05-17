@@ -6,10 +6,6 @@
 //  Copyright © 2019 Jonny Kuang. All rights reserved.
 //
 
-import Foundation
-import UserNotifications
-import LyricsProvider
-
 public class LyricsNotificationController : NSObject {
     
     public static let shared = LyricsNotificationController()

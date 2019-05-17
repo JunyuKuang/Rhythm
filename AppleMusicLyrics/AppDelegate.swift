@@ -6,10 +6,7 @@
 //  Copyright © 2019 Jonny Kuang. All rights reserved.
 //
 
-import UIKit
-import UserNotifications
 import LyricsUI
-
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {

@@ -5,9 +5,8 @@
 //  Copyright © 2018 Junyu Kuang <lightscreen.app@gmail.com>. All rights reserved.
 //
 
-import Foundation
-import CoreLocation
 import LyricsCore
+import CoreLocation
 
 class LocationManager : NSObject {
     

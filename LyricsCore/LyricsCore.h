@@ -8,6 +8,7 @@
 
 @import UIKit;
 @import MediaPlayer;
+@import UserNotifications;
 @import LyricsProvider;
 
 //! Project version number for LyricsCore.

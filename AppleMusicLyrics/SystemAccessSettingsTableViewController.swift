@@ -6,9 +6,7 @@
 //  Copyright © 2019 Jonny Kuang. All rights reserved.
 //
 
-import UIKit
-import MediaPlayer
-import UserNotifications
+import LyricsUI
 import CoreLocation
 
 class SystemAccessSettingsTableViewController: UITableViewController {
