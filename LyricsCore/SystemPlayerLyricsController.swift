@@ -18,6 +18,8 @@ public class SystemPlayerLyricsController {
         player.beginGeneratingPlaybackNotifications()
         NotificationCenter.default.addObserver(forName: .MPMusicPlayerControllerNowPlayingItemDidChange, object: player, queue: .main) { _ in
             self.nowPlaying = nil
+            NotificationCenter.default.post(name: SystemPlayerLyricsController.nowPlayingLyricsDidChangeNotification, object: self)
+            
             if let nowPlayingItem = player.nowPlayingItem {
                 self.update(for: nowPlayingItem)
             }
