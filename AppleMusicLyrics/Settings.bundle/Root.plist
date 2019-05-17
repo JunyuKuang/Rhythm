@@ -64,6 +64,18 @@
 				<string>5</string>
 			</array>
 		</dict>
+		<dict>
+			<key>Type</key>
+			<string>PSGroupSpecifier</string>
+		</dict>
+		<dict>
+			<key>Type</key>
+			<string>PSChildPaneSpecifier</string>
+			<key>Title</key>
+			<string>licenses</string>
+			<key>File</key>
+			<string>Licenses</string>
+		</dict>
 	</array>
 </dict>
 </plist>
