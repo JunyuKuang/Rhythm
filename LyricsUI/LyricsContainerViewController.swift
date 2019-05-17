@@ -244,7 +244,7 @@ private extension LyricsContainerViewController {
             UIApplication.shared.open(URL(string: "https://twitter.com/kuangjunyu")!)
         })
         controller.addAction(UIAlertAction(title: localized("followOnGitHub"), style: .default) { _ in
-            UIApplication.shared.open(URL(string: "https://github.com/JunyuKuang/AppleMusicLyrics")!)
+            UIApplication.shared.open(URL(string: "https://github.com/JunyuKuang/Rhythm")!)
         })
         
         controller.popoverPresentationController?.barButtonItem = buttonItem

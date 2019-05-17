@@ -1,7 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Scheme
    LastUpgradeVersion = "1020"
-   version = "1.3">
+   wasCreatedForAppExtension = "YES"
+   version = "2.0">
    <BuildAction
       parallelizeBuildables = "YES"
       buildImplicitDependencies = "YES">
@@ -14,10 +15,24 @@
             buildForAnalyzing = "YES">
             <BuildableReference
                BuildableIdentifier = "primary"
+               BlueprintIdentifier = "FB8A1D2622897C4500571A63"
+               BuildableName = "NotificationContentExtension.appex"
+               BlueprintName = "NotificationContentExtension"
+               ReferencedContainer = "container:Rhythm.xcodeproj">
+            </BuildableReference>
+         </BuildActionEntry>
+         <BuildActionEntry
+            buildForTesting = "YES"
+            buildForRunning = "YES"
+            buildForProfiling = "YES"
+            buildForArchiving = "YES"
+            buildForAnalyzing = "YES">
+            <BuildableReference
+               BuildableIdentifier = "primary"
                BlueprintIdentifier = "FB8A1C4A22871C5700571A63"
-               BuildableName = "AppleMusicLyrics.app"
-               BlueprintName = "AppleMusicLyrics"
-               ReferencedContainer = "container:AppleMusicLyrics.xcodeproj">
+               BuildableName = "Rhythm.app"
+               BlueprintName = "Rhythm"
+               ReferencedContainer = "container:Rhythm.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
       </BuildActionEntries>
@@ -32,10 +47,10 @@
       <MacroExpansion>
          <BuildableReference
             BuildableIdentifier = "primary"
-            BlueprintIdentifier = "FB8A1C4A22871C5700571A63"
-            BuildableName = "AppleMusicLyrics.app"
-            BlueprintName = "AppleMusicLyrics"
-            ReferencedContainer = "container:AppleMusicLyrics.xcodeproj">
+            BlueprintIdentifier = "FB8A1D2622897C4500571A63"
+            BuildableName = "NotificationContentExtension.appex"
+            BlueprintName = "NotificationContentExtension"
+            ReferencedContainer = "container:Rhythm.xcodeproj">
          </BuildableReference>
       </MacroExpansion>
       <AdditionalOptions>
@@ -43,24 +58,29 @@
    </TestAction>
    <LaunchAction
       buildConfiguration = "Debug"
-      selectedDebuggerIdentifier = "Xcode.DebuggerFoundation.Debugger.LLDB"
-      selectedLauncherIdentifier = "Xcode.DebuggerFoundation.Launcher.LLDB"
+      selectedDebuggerIdentifier = ""
+      selectedLauncherIdentifier = "Xcode.IDEFoundation.Launcher.PosixSpawn"
       launchStyle = "0"
       useCustomWorkingDirectory = "NO"
       ignoresPersistentStateOnLaunch = "NO"
       debugDocumentVersioning = "YES"
       debugServiceExtension = "internal"
-      allowLocationSimulation = "YES">
-      <BuildableProductRunnable
-         runnableDebuggingMode = "0">
+      allowLocationSimulation = "YES"
+      launchAutomaticallySubstyle = "2">
+      <RemoteRunnable
+         runnableDebuggingMode = "1"
+         BundleIdentifier = "com.apple.mobilesafari"
+         RemotePath = "/Applications/MobileSafari.app">
+      </RemoteRunnable>
+      <MacroExpansion>
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "FB8A1C4A22871C5700571A63"
-            BuildableName = "AppleMusicLyrics.app"
-            BlueprintName = "AppleMusicLyrics"
-            ReferencedContainer = "container:AppleMusicLyrics.xcodeproj">
+            BuildableName = "Rhythm.app"
+            BlueprintName = "Rhythm"
+            ReferencedContainer = "container:Rhythm.xcodeproj">
          </BuildableReference>
-      </BuildableProductRunnable>
+      </MacroExpansion>
       <AdditionalOptions>
       </AdditionalOptions>
    </LaunchAction>
@@ -69,15 +89,16 @@
       shouldUseLaunchSchemeArgsEnv = "YES"
       savedToolIdentifier = ""
       useCustomWorkingDirectory = "NO"
-      debugDocumentVersioning = "YES">
+      debugDocumentVersioning = "YES"
+      launchAutomaticallySubstyle = "2">
       <BuildableProductRunnable
          runnableDebuggingMode = "0">
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "FB8A1C4A22871C5700571A63"
-            BuildableName = "AppleMusicLyrics.app"
-            BlueprintName = "AppleMusicLyrics"
-            ReferencedContainer = "container:AppleMusicLyrics.xcodeproj">
+            BuildableName = "Rhythm.app"
+            BlueprintName = "Rhythm"
+            ReferencedContainer = "container:Rhythm.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>
    </ProfileAction>

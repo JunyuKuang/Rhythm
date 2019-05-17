@@ -1,5 +1,3 @@
-"CFBundleName" = "歌词";
-
 "NSAppleMusicUsageDescription" = "此权限允许 app 获取正在播放歌曲的信息，以搜索并显示对应的歌词。";
 
 "NSLocationAlwaysAndWhenInUseUsageDescription" = "此权限允许 app 在后台持续运行，以在“锁定屏幕”和“通知中心”上动态更新歌词。此 app 不会采集或上传你的定位信息。“始终”允许以达到最佳效果。";

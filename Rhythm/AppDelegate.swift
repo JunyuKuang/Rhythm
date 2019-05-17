@@ -1,6 +1,6 @@
 //
 //  AppDelegate.swift
-//  AppleMusicLyrics
+//  Rhythm
 //
 //  Created by Jonny Kuang on 5/11/19.
 //  Copyright © 2019 Jonny Kuang. All rights reserved.

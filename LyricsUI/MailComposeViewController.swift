@@ -47,7 +47,7 @@ public class MailComposeViewController : MFMailComposeViewController, MFMailComp
 private extension MailComposeViewController {
     
     struct FeedbackPlaceholders {
-        static let mailAddress = "Lyrics Support<LightScreen.app@gmail.com>"
-        static let subject = "Feedback - Lyrics (\(Bundle.main.object(forInfoDictionaryKey: kCFBundleVersionKey as String) as? String ?? ""))"
+        static let mailAddress = "Rhythm Support<LightScreen.app@gmail.com>"
+        static let subject = "Feedback - Rhythm (\(Bundle.main.object(forInfoDictionaryKey: kCFBundleVersionKey as String) as? String ?? ""))"
     }
 }

@@ -159,7 +159,7 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
-		FB8A1C4B22871C5700571A63 /* AppleMusicLyrics.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = AppleMusicLyrics.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		FB8A1C4B22871C5700571A63 /* Rhythm.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Rhythm.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		FB8A1C4E22871C5700571A63 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		FB8A1C5522871C5700571A63 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		FB8A1C5822871C5700571A63 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
@@ -213,7 +213,6 @@
 		FB8A1CB422882B2800571A63 /* NetEaseResponseSearchResult.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NetEaseResponseSearchResult.swift; sourceTree = "<group>"; };
 		FB8A1CB622882B2800571A63 /* QQResponseSingleLyrics.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = QQResponseSingleLyrics.swift; sourceTree = "<group>"; };
 		FB8A1CB722882B2800571A63 /* QQResponseSearchResult.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = QQResponseSearchResult.swift; sourceTree = "<group>"; };
-		FB8A1CE622882B5600571A63 /* AppleMusicLyrics-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "AppleMusicLyrics-Bridging-Header.h"; sourceTree = "<group>"; };
 		FB8A1CEA22882B8F00571A63 /* SpringboardNotificationObserver.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SpringboardNotificationObserver.h; sourceTree = "<group>"; };
 		FB8A1CEB22882B8F00571A63 /* LocationManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LocationManager.swift; sourceTree = "<group>"; };
 		FB8A1CEC22882B9000571A63 /* SpringboardNotificationObserver.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SpringboardNotificationObserver.m; sourceTree = "<group>"; };
@@ -238,8 +237,6 @@
 		FBF08E31228BB9D700383D6D /* UIView+Constraints.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIView+Constraints.swift"; sourceTree = "<group>"; };
 		FBF08E34228D697800383D6D /* NowPlayingNotificationManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NowPlayingNotificationManager.swift; sourceTree = "<group>"; };
 		FBF08E54228D7B8900383D6D /* UserDefaults+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UserDefaults+.swift"; sourceTree = "<group>"; };
-		FBF08E56228D7BB000383D6D /* AppleMusicLyrics.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = AppleMusicLyrics.entitlements; sourceTree = "<group>"; };
-		FBF08E57228D7BFF00383D6D /* NotificationContentExtension.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = NotificationContentExtension.entitlements; sourceTree = "<group>"; };
 		FBF08E58228DA38F00383D6D /* SystemAccessSettingsTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SystemAccessSettingsTableViewController.swift; sourceTree = "<group>"; };
 		FBF08E5C228E45C000383D6D /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.stringsdict; name = en; path = en.lproj/Localizable.stringsdict; sourceTree = "<group>"; };
 		FBF08E5E228E45C600383D6D /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.stringsdict; name = "zh-Hans"; path = "zh-Hans.lproj/Localizable.stringsdict"; sourceTree = "<group>"; };
@@ -258,6 +255,8 @@
 		FBF08E82228E964700383D6D /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/Localizable.strings"; sourceTree = "<group>"; };
 		FBF08E84228EB17000383D6D /* LyricsTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LyricsTableViewCell.swift; sourceTree = "<group>"; };
 		FBF08E86228EB48500383D6D /* LyricsProviderPickerController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LyricsProviderPickerController.swift; sourceTree = "<group>"; };
+		FBF08E88228EF76100383D6D /* Rhythm.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Rhythm.entitlements; sourceTree = "<group>"; };
+		FBF08E89228EF76700383D6D /* NotificationContentExtension.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = NotificationContentExtension.entitlements; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -310,7 +309,7 @@
 		FB8A1C4222871C5700571A63 = {
 			isa = PBXGroup;
 			children = (
-				FB8A1C4D22871C5700571A63 /* AppleMusicLyrics */,
+				FB8A1C4D22871C5700571A63 /* Rhythm */,
 				FB8A1D2C22897C4500571A63 /* NotificationContentExtension */,
 				FB8A1C7022882ABB00571A63 /* LyricsProvider */,
 				FB8A1CFD228955CA00571A63 /* LyricsUI */,
@@ -323,7 +322,7 @@
 		FB8A1C4C22871C5700571A63 /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				FB8A1C4B22871C5700571A63 /* AppleMusicLyrics.app */,
+				FB8A1C4B22871C5700571A63 /* Rhythm.app */,
 				FB8A1C6F22882ABB00571A63 /* LyricsProvider.framework */,
 				FB8A1CFC228955CA00571A63 /* LyricsUI.framework */,
 				FB8A1D112289736D00571A63 /* LyricsCore.framework */,
@@ -332,7 +331,7 @@
 			name = Products;
 			sourceTree = "<group>";
 		};
-		FB8A1C4D22871C5700571A63 /* AppleMusicLyrics */ = {
+		FB8A1C4D22871C5700571A63 /* Rhythm */ = {
 			isa = PBXGroup;
 			children = (
 				FB8A1C4E22871C5700571A63 /* AppDelegate.swift */,
@@ -345,10 +344,9 @@
 				FB8A1C5722871C5700571A63 /* LaunchScreen.storyboard */,
 				FB8A1C5A22871C5700571A63 /* Info.plist */,
 				FBF08E71228E8AB200383D6D /* InfoPlist.strings */,
-				FB8A1CE622882B5600571A63 /* AppleMusicLyrics-Bridging-Header.h */,
-				FBF08E56228D7BB000383D6D /* AppleMusicLyrics.entitlements */,
+				FBF08E88228EF76100383D6D /* Rhythm.entitlements */,
 			);
-			path = AppleMusicLyrics;
+			path = Rhythm;
 			sourceTree = "<group>";
 		};
 		FB8A1C7022882ABB00571A63 /* LyricsProvider */ = {
@@ -570,7 +568,7 @@
 			children = (
 				FB8A1D2D22897C4500571A63 /* NotificationViewController.swift */,
 				FB8A1D3222897C4500571A63 /* Info.plist */,
-				FBF08E57228D7BFF00383D6D /* NotificationContentExtension.entitlements */,
+				FBF08E89228EF76700383D6D /* NotificationContentExtension.entitlements */,
 			);
 			path = NotificationContentExtension;
 			sourceTree = "<group>";
@@ -606,9 +604,9 @@
 /* End PBXHeadersBuildPhase section */
 
 /* Begin PBXNativeTarget section */
-		FB8A1C4A22871C5700571A63 /* AppleMusicLyrics */ = {
+		FB8A1C4A22871C5700571A63 /* Rhythm */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = FB8A1C5D22871C5700571A63 /* Build configuration list for PBXNativeTarget "AppleMusicLyrics" */;
+			buildConfigurationList = FB8A1C5D22871C5700571A63 /* Build configuration list for PBXNativeTarget "Rhythm" */;
 			buildPhases = (
 				FB8A1C4722871C5700571A63 /* Sources */,
 				FB8A1C4822871C5700571A63 /* Frameworks */,
@@ -625,9 +623,9 @@
 				FB8A1D172289736D00571A63 /* PBXTargetDependency */,
 				FB8A1D3422897C4500571A63 /* PBXTargetDependency */,
 			);
-			name = AppleMusicLyrics;
+			name = Rhythm;
 			productName = AppleMusicLyrics;
-			productReference = FB8A1C4B22871C5700571A63 /* AppleMusicLyrics.app */;
+			productReference = FB8A1C4B22871C5700571A63 /* Rhythm.app */;
 			productType = "com.apple.product-type.application";
 		};
 		FB8A1C6E22882ABB00571A63 /* LyricsProvider */ = {
@@ -743,7 +741,7 @@
 					};
 				};
 			};
-			buildConfigurationList = FB8A1C4622871C5700571A63 /* Build configuration list for PBXProject "AppleMusicLyrics" */;
+			buildConfigurationList = FB8A1C4622871C5700571A63 /* Build configuration list for PBXProject "Rhythm" */;
 			compatibilityVersion = "Xcode 9.3";
 			developmentRegion = en;
 			hasScannedForEncodings = 0;
@@ -757,7 +755,7 @@
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				FB8A1C4A22871C5700571A63 /* AppleMusicLyrics */,
+				FB8A1C4A22871C5700571A63 /* Rhythm */,
 				FB8A1D2622897C4500571A63 /* NotificationContentExtension */,
 				FB8A1C6E22882ABB00571A63 /* LyricsProvider */,
 				FB8A1D102289736D00571A63 /* LyricsCore */,
@@ -1142,17 +1140,18 @@
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
-				CODE_SIGN_ENTITLEMENTS = AppleMusicLyrics/AppleMusicLyrics.entitlements;
+				CODE_SIGN_ENTITLEMENTS = Rhythm/Rhythm.entitlements;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = FF973S8UP2;
-				INFOPLIST_FILE = AppleMusicLyrics/Info.plist;
+				INFOPLIST_FILE = "$(SRCROOT)/Rhythm/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.jonny.AppleMusicLyrics;
+				PRODUCT_BUNDLE_IDENTIFIER = com.jonny.lyrics;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_OBJC_BRIDGING_HEADER = "AppleMusicLyrics/AppleMusicLyrics-Bridging-Header.h";
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -1165,17 +1164,18 @@
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
-				CODE_SIGN_ENTITLEMENTS = AppleMusicLyrics/AppleMusicLyrics.entitlements;
+				CODE_SIGN_ENTITLEMENTS = Rhythm/Rhythm.entitlements;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = FF973S8UP2;
-				INFOPLIST_FILE = AppleMusicLyrics/Info.plist;
+				INFOPLIST_FILE = "$(SRCROOT)/Rhythm/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.jonny.AppleMusicLyrics;
+				PRODUCT_BUNDLE_IDENTIFIER = com.jonny.lyrics;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_OBJC_BRIDGING_HEADER = "AppleMusicLyrics/AppleMusicLyrics-Bridging-Header.h";
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
@@ -1357,6 +1357,7 @@
 			buildSettings = {
 				APPLICATION_EXTENSION_API_ONLY = NO;
 				CODE_SIGN_ENTITLEMENTS = NotificationContentExtension/NotificationContentExtension.entitlements;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = FF973S8UP2;
 				INFOPLIST_FILE = NotificationContentExtension/Info.plist;
@@ -1365,8 +1366,9 @@
 					"@executable_path/Frameworks",
 					"@executable_path/../../Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.jonny.AppleMusicLyrics.NotificationContentExtension;
+				PRODUCT_BUNDLE_IDENTIFIER = com.jonny.lyrics.NotificationContentExtension;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				SKIP_INSTALL = YES;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -1378,6 +1380,7 @@
 			buildSettings = {
 				APPLICATION_EXTENSION_API_ONLY = NO;
 				CODE_SIGN_ENTITLEMENTS = NotificationContentExtension/NotificationContentExtension.entitlements;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = FF973S8UP2;
 				INFOPLIST_FILE = NotificationContentExtension/Info.plist;
@@ -1386,8 +1389,9 @@
 					"@executable_path/Frameworks",
 					"@executable_path/../../Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.jonny.AppleMusicLyrics.NotificationContentExtension;
+				PRODUCT_BUNDLE_IDENTIFIER = com.jonny.lyrics.NotificationContentExtension;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				SKIP_INSTALL = YES;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -1397,7 +1401,7 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		FB8A1C4622871C5700571A63 /* Build configuration list for PBXProject "AppleMusicLyrics" */ = {
+		FB8A1C4622871C5700571A63 /* Build configuration list for PBXProject "Rhythm" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				FB8A1C5B22871C5700571A63 /* Debug */,
@@ -1406,7 +1410,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		FB8A1C5D22871C5700571A63 /* Build configuration list for PBXNativeTarget "AppleMusicLyrics" */ = {
+		FB8A1C5D22871C5700571A63 /* Build configuration list for PBXNativeTarget "Rhythm" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				FB8A1C5E22871C5700571A63 /* Debug */,
