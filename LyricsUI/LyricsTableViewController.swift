@@ -139,36 +139,6 @@ public class LyricsTableViewController: UITableViewController {
 }
 
 
-class LyricsTableViewCell : UITableViewCell {
-    
-    override func setSelected(_ selected: Bool, animated: Bool) {
-        super.setSelected(selected, animated: animated)
-        updateTextColor()
-    }
-    
-    override func tintColorDidChange() {
-        super.tintColorDidChange()
-        updateTextColor()
-    }
-    
-    private func updateTextColor() {
-        let textColor = isSelected ? tintColor! : .darkText
-        textLabel?.textColor = textColor
-        detailTextLabel?.textColor = textColor
-    }
-    
-    override func layoutSubviews() {
-        super.layoutSubviews()
-        
-        let labels = [textLabel, detailTextLabel].compactMap { $0 }
-        labels.forEach {
-            let inset = $0.frame.origin.x
-            $0.frame.size.width = contentView.bounds.width - inset * 2
-        }
-    }
-}
-
-
 private extension LyricsTableViewController {
     
     func configureLyricsChangeObservers() {

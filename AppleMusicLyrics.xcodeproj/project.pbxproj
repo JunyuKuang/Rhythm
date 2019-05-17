@@ -96,6 +96,7 @@
 		FBF08E7B228E93E800383D6D /* LyricsProviderSource+Name.swift in Sources */ = {isa = PBXBuildFile; fileRef = FBF08E73228E923E00383D6D /* LyricsProviderSource+Name.swift */; };
 		FBF08E7F228E964000383D6D /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = FBF08E81228E964000383D6D /* Localizable.strings */; };
 		FBF08E83228E972000383D6D /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = FBF08E79228E937D00383D6D /* Localizable.strings */; };
+		FBF08E85228EB17000383D6D /* LyricsTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = FBF08E84228EB17000383D6D /* LyricsTableViewCell.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -254,6 +255,7 @@
 		FBF08E7A228E937F00383D6D /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/Localizable.strings"; sourceTree = "<group>"; };
 		FBF08E80228E964000383D6D /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
 		FBF08E82228E964700383D6D /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/Localizable.strings"; sourceTree = "<group>"; };
+		FBF08E84228EB17000383D6D /* LyricsTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LyricsTableViewCell.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -520,6 +522,7 @@
 				FB8A1CFE228955CA00571A63 /* LyricsUI.h */,
 				FBF08E2E228BB87500383D6D /* LyricsContainerViewController.swift */,
 				FB8A1D082289581000571A63 /* LyricsTableViewController.swift */,
+				FBF08E84228EB17000383D6D /* LyricsTableViewCell.swift */,
 				FB8A1D3C22897F5B00571A63 /* UIColor+globalTint.swift */,
 				FBF08E31228BB9D700383D6D /* UIView+Constraints.swift */,
 				FBF08E61228E6B8900383D6D /* UIBarButtonItem+HUD.swift */,
@@ -901,6 +904,7 @@
 				FBF08E62228E6B8900383D6D /* UIBarButtonItem+HUD.swift in Sources */,
 				FBF08E64228E6BDE00383D6D /* Bundle+.swift in Sources */,
 				FBF08E66228E714700383D6D /* MailComposeViewController.swift in Sources */,
+				FBF08E85228EB17000383D6D /* LyricsTableViewCell.swift in Sources */,
 				FB8A1D092289581000571A63 /* LyricsTableViewController.swift in Sources */,
 				FBF08E32228BB9D700383D6D /* UIView+Constraints.swift in Sources */,
 			);
