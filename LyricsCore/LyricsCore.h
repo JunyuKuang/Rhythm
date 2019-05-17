@@ -17,5 +17,5 @@ FOUNDATION_EXPORT double LyricsCoreVersionNumber;
 FOUNDATION_EXPORT const unsigned char LyricsCoreVersionString[];
 
 // In this header, you should import all the public headers of your framework using statements like #import <LyricsCore/PublicHeader.h>
-#import <LyricsCore/DarwinNotificationObserver.h>
+#import <LyricsCore/SpringboardNotificationObserver.h>
 

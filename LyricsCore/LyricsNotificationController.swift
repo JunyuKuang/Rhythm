@@ -28,13 +28,13 @@ public class LyricsNotificationController : NSObject {
     private override init() {
         super.init()
         
-        let observer = DarwinNotificationObserver.shared
+        let springboardNotificationObserver = SpringboardNotificationObserver.shared
         
         kvoObservers = [
-            observer.observe(\.isDeviceSleepModeEnabled) { _, _ in
+            springboardNotificationObserver.observe(\.isDeviceSleepModeEnabled) { _, _ in
                 self.postPendingLyricsIfNeeded()
             },
-            observer.observe(\.isCoverSheetVisible) { _, _ in
+            springboardNotificationObserver.observe(\.isCoverSheetVisible) { _, _ in
                 self.postPendingLyricsIfNeeded()
             },
         ]
@@ -81,7 +81,7 @@ public class LyricsNotificationController : NSObject {
     ///
     /// Returns true only if A. iOS Notification Center (a.k.a. Cover Sheet) is on the front and B. the device is not in sleep mode.
     var isPostable: Bool {
-        let observer = DarwinNotificationObserver.shared
+        let observer = SpringboardNotificationObserver.shared
         return observer.isCoverSheetVisible && !observer.isDeviceSleepModeEnabled
     }
     

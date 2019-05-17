@@ -1,21 +1,21 @@
 //
-//  DarwinNotificationObserver.m
+//  SpringboardNotificationObserver.m
 //  Lyrics
 //
 //  Created by Jonny Kuang on 5/12/19.
 //
 
-#import "DarwinNotificationObserver.h"
+#import "SpringboardNotificationObserver.h"
 #import <notify.h>
 
-@implementation DarwinNotificationObserver
+@implementation SpringboardNotificationObserver
 
 + (instancetype)shared
 {
-    static DarwinNotificationObserver *instance;
+    static SpringboardNotificationObserver *instance;
     static dispatch_once_t onceToken;
     dispatch_once(&onceToken, ^{
-        instance = [[DarwinNotificationObserver alloc] init];
+        instance = [[SpringboardNotificationObserver alloc] init];
     });
     return instance;
 }
