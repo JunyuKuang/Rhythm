@@ -97,14 +97,11 @@ public class LyricsContainerViewController : UIViewController {
         } else {
             iconNames = ["Translate-Disabled", "Translate-Disabled-compact"]
         }
-        let icons = iconNames.map {
-            UIImage(named: $0, in: Bundle(for: type(of: self)), compatibleWith: nil)!
-        }
+        let icons = iconNames.map { img($0)! }
         buttonItem.image = icons.first
         buttonItem.landscapeImagePhone = icons.last
         
-        buttonItem.title = showsTranslation ? "Hide Translation" : "Show Translation"
-        buttonItem.accessibilityLabel = buttonItem.title
+        buttonItem.hudTitle = showsTranslation ? "Hide Translation" : "Show Translation"
     }
     
     private var playPauseButtonItem: UIBarButtonItem?
@@ -152,8 +149,7 @@ private extension LyricsContainerViewController {
                 target: self,
                 action: #selector(openMusicApp)
             )
-            buttonItem.title = "Apple Music"
-            buttonItem.accessibilityLabel = buttonItem.title
+            buttonItem.hudTitle = "Apple Music"
             return buttonItem
         }()
         
