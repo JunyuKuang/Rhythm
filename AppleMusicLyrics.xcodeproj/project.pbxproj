@@ -496,8 +496,8 @@
 			isa = PBXGroup;
 			children = (
 				FB8A1CFE228955CA00571A63 /* LyricsUI.h */,
-				FB8A1D082289581000571A63 /* LyricsTableViewController.swift */,
 				FBF08E2E228BB87500383D6D /* LyricsContainerViewController.swift */,
+				FB8A1D082289581000571A63 /* LyricsTableViewController.swift */,
 				FB8A1D3C22897F5B00571A63 /* UIColor+globalTint.swift */,
 				FBF08E31228BB9D700383D6D /* UIView+Constraints.swift */,
 				FBF08E2B228B09CA00383D6D /* Assets.xcassets */,
