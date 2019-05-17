@@ -90,6 +90,7 @@
 		FBF08E60228E46DE00383D6D /* Settings.bundle in Resources */ = {isa = PBXBuildFile; fileRef = FBF08E5F228E46DE00383D6D /* Settings.bundle */; };
 		FBF08E62228E6B8900383D6D /* UIBarButtonItem+HUD.swift in Sources */ = {isa = PBXBuildFile; fileRef = FBF08E61228E6B8900383D6D /* UIBarButtonItem+HUD.swift */; };
 		FBF08E64228E6BDE00383D6D /* Bundle+.swift in Sources */ = {isa = PBXBuildFile; fileRef = FBF08E63228E6BDE00383D6D /* Bundle+.swift */; };
+		FBF08E66228E714700383D6D /* MailComposeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FBF08E65228E714700383D6D /* MailComposeViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -238,6 +239,7 @@
 		FBF08E5F228E46DE00383D6D /* Settings.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = Settings.bundle; sourceTree = "<group>"; };
 		FBF08E61228E6B8900383D6D /* UIBarButtonItem+HUD.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIBarButtonItem+HUD.swift"; sourceTree = "<group>"; };
 		FBF08E63228E6BDE00383D6D /* Bundle+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Bundle+.swift"; sourceTree = "<group>"; };
+		FBF08E65228E714700383D6D /* MailComposeViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MailComposeViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -506,6 +508,7 @@
 				FBF08E31228BB9D700383D6D /* UIView+Constraints.swift */,
 				FBF08E61228E6B8900383D6D /* UIBarButtonItem+HUD.swift */,
 				FBF08E63228E6BDE00383D6D /* Bundle+.swift */,
+				FBF08E65228E714700383D6D /* MailComposeViewController.swift */,
 				FBF08E2B228B09CA00383D6D /* Assets.xcassets */,
 				FB8A1CFF228955CA00571A63 /* Info.plist */,
 			);
@@ -874,6 +877,7 @@
 				FBF08E2F228BB87500383D6D /* LyricsContainerViewController.swift in Sources */,
 				FBF08E62228E6B8900383D6D /* UIBarButtonItem+HUD.swift in Sources */,
 				FBF08E64228E6BDE00383D6D /* Bundle+.swift in Sources */,
+				FBF08E66228E714700383D6D /* MailComposeViewController.swift in Sources */,
 				FB8A1D092289581000571A63 /* LyricsTableViewController.swift in Sources */,
 				FBF08E32228BB9D700383D6D /* UIView+Constraints.swift in Sources */,
 			);

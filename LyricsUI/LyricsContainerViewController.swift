@@ -209,6 +209,31 @@ private extension LyricsContainerViewController {
     }
     
     func tapMoreButtonItem(_ buttonItem: UIBarButtonItem) {
-        UIApplication.shared.open(URL(string: UIApplication.openSettingsURLString)!)
+        let controller = UIAlertController(title: nil, message: nil, preferredStyle: .actionSheet)
+        
+        controller.addAction(UIAlertAction(title: localized("Cancel"), style: .cancel, handler: nil))
+        
+        controller.addAction(UIAlertAction(title: localized("Settings"), style: .default) { _ in
+            UIApplication.shared.open(URL(string: UIApplication.openSettingsURLString)!)
+        })
+        controller.addAction(UIAlertAction(title: localized("Send Feedback"), style: .default) { _ in
+            if let controller = MailComposeViewController(text: "") {
+                self.present(controller, animated: true)
+            }
+        })
+        controller.addAction(UIAlertAction(title: localized("Follow on Weibo"), style: .default) { _ in
+            UIApplication.shared.open(URL(string: "https://weibo.com/lightscreen")!)
+        })
+        controller.addAction(UIAlertAction(title: localized("Follow on Twitter"), style: .default) { _ in
+            UIApplication.shared.open(URL(string: "https://twitter.com/kuangjunyu")!)
+        })
+        controller.addAction(UIAlertAction(title: localized("Follow on GitHub"), style: .default) { _ in
+            UIApplication.shared.open(URL(string: "https://github.com/JunyuKuang/AppleMusicLyrics")!)
+        })
+        
+        controller.popoverPresentationController?.barButtonItem = buttonItem
+        present(controller, animated: true) {
+            controller.popoverPresentationController?.passthroughViews = []
+        }
     }
 }
