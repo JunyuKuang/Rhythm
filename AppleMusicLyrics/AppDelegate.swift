@@ -16,7 +16,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     private lazy var mainWindow = UIWindow()
     
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
-        _ = LyricsNotificationController.shared // register observers to track the visible state of iOS Notification Center
+        
+        LyricsNotificationController.shared.openSettingsHandler = { _ in
+            application.open(URL(string: UIApplication.openSettingsURLString)!)
+        }
         
         mainWindow.tintColor = .globalTint
         

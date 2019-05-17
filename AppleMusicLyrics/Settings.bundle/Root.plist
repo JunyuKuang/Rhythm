@@ -21,8 +21,10 @@
 		<dict>
 			<key>Type</key>
 			<string>PSGroupSpecifier</string>
+			<key>Title</key>
+			<string>notificationGroupTitle</string>
 			<key>FooterText</key>
-			<string>maximumNotificationCountFooter</string>
+			<string>notificationGroupFooter</string>
 		</dict>
 		<dict>
 			<key>Type</key>

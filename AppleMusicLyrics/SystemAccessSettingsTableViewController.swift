@@ -87,7 +87,11 @@ class SystemAccessSettingsTableViewController: UITableViewController {
                     case .notDetermined:
                         setting.accessLevel = .notDetermined
                         setting.handler = {
-                            UNUserNotificationCenter.current().requestAuthorization(options: .alert) { _, _ in
+                            var options = UNAuthorizationOptions.alert
+                            if #available(iOS 12.0, *) {
+                                options.insert(.providesAppNotificationSettings)
+                            }
+                            UNUserNotificationCenter.current().requestAuthorization(options: options) { _, _ in
                                 DispatchQueue.main.async {
                                     self?.updateSettings()
                                 }
