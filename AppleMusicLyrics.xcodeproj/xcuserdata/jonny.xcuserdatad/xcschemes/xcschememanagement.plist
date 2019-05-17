@@ -17,7 +17,7 @@
 		<key>LyricsProvider.xcscheme_^#shared#^_</key>
 		<dict>
 			<key>orderHint</key>
-			<integer>1</integer>
+			<integer>2</integer>
 		</dict>
 		<key>LyricsUI.xcscheme_^#shared#^_</key>
 		<dict>
@@ -27,7 +27,20 @@
 		<key>NotificationContentExtension.xcscheme_^#shared#^_</key>
 		<dict>
 			<key>orderHint</key>
-			<integer>2</integer>
+			<integer>1</integer>
+		</dict>
+	</dict>
+	<key>SuppressBuildableAutocreation</key>
+	<dict>
+		<key>FB8A1C4A22871C5700571A63</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>FB8A1D2622897C4500571A63</key>
+		<dict>
+			<key>primary</key>
+			<true/>
 		</dict>
 	</dict>
 </dict>

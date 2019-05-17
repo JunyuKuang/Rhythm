@@ -304,10 +304,10 @@
 			isa = PBXGroup;
 			children = (
 				FB8A1C4D22871C5700571A63 /* AppleMusicLyrics */,
+				FB8A1D2C22897C4500571A63 /* NotificationContentExtension */,
 				FB8A1C7022882ABB00571A63 /* LyricsProvider */,
 				FB8A1CFD228955CA00571A63 /* LyricsUI */,
 				FB8A1D122289736D00571A63 /* LyricsCore */,
-				FB8A1D2C22897C4500571A63 /* NotificationContentExtension */,
 				FB8A1C4C22871C5700571A63 /* Products */,
 				FB8A1D0A2289584100571A63 /* Frameworks */,
 			);
