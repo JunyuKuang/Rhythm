@@ -27,17 +27,16 @@ class SystemAccessSettingsTableViewController: UITableViewController {
     
     private var settings = [Setting]()
     
-    private lazy var locationManager: CLLocationManager = {
-        let locationManager = CLLocationManager()
-        locationManager.delegate = self
-        return locationManager
-    }()
+    private lazy var locationManager = CLLocationManager()
     
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        updateSettings()
+        
+        tableView.cellLayoutMarginsFollowReadableWidth = false
         NotificationCenter.default.addObserver(self, selector: #selector(appDidBecomeActive), name: UIApplication.didBecomeActiveNotification, object: nil)
+        
+        updateSettings()
     }
     
     
@@ -57,18 +56,14 @@ class SystemAccessSettingsTableViewController: UITableViewController {
                 
                 do {
                     var setting = Setting()
-                    setting.title = NSLocalizedString("Allow Access Apple Music", comment: "")
+                    setting.title = NSLocalizedString("allowAccessAppleMusic", comment: "")
                     setting.usageDescription = infoDictionary["NSAppleMusicUsageDescription"] as? String ?? ""
                     
                     switch MPMediaLibrary.authorizationStatus() {
                     case .notDetermined:
                         setting.accessLevel = .notDetermined
                         setting.handler = {
-                            MPMediaLibrary.requestAuthorization { _ in
-                                DispatchQueue.main.async {
-                                    self?.updateSettings()
-                                }
-                            }
+                            MPMediaLibrary.requestAuthorization { _ in }
                         }
                     case .authorized:
                         setting.accessLevel = .authorized
@@ -80,8 +75,8 @@ class SystemAccessSettingsTableViewController: UITableViewController {
                 }
                 do {
                     var setting = Setting()
-                    setting.title = NSLocalizedString("Enable Notifications", comment: "")
-                    setting.usageDescription = NSLocalizedString("This allows the app to show lyrics on the Lock Screen and Notification Center.", comment: "")
+                    setting.title = NSLocalizedString("enableNotifications", comment: "")
+                    setting.usageDescription = NSLocalizedString("enableNotificationsDescription", comment: "")
                     
                     switch notificationSettings.authorizationStatus {
                     case .notDetermined:
@@ -91,11 +86,7 @@ class SystemAccessSettingsTableViewController: UITableViewController {
                             if #available(iOS 12.0, *) {
                                 options.insert(.providesAppNotificationSettings)
                             }
-                            UNUserNotificationCenter.current().requestAuthorization(options: options) { _, _ in
-                                DispatchQueue.main.async {
-                                    self?.updateSettings()
-                                }
-                            }
+                            UNUserNotificationCenter.current().requestAuthorization(options: options) { _, _ in }
                         }
                     case .authorized:
                         setting.accessLevel = .authorized
@@ -107,7 +98,7 @@ class SystemAccessSettingsTableViewController: UITableViewController {
                 }
                 do {
                     var setting = Setting()
-                    setting.title = NSLocalizedString("Enable Location Services", comment: "")
+                    setting.title = NSLocalizedString("enableLocation", comment: "")
                     setting.usageDescription = infoDictionary["NSLocationWhenInUseUsageDescription"] as? String ?? ""
                     
                     switch CLLocationManager.authorizationStatus() {
@@ -172,18 +163,5 @@ class SystemAccessSettingsTableViewController: UITableViewController {
         if setting.accessLevel == .authorized {
             tableView.deselectRow(at: indexPath, animated: true)
         }
-    }
-}
-
-
-extension SystemAccessSettingsTableViewController : CLLocationManagerDelegate {
-    
-    func locationManager(_ manager: CLLocationManager, didChangeAuthorization status: CLAuthorizationStatus) {
-        DispatchQueue.main.async {
-            self.updateSettings()
-        }
-    }
-    
-    func locationManager(_ manager: CLLocationManager, didFailWithError error: Error) {
     }
 }
