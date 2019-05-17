@@ -50,7 +50,7 @@ public class LyricsContainerViewController : UIViewController {
         
         navigationItem.leftBarButtonItem = {
             let item = UIBarButtonItem(image: img("More"), style: .plain, target: self, action: #selector(tapMoreButtonItem))
-            item.hudTitle = localized("More")
+            item.hudTitle = localized("more")
             return item
         }()
         configureToolbars()
@@ -101,7 +101,7 @@ public class LyricsContainerViewController : UIViewController {
         buttonItem.image = icons.first
         buttonItem.landscapeImagePhone = icons.last
         
-        buttonItem.hudTitle = showsTranslation ? "Hide Translation" : "Show Translation"
+        buttonItem.hudTitle = localized(showsTranslation ? "hideTranslation" : "showTranslation")
     }
     
     private var playPauseButtonItem: UIBarButtonItem?
@@ -149,7 +149,7 @@ private extension LyricsContainerViewController {
                 target: self,
                 action: #selector(openMusicApp)
             )
-            buttonItem.hudTitle = "Apple Music"
+            buttonItem.hudTitle = localized("appleMusic")
             return buttonItem
         }()
         
@@ -211,23 +211,23 @@ private extension LyricsContainerViewController {
     func tapMoreButtonItem(_ buttonItem: UIBarButtonItem) {
         let controller = UIAlertController(title: nil, message: nil, preferredStyle: .actionSheet)
         
-        controller.addAction(UIAlertAction(title: localized("Cancel"), style: .cancel, handler: nil))
+        controller.addAction(UIAlertAction(title: localized("cancel"), style: .cancel, handler: nil))
         
-        controller.addAction(UIAlertAction(title: localized("Settings"), style: .default) { _ in
+        controller.addAction(UIAlertAction(title: localized("settings"), style: .default) { _ in
             UIApplication.shared.open(URL(string: UIApplication.openSettingsURLString)!)
         })
-        controller.addAction(UIAlertAction(title: localized("Send Feedback"), style: .default) { _ in
+        controller.addAction(UIAlertAction(title: localized("sendFeedback"), style: .default) { _ in
             if let controller = MailComposeViewController(text: "") {
                 self.present(controller, animated: true)
             }
         })
-        controller.addAction(UIAlertAction(title: localized("Follow on Weibo"), style: .default) { _ in
+        controller.addAction(UIAlertAction(title: localized("followOnWeibo"), style: .default) { _ in
             UIApplication.shared.open(URL(string: "https://weibo.com/lightscreen")!)
         })
-        controller.addAction(UIAlertAction(title: localized("Follow on Twitter"), style: .default) { _ in
+        controller.addAction(UIAlertAction(title: localized("followOnTwitter"), style: .default) { _ in
             UIApplication.shared.open(URL(string: "https://twitter.com/kuangjunyu")!)
         })
-        controller.addAction(UIAlertAction(title: localized("Follow on GitHub"), style: .default) { _ in
+        controller.addAction(UIAlertAction(title: localized("followOnGitHub"), style: .default) { _ in
             UIApplication.shared.open(URL(string: "https://github.com/JunyuKuang/AppleMusicLyrics")!)
         })
         

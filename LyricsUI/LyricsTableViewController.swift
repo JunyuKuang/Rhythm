@@ -165,13 +165,12 @@ private extension LyricsTableViewController {
     
     func configureLyricsChangeObservers() {
         let lyricsUpdateHandler = { [weak self] in
-            if let nowPlaying = SystemPlayerLyricsController.shared.nowPlaying {
-                self?.lyrics = nowPlaying.lyrics
-                self?.title = [nowPlaying.item.title, nowPlaying.item.artist].compactMap { $0?.trimmingCharacters(in: .whitespacesAndNewlines) }.joined(separator: " - ")
+            if let nowPlayingItem = MPMusicPlayerController.systemMusicPlayer.nowPlayingItem {
+                self?.title = [nowPlayingItem.title, nowPlayingItem.artist].compactMap { $0?.trimmingCharacters(in: .whitespacesAndNewlines) }.joined(separator: " - ")
             } else {
-                self?.lyrics = nil
-                self?.title = "Not Playing"
+                self?.title = localized("notPlaying")
             }
+            self?.lyrics = SystemPlayerLyricsController.shared.nowPlaying?.lyrics
         }
         lyricsUpdateHandler()
         
