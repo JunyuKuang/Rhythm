@@ -53,6 +53,8 @@ public class LyricsContainerViewController : UIViewController {
             item.hudTitle = localized("more")
             return item
         }()
+        navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .compose, target: self, action: #selector(tapComposeButtonItem))
+        
         configureToolbars()
         
         NotificationCenter.default.addObserver(self, selector: #selector(playbackStateDidChange), name: .MPMusicPlayerControllerPlaybackStateDidChange, object: player)
@@ -249,5 +251,9 @@ private extension LyricsContainerViewController {
         present(controller, animated: true) {
             controller.popoverPresentationController?.passthroughViews = []
         }
+    }
+    
+    func tapComposeButtonItem(_ buttonItem: UIBarButtonItem) {
+        present(LyricsProviderPickerController(), animated: true)
     }
 }
