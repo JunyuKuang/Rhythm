@@ -87,6 +87,7 @@
 		FBF08E55228D7B8900383D6D /* UserDefaults+.swift in Sources */ = {isa = PBXBuildFile; fileRef = FBF08E54228D7B8900383D6D /* UserDefaults+.swift */; };
 		FBF08E59228DA38F00383D6D /* SystemAccessSettingsTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FBF08E58228DA38F00383D6D /* SystemAccessSettingsTableViewController.swift */; };
 		FBF08E5B228E45C000383D6D /* Localizable.stringsdict in Resources */ = {isa = PBXBuildFile; fileRef = FBF08E5D228E45C000383D6D /* Localizable.stringsdict */; };
+		FBF08E60228E46DE00383D6D /* Settings.bundle in Resources */ = {isa = PBXBuildFile; fileRef = FBF08E5F228E46DE00383D6D /* Settings.bundle */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -232,6 +233,7 @@
 		FBF08E58228DA38F00383D6D /* SystemAccessSettingsTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SystemAccessSettingsTableViewController.swift; sourceTree = "<group>"; };
 		FBF08E5C228E45C000383D6D /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.stringsdict; name = en; path = en.lproj/Localizable.stringsdict; sourceTree = "<group>"; };
 		FBF08E5E228E45C600383D6D /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.stringsdict; name = "zh-Hans"; path = "zh-Hans.lproj/Localizable.stringsdict"; sourceTree = "<group>"; };
+		FBF08E5F228E46DE00383D6D /* Settings.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = Settings.bundle; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -312,6 +314,7 @@
 				FB8A1C4E22871C5700571A63 /* AppDelegate.swift */,
 				FBF08E58228DA38F00383D6D /* SystemAccessSettingsTableViewController.swift */,
 				FB8A1CEB22882B8F00571A63 /* LocationManager.swift */,
+				FBF08E5F228E46DE00383D6D /* Settings.bundle */,
 				FBF08E5D228E45C000383D6D /* Localizable.stringsdict */,
 				FB8A1C5522871C5700571A63 /* Assets.xcassets */,
 				FB8A1C5722871C5700571A63 /* LaunchScreen.storyboard */,
@@ -734,6 +737,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				FBF08E60228E46DE00383D6D /* Settings.bundle in Resources */,
 				FB8A1C5922871C5700571A63 /* LaunchScreen.storyboard in Resources */,
 				FBF08E5B228E45C000383D6D /* Localizable.stringsdict in Resources */,
 				FB8A1C5622871C5700571A63 /* Assets.xcassets in Resources */,
