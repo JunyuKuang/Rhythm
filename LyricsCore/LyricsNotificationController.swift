@@ -50,7 +50,7 @@ public class LyricsNotificationController : NSObject {
         
         let category: UNNotificationCategory = {
             let actions = LyricsProviderSource.allCases.map {
-                UNNotificationAction(identifier: $0.rawValue, title: $0.rawValue)
+                UNNotificationAction(identifier: $0.rawValue, title: $0.localizedName)
             }
             let options: UNNotificationCategoryOptions = [.hiddenPreviewsShowTitle, .hiddenPreviewsShowSubtitle]
             

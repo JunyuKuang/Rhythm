@@ -93,6 +93,8 @@
 		FBF08E66228E714700383D6D /* MailComposeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FBF08E65228E714700383D6D /* MailComposeViewController.swift */; };
 		FBF08E69228E88EB00383D6D /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = FBF08E6B228E88EB00383D6D /* Localizable.strings */; };
 		FBF08E6F228E8AB200383D6D /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = FBF08E71228E8AB200383D6D /* InfoPlist.strings */; };
+		FBF08E77228E937D00383D6D /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = FBF08E79228E937D00383D6D /* Localizable.strings */; };
+		FBF08E7B228E93E800383D6D /* LyricsProviderSource+Name.swift in Sources */ = {isa = PBXBuildFile; fileRef = FBF08E73228E923E00383D6D /* LyricsProviderSource+Name.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -246,6 +248,9 @@
 		FBF08E6C228E88EC00383D6D /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/Localizable.strings"; sourceTree = "<group>"; };
 		FBF08E70228E8AB200383D6D /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		FBF08E72228E8AB700383D6D /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/InfoPlist.strings"; sourceTree = "<group>"; };
+		FBF08E73228E923E00383D6D /* LyricsProviderSource+Name.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "LyricsProviderSource+Name.swift"; sourceTree = "<group>"; };
+		FBF08E78228E937D00383D6D /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
+		FBF08E7A228E937F00383D6D /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/Localizable.strings"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -543,6 +548,8 @@
 				FB8A1CEC22882B9000571A63 /* SpringboardNotificationObserver.m */,
 				FBF08E54228D7B8900383D6D /* UserDefaults+.swift */,
 				FB8A1CEF22882BAC00571A63 /* DebugPrint.swift */,
+				FBF08E73228E923E00383D6D /* LyricsProviderSource+Name.swift */,
+				FBF08E79228E937D00383D6D /* Localizable.strings */,
 				FB8A1D142289736D00571A63 /* Info.plist */,
 			);
 			path = LyricsCore;
@@ -775,6 +782,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				FBF08E2C228B09CA00383D6D /* Assets.xcassets in Resources */,
+				FBF08E77228E937D00383D6D /* Localizable.strings in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -903,6 +911,7 @@
 				FB8A1D22228973D900571A63 /* DebugPrint.swift in Sources */,
 				FBF08E55228D7B8900383D6D /* UserDefaults+.swift in Sources */,
 				FBF08E35228D697800383D6D /* NowPlayingNotificationManager.swift in Sources */,
+				FBF08E7B228E93E800383D6D /* LyricsProviderSource+Name.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -973,6 +982,15 @@
 				FBF08E72228E8AB700383D6D /* zh-Hans */,
 			);
 			name = InfoPlist.strings;
+			sourceTree = "<group>";
+		};
+		FBF08E79228E937D00383D6D /* Localizable.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				FBF08E78228E937D00383D6D /* en */,
+				FBF08E7A228E937F00383D6D /* zh-Hans */,
+			);
+			name = Localizable.strings;
 			sourceTree = "<group>";
 		};
 /* End PBXVariantGroup section */
