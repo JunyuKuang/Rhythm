@@ -61,10 +61,15 @@ class SystemAccessSettingsTableViewController: UITableViewController {
                     
                     switch MPMediaLibrary.authorizationStatus() {
                     case .notDetermined:
+                        #if targetEnvironment(simulator)
+                        // MPMediaLibrary.requestAuthorization is unusable on simulator
+                        setting.accessLevel = .authorized
+                        #else
                         setting.accessLevel = .notDetermined
                         setting.handler = {
                             MPMediaLibrary.requestAuthorization { _ in }
                         }
+                        #endif
                     case .authorized:
                         setting.accessLevel = .authorized
                     default:
