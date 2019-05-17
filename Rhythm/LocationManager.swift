@@ -5,7 +5,6 @@
 //  Copyright © 2018 Junyu Kuang <lightscreen.app@gmail.com>. All rights reserved.
 //
 
-import LyricsCore
 import CoreLocation
 
 class LocationManager : NSObject {
@@ -41,10 +40,8 @@ class LocationManager : NSObject {
             
             manager.startUpdatingLocation()
             
-            dprint("startUpdatingLocation")
-            
         default:
-            dprint("location services unavailable")
+            break
         }
     }
     
@@ -58,20 +55,12 @@ class LocationManager : NSObject {
 extension LocationManager : CLLocationManagerDelegate {
     
     func locationManager(_ manager: CLLocationManager, didChangeAuthorization status: CLAuthorizationStatus) {
-        switch status {
-        case .authorizedAlways, .authorizedWhenInUse:
-            dprint("location access granted")
-        default:
-            dprint("location access denied")
-        }
     }
     
     func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
-        dprint("locations.count", locations.count)
     }
     
     func locationManager(_ manager: CLLocationManager, didFailWithError error: Error) {
-        dprint(error)
         isRunning = false
     }
 }
