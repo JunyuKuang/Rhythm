@@ -32,6 +32,33 @@ public extension UserDefaults {
             set(newValue, forKey: "userSpecifiedSourcesByMediaIDs")
         }
     }
+    
+    @objc dynamic var maximumNotificationCount: Int {
+        get {
+            return value(forKey: "maximumNotificationCount") as? Int ?? 3
+        }
+        set {
+            set(newValue, forKey: "maximumNotificationCount")
+        }
+    }
+    
+    @objc dynamic var allowsNowPlayingItemNotification: Bool {
+        get {
+            return value(forKey: "allowsNowPlayingItemNotification") as? Bool ?? true
+        }
+        set {
+            set(newValue, forKey: "allowsNowPlayingItemNotification")
+        }
+    }
+    
+    @objc dynamic var prefersCenterAlignedLayout: Bool {
+        get {
+            return bool(forKey: "prefersCenterAlignedLayout")
+        }
+        set {
+            set(newValue, forKey: "prefersCenterAlignedLayout")
+        }
+    }
 }
 
 
