@@ -125,10 +125,13 @@ class SystemAccessSettingsTableViewController: UITableViewController {
                 
                 if settings.contains(where: { $0.accessLevel != .authorized }) {
                     self?.preparationHandler?()
+                    self?.preparationHandler = nil
+                    
                     self?.settings = settings
                     self?.tableView.reloadData()
                 } else {
                     self?.completionHandler?()
+                    self?.completionHandler = nil
                 }
             }
         }
