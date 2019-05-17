@@ -78,6 +78,20 @@ public class LyricsContainerViewController : UIViewController {
                 self.updateState(forTranslationButtonItem: self.translationButtonItem)
             }
         }
+        
+        let translationAvailabilityUpdateHandler = { [weak self] in
+            var isEnabled = false
+            if let lyrics = SystemPlayerLyricsController.shared.nowPlaying?.lyrics,
+                lyrics.lines.contains(where: { !($0.attachments.translation()?.trimmingCharacters(in: .whitespacesAndNewlines) ?? "").isEmpty })
+            {
+                isEnabled = true
+            }
+            self?.translationButtonItem.isEnabled = isEnabled
+        }
+        translationAvailabilityUpdateHandler()
+        NotificationCenter.default.addObserver(forName: SystemPlayerLyricsController.nowPlayingLyricsDidChangeNotification, object: nil, queue: .main) { _ in
+            translationAvailabilityUpdateHandler()
+        }
     }
     
     private var showsTranslationObserver: NSKeyValueObservation?
