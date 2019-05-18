@@ -9,8 +9,9 @@
 import AVFoundation
 
 class AlbumArtworkView : UIView {
-    
-    private let imageView = AlbumArtworkImageView(image: nil)
+
+    private let placeholderImage = img("PlaceholderAlbumArtwork")
+    private lazy var imageView = AlbumArtworkImageView(image: placeholderImage)
     
     init() {
         super.init(frame: .zero)
@@ -22,19 +23,16 @@ class AlbumArtworkView : UIView {
     }
     
     override func layoutSubviews() {
-        if let artwork = artwork {
-            imageView.frame = AVMakeRect(aspectRatio: artwork.size, insideRect: bounds)
+        if let image = imageView.image {
+            imageView.frame = AVMakeRect(aspectRatio: image.size, insideRect: bounds)
         } else {
             imageView.frame = bounds
         }
     }
     
     var artwork: UIImage? {
-        get {
-            return imageView.image
-        }
-        set {
-            imageView.image = newValue
+        didSet {
+            imageView.image = artwork ?? placeholderImage
             setNeedsLayout()
         }
     }
