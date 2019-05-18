@@ -16,7 +16,7 @@ Tap the [Test Invitation Link](https://testflight.apple.com/join/PGzq9arn) on yo
 ## Disclaimer
 All lyrics are property and copyright of their owners.
 
-## License
+## GNU General Public License
 Rhythm <https://github.com/JunyuKuang/Rhythm>
 
 Copyright (C) 2019  Junyu Kuang
