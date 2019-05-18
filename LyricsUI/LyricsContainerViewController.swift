@@ -84,7 +84,13 @@ public class LyricsContainerViewController : UIViewController {
             item.hudTitle = localized("more")
             return item
         }()
-        navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .compose, target: self, action: #selector(tapComposeButtonItem))
+        
+        let composeButtonItem = UIBarButtonItem(barButtonSystemItem: .compose, target: self, action: #selector(tapComposeButtonItem))
+        composeButtonItem.isEnabled = player.nowPlayingItem != nil
+        NotificationCenter.default.addObserver(forName: .MPMusicPlayerControllerNowPlayingItemDidChange, object: player, queue: .main) { [weak self, weak composeButtonItem] _ in
+            composeButtonItem?.isEnabled = self?.player.nowPlayingItem != nil
+        }
+        navigationItem.rightBarButtonItem = composeButtonItem
         
         configureToolbars()
         
