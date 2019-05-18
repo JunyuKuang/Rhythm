@@ -13,6 +13,9 @@ Tap the [Test Invitation Link](https://testflight.apple.com/join/PGzq9arn) on yo
 4. Configure App Group settings by Find and Replace all of the occurrence "group.com.jonny.lyrics" with your own App Group identifier
 5. Build & run
 
+## Open Source Library
+[LyricsProvider](https://github.com/ddddxxx/LyricsProvider)
+
 ## Disclaimer
 All lyrics are property and copyright of their owners.
 
