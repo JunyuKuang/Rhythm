@@ -6,7 +6,7 @@
 //  Copyright © 2019 Jonny Kuang. All rights reserved.
 //
 
-extension LyricsProviderSource {
+public extension LyricsProviderSource {
     var localizedName: String {
         return NSLocalizedString(rawValue, bundle: .current, comment: "")
     }

@@ -66,8 +66,15 @@ private class LyricsProviderPickerTableViewController : UITableViewController {
         
         let lyrics = lyricsArray[indexPath.row]
         
-        cell.textLabel?.text = lyrics.idTags[.title]
-        cell.detailTextLabel?.text = [lyrics.idTags[.album], lyrics.idTags[.artist]].compactMap { $0 } .joined(separator: " - ")
+        cell.textLabel?.text = lyrics.idTags[.title]?.trimmingCharacters(in: .whitespacesAndNewlines)
+        cell.detailTextLabel?.text = {
+            let detailInfo = [
+                [lyrics.idTags[.album], lyrics.idTags[.artist]],
+                [lyrics.idTags[.lrcBy], lyrics.metadata.source?.localizedName]
+            ]
+            let compactDetailInfo = detailInfo.map { $0.compactMap { $0?.trimmingCharacters(in: .whitespacesAndNewlines) } }
+            return compactDetailInfo.map { $0.joined(separator: " - ") } .joined(separator: "\n")
+        }()
         
         cell.textLabel?.font = UIFont.preferredFont(forTextStyle: .headline)
         cell.detailTextLabel?.font = UIFont.preferredFont(forTextStyle: .body)
