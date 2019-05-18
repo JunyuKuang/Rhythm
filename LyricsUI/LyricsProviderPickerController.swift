@@ -100,12 +100,12 @@ private class LyricsProviderPickerTableViewController : UITableViewController {
         if let imageView = cell.imageView {
             if isTranslatedLyricsExist {
                 let hasTranslation = lyrics.metadata.hasTranslation
-                imageView.isHidden = !hasTranslation
-                imageView.image = img("Translate")
-                imageView.adjustsImageSizeForAccessibilityContentSizeCategory = true
-                
                 if !hasTranslation, traitCollection.preferredContentSizeCategory.isAccessibilityCategory {
                     imageView.image = nil
+                } else {
+                    imageView.isHidden = !hasTranslation
+                    imageView.image = img("Translate")
+                    imageView.adjustsImageSizeForAccessibilityContentSizeCategory = true
                 }
             } else {
                 imageView.image = nil
