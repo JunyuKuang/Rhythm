@@ -3,28 +3,14 @@
 <plist version="1.0">
 <dict>
 	<key>StringsTable</key>
-	<string>Licenses</string>
+	<string>GPL</string>
 	<key>PreferenceSpecifiers</key>
 	<array>
 		<dict>
 			<key>Type</key>
 			<string>PSGroupSpecifier</string>
 			<key>FooterText</key>
-			<string>RhythmLicense</string>
-		</dict>
-		<dict>
-			<key>Type</key>
-			<string>PSChildPaneSpecifier</string>
-			<key>Title</key>
-			<string>GNU General Public License</string>
-			<key>File</key>
 			<string>GPL</string>
-		</dict>
-		<dict>
-			<key>Type</key>
-			<string>PSGroupSpecifier</string>
-			<key>FooterText</key>
-			<string>LyricsProviderLicense</string>
 		</dict>
 	</array>
 </dict>
