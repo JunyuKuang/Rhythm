@@ -50,8 +50,8 @@ class AppDelegate : UIResponder, UIApplicationDelegate {
     }
     
     private func updateWindowForLyricsUI() {
-        let lyricsTVC = LyricsContainerViewController()
-        let navigationController = UINavigationController(rootViewController: lyricsTVC)
+        let lyricsController = LyricsContainerViewController()
+        let navigationController = UINavigationController(rootViewController: lyricsController)
         navigationController.isToolbarHidden = false
         
         mainWindow.rootViewController = navigationController
