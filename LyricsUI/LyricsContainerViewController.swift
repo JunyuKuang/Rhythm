@@ -8,16 +8,25 @@
 
 public class LyricsContainerViewController : UIViewController {
     
+    private let artworkViewController = AlbumArtworkViewController()
     private let tableViewController = LyricsTableViewController()
+    
     private let player = MPMusicPlayerController.systemMusicPlayer
     private let progressView = UIProgressView()
     private var titleObserver: NSKeyValueObservation?
+    private var showsTranslationObserver: NSKeyValueObservation?
+    
+    private var constraintsForRegularLayout = [NSLayoutConstraint]()
+    private var constraintsForCompactLayout = [NSLayoutConstraint]()
     
     public init() {
         super.init(nibName: nil, bundle: nil)
-        addChild(tableViewController)
-        tableViewController.didMove(toParent: self)
         player.beginGeneratingPlaybackNotifications()
+        
+        [artworkViewController, tableViewController].forEach {
+            addChild($0)
+            $0.didMove(toParent: self)
+        }
     }
     
     public required init?(coder aDecoder: NSCoder) {
@@ -30,15 +39,37 @@ public class LyricsContainerViewController : UIViewController {
     
     public override func viewDidLoad() {
         super.viewDidLoad()
+        view.backgroundColor = .white
         
         title = tableViewController.title
         titleObserver = tableViewController.observe(\.title, options: .new) { [weak self] _, change in
             self?.title = change.newValue ?? ""
         }
-        tableViewController.additionalSafeAreaInsets.bottom = progressView.intrinsicContentSize.height
         
-        view.addSubview(tableViewController.view)
-        tableViewController.view.addConstraintsToFitSuperview()
+        [artworkViewController, tableViewController].forEach {
+            $0.additionalSafeAreaInsets.bottom = progressView.intrinsicContentSize.height
+            view.addSubview($0.view)
+            $0.view.translatesAutoresizingMaskIntoConstraints = false
+        }
+        
+        constraintsForRegularLayout = [
+            artworkViewController.view.leadingAnchor.constraint(equalTo: view.leadingAnchor),
+            tableViewController.view.widthAnchor.constraint(equalTo: view.widthAnchor, multiplier: 0.6),
+        ]
+        constraintsForCompactLayout = [
+            artworkViewController.view.trailingAnchor.constraint(equalTo: view.leadingAnchor),
+            tableViewController.view.leadingAnchor.constraint(equalTo: view.leadingAnchor),
+        ]
+        let commonConstraints = [
+            artworkViewController.view.topAnchor.constraint(equalTo: view.topAnchor),
+            artworkViewController.view.bottomAnchor.constraint(equalTo: view.bottomAnchor),
+            artworkViewController.view.widthAnchor.constraint(equalTo: view.widthAnchor, multiplier: 0.4),
+            
+            tableViewController.view.topAnchor.constraint(equalTo: view.topAnchor),
+            tableViewController.view.trailingAnchor.constraint(equalTo: view.trailingAnchor),
+            tableViewController.view.bottomAnchor.constraint(equalTo: view.bottomAnchor),
+        ]
+        NSLayoutConstraint.activate(commonConstraints)
         
         view.addSubview(progressView)
         progressView.translatesAutoresizingMaskIntoConstraints = false
@@ -107,9 +138,32 @@ public class LyricsContainerViewController : UIViewController {
                 }
             }
         }
+        NotificationCenter.default.addObserver(forName: UIContentSizeCategory.didChangeNotification, object: nil, queue: .main) { [weak self] _ in
+            self?.updateLayout()
+        }
+        view.addGestureRecognizer(tableViewController.tableView.panGestureRecognizer)
     }
     
-    private var showsTranslationObserver: NSKeyValueObservation?
+    public override func viewWillLayoutSubviews() {
+        super.viewWillLayoutSubviews()
+        updateLayout()
+    }
+    
+    private func updateLayout() {
+        // 480: minimum point width on iPhone Landscape mode (iPhone 4s)
+        if view.bounds.width < 480 || traitCollection.horizontalSizeClass == .compact && traitCollection.preferredContentSizeCategory.isAccessibilityCategory {
+            // compact layout
+            artworkViewController.updatesArtwork = false
+            NSLayoutConstraint.deactivate(constraintsForRegularLayout)
+            NSLayoutConstraint.activate(constraintsForCompactLayout)
+        } else {
+            // regular layout
+            artworkViewController.updatesArtwork = true
+            NSLayoutConstraint.deactivate(constraintsForCompactLayout)
+            NSLayoutConstraint.activate(constraintsForRegularLayout)
+        }
+    }
+    
     
     private lazy var translationButtonItem: UIBarButtonItem = {
         let buttonItem = UIBarButtonItem(image: nil, style: .plain, target: self, action: #selector(toggleTranslation))
