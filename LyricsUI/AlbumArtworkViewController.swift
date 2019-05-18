@@ -31,8 +31,11 @@ class AlbumArtworkViewController : UIViewController {
         NotificationCenter.default.addObserver(forName: SystemPlayerLyricsController.nowPlayingLyricsDidChangeNotification, object: nil, queue: .main) { [weak self] _ in
             self?.updateArtworkIfNeeded()
         }
-        NotificationCenter.default.addObserver(forName: UIApplication.willEnterForegroundNotification, object: nil, queue: .main) { [weak self] _ in
-            self?.updateArtworkIfNeeded()
+        NotificationCenter.default.addObserver(forName: UIApplication.willEnterForegroundNotification, object: nil, queue: nil) { [weak self] _ in
+            // willEnterForegroundNotification posted shortly **before** an app leaves the background state.
+            DispatchQueue.main.async {
+                self?.updateArtworkIfNeeded()
+            }
         }
     }
     
