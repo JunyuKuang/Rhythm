@@ -83,9 +83,7 @@ public class LyricsContainerViewController : UIViewController {
         
         let translationAvailabilityUpdateHandler = { [weak self] in
             var isEnabled = false
-            if let lyrics = SystemPlayerLyricsController.shared.nowPlaying?.lyrics,
-                lyrics.lines.contains(where: { !($0.attachments.translation()?.trimmingCharacters(in: .whitespacesAndNewlines) ?? "").isEmpty })
-            {
+            if let lyrics = SystemPlayerLyricsController.shared.nowPlaying?.lyrics, lyrics.metadata.hasTranslation {
                 isEnabled = true
             }
             self?.translationButtonItem.isEnabled = isEnabled
