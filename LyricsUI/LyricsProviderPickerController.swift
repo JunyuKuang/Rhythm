@@ -53,18 +53,20 @@ class LyricsProviderPickerController : UIViewController {
 private class LyricsProviderPickerTableViewController : UITableViewController {
     
     private var lyricsArray = [Lyrics]()
+    private var isTranslatedLyricsExist = false
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        updateLyricsArray()
+        updateContent()
         NotificationCenter.default.addObserver(forName: SystemPlayerLyricsController.availableLyricsArrayDidChangeNotification, object: nil, queue: .main) { [weak self] _ in
-            self?.updateLyricsArray()
+            self?.updateContent()
         }
     }
     
-    private func updateLyricsArray() {
+    private func updateContent() {
         lyricsArray = (SystemPlayerLyricsController.shared.nowPlaying?.availableLyricsArray ?? []).sorted { $0.quality > $1.quality }
+        isTranslatedLyricsExist = lyricsArray.contains { $0.metadata.hasTranslation }
         tableView.reloadData()
     }
 
@@ -96,12 +98,16 @@ private class LyricsProviderPickerTableViewController : UITableViewController {
         labels.forEach { $0.numberOfLines = 0 }
         
         if let imageView = cell.imageView {
-            let hasTranslation = lyrics.metadata.hasTranslation
-            imageView.isHidden = !hasTranslation
-            imageView.image = img("Translate")
-            imageView.adjustsImageSizeForAccessibilityContentSizeCategory = true
-            
-            if !hasTranslation, traitCollection.preferredContentSizeCategory.isAccessibilityCategory {
+            if isTranslatedLyricsExist {
+                let hasTranslation = lyrics.metadata.hasTranslation
+                imageView.isHidden = !hasTranslation
+                imageView.image = img("Translate")
+                imageView.adjustsImageSizeForAccessibilityContentSizeCategory = true
+                
+                if !hasTranslation, traitCollection.preferredContentSizeCategory.isAccessibilityCategory {
+                    imageView.image = nil
+                }
+            } else {
                 imageView.image = nil
             }
         }
