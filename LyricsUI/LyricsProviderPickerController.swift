@@ -67,18 +67,24 @@ private class LyricsProviderPickerTableViewController : UITableViewController {
         let lyrics = lyricsArray[indexPath.row]
         
         cell.textLabel?.text = lyrics.idTags[.title]
-        
-        var detailText = [lyrics.idTags[.album], lyrics.idTags[.artist]].compactMap { $0 } .joined(separator: " - ")
-        if lyrics.metadata.hasTranslation {
-            detailText += "\n" + localized("translated")
-        }
-        cell.detailTextLabel?.text = detailText
+        cell.detailTextLabel?.text = [lyrics.idTags[.album], lyrics.idTags[.artist]].compactMap { $0 } .joined(separator: " - ")
         
         cell.textLabel?.font = UIFont.preferredFont(forTextStyle: .headline)
         cell.detailTextLabel?.font = UIFont.preferredFont(forTextStyle: .body)
         
         let labels = [cell.textLabel, cell.detailTextLabel].compactMap { $0 }
         labels.forEach { $0.numberOfLines = 0 }
+        
+        if let imageView = cell.imageView {
+            let hasTranslation = lyrics.metadata.hasTranslation
+            imageView.isHidden = !hasTranslation
+            imageView.image = img("Translate")
+            imageView.adjustsImageSizeForAccessibilityContentSizeCategory = true
+            
+            if !hasTranslation, traitCollection.preferredContentSizeCategory.isAccessibilityCategory {
+                imageView.image = nil
+            }
+        }
         
         if lyrics.idTags == SystemPlayerLyricsController.shared.nowPlaying?.lyrics.idTags {
             cell.accessoryType = .checkmark
