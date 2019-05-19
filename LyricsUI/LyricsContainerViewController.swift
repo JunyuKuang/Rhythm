@@ -312,25 +312,27 @@ private extension LyricsContainerViewController {
     func tapMoreButtonItem(_ buttonItem: UIBarButtonItem) {
         let controller = UIAlertController(title: nil, message: nil, preferredStyle: .actionSheet)
         
-        controller.addAction(UIAlertAction(title: localized("cancel"), style: .cancel, handler: nil))
-        
-        controller.addAction(UIAlertAction(title: localized("settings"), style: .default) { _ in
-            UIApplication.shared.open(URL(string: UIApplication.openSettingsURLString)!)
-        })
-        controller.addAction(UIAlertAction(title: localized("sendFeedback"), style: .default) { _ in
-            if let controller = MailComposeViewController(text: "") {
-                self.present(controller, animated: true)
-            }
-        })
-        controller.addAction(UIAlertAction(title: localized("followOnWeibo"), style: .default) { _ in
-            UIApplication.shared.open(URL(string: "https://weibo.com/lightscreen")!)
-        })
-        controller.addAction(UIAlertAction(title: localized("followOnTwitter"), style: .default) { _ in
-            UIApplication.shared.open(URL(string: "https://twitter.com/kuangjunyu")!)
-        })
-        controller.addAction(UIAlertAction(title: localized("followOnGitHub"), style: .default) { _ in
-            UIApplication.shared.open(URL(string: "https://github.com/JunyuKuang/Rhythm")!)
-        })
+        let actions = [
+            UIAlertAction(title: localized("settings"), style: .default) { _ in
+                UIApplication.shared.open(URL(string: UIApplication.openSettingsURLString)!)
+            },
+            UIAlertAction(title: localized("sendFeedback"), style: .default) { _ in
+                if let controller = MailComposeViewController(text: "") {
+                    self.present(controller, animated: true)
+                }
+            },
+            UIAlertAction(title: localized("followOnWeibo"), style: .default) { _ in
+                UIApplication.shared.open(URL(string: "https://weibo.com/lightscreen")!)
+            },
+            UIAlertAction(title: localized("followOnTwitter"), style: .default) { _ in
+                UIApplication.shared.open(URL(string: "https://twitter.com/kuangjunyu")!)
+            },
+            UIAlertAction(title: localized("followOnGitHub"), style: .default) { _ in
+                UIApplication.shared.open(URL(string: "https://github.com/JunyuKuang/Rhythm")!)
+            },
+            UIAlertAction(title: localized("cancel"), style: .cancel),
+        ]
+        actions.forEach(controller.addAction)
         
         controller.popoverPresentationController?.barButtonItem = buttonItem
         present(controller, animated: true) {
