@@ -66,13 +66,21 @@ private class LyricsProviderPickerTableViewController : UITableViewController {
     
     private func updateContent() {
         DispatchQueue.global(qos: .utility).async { [weak self] in
-            var lyricsArray = SystemPlayerLyricsController.shared.nowPlaying?.availableLyricsArray ?? []
-            lyricsArray = Set(lyricsArray).sorted { $0.quality > $1.quality }
+            let availableLyricsArray = SystemPlayerLyricsController.shared.nowPlaying?.availableLyricsArray ?? []
             
-            let isTranslatedLyricsExist = lyricsArray.contains { $0.metadata.hasTranslation }
+            // By not involving `Set`, the lyrics order keeps the same across multiple updates when two `Lyrics` have same `quality`.
+            var filteredLyricsArray = [Lyrics]()
+            availableLyricsArray.forEach {
+                if !filteredLyricsArray.contains($0) {
+                    filteredLyricsArray.append($0)
+                }
+            }
+            filteredLyricsArray.sort { $0.quality > $1.quality }
+            
+            let isTranslatedLyricsExist = filteredLyricsArray.contains { $0.metadata.hasTranslation }
                         
             DispatchQueue.main.async {
-                self?.lyricsArray = lyricsArray
+                self?.lyricsArray = filteredLyricsArray
                 self?.isTranslatedLyricsExist = isTranslatedLyricsExist
                 self?.tableView.reloadData()
             }
