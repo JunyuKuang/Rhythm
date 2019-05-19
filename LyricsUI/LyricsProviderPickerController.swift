@@ -59,15 +59,24 @@ private class LyricsProviderPickerTableViewController : UITableViewController {
         super.viewDidLoad()
         
         updateContent()
-        NotificationCenter.default.addObserver(forName: SystemPlayerLyricsController.availableLyricsArrayDidChangeNotification, object: nil, queue: .main) { [weak self] _ in
+        NotificationCenter.default.addObserver(forName: SystemPlayerLyricsController.availableLyricsArrayDidChangeNotification, object: nil, queue: nil) { [weak self] _ in
             self?.updateContent()
         }
     }
     
     private func updateContent() {
-        lyricsArray = (SystemPlayerLyricsController.shared.nowPlaying?.availableLyricsArray ?? []).sorted { $0.quality > $1.quality }
-        isTranslatedLyricsExist = lyricsArray.contains { $0.metadata.hasTranslation }
-        tableView.reloadData()
+        DispatchQueue.global(qos: .utility).async { [weak self] in
+            var lyricsArray = SystemPlayerLyricsController.shared.nowPlaying?.availableLyricsArray ?? []
+            lyricsArray = Set(lyricsArray).sorted { $0.quality > $1.quality }
+            
+            let isTranslatedLyricsExist = lyricsArray.contains { $0.metadata.hasTranslation }
+                        
+            DispatchQueue.main.async {
+                self?.lyricsArray = lyricsArray
+                self?.isTranslatedLyricsExist = isTranslatedLyricsExist
+                self?.tableView.reloadData()
+            }
+        }
     }
 
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -123,5 +132,17 @@ private class LyricsProviderPickerTableViewController : UITableViewController {
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         SystemPlayerLyricsController.shared.nowPlaying?.item.kjy_userSpecifiedLyrics = lyricsArray[indexPath.row]
         dismiss(animated: true)
+    }
+}
+
+
+extension Lyrics : Hashable {
+    
+    public func hash(into hasher: inout Hasher) {
+        hasher.combine(idTags)
+    }
+    
+    public static func == (lhs: Lyrics, rhs: Lyrics) -> Bool {
+        return lhs.idTags == rhs.idTags
     }
 }
