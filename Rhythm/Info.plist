@@ -48,6 +48,8 @@
 	<string>PRIVACY</string>
 	<key>NSLocationWhenInUseUsageDescription</key>
 	<string>PRIVACY</string>
+	<key>NSPhotoLibraryAddUsageDescription</key>
+	<string>PRIVACY</string>
 	<key>UIBackgroundModes</key>
 	<array>
 		<string>location</string>

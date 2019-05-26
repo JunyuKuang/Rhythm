@@ -49,6 +49,8 @@ class AlbumArtworkViewController : UIViewController {
                 self?.updateArtworkIfNeeded()
             }
         }
+        
+        artworkView.artworkButton.addTarget(self, action: #selector(tapArtworkButton), for: .touchUpInside)
     }
     
     /// Default is false.
@@ -106,4 +108,22 @@ class AlbumArtworkViewController : UIViewController {
         configuration.waitsForConnectivity = true
         return URLSession(configuration: configuration)
     }()
+    
+    @objc private func tapArtworkButton(_ button: UIButton) {
+        let controller = UIAlertController(title: nil, message: nil, preferredStyle: .actionSheet)
+        controller.addAction(UIAlertAction(title: localized("saveImage"), style: .default) { _ in
+            if let image = button.image(for: .normal) {
+                UIImageWriteToSavedPhotosAlbum(image, nil, nil, nil)
+            }
+        })
+        controller.addAction(UIAlertAction(title: localized("cancel"), style: .cancel))
+        
+        let popover = controller.popoverPresentationController
+        popover?.sourceView = button
+        popover?.sourceRect = button.bounds
+        
+        present(controller, animated: true) {
+            popover?.passthroughViews = []
+        }
+    }
 }

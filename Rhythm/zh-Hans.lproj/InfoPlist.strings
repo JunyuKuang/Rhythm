@@ -5,3 +5,5 @@
 "NSLocationAlwaysUsageDescription" = "此权限允许 app 在后台持续运行，以在“锁定屏幕”和“通知中心”上动态更新歌词。此 app 不会采集或上传你的定位信息。";
 
 "NSLocationWhenInUseUsageDescription" = "此权限允许 app 在后台持续运行，以在“锁定屏幕”和“通知中心”上动态更新歌词。此 app 不会采集或上传你的定位信息。";
+
+"NSPhotoLibraryAddUsageDescription" = "存储专辑封面至 iOS 照片图库。";

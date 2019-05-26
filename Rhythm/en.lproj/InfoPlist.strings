@@ -5,3 +5,5 @@
 "NSLocationAlwaysUsageDescription" = "This allows the app to keep running in background, so it can dynamically update lyrics on Lock Screen and Notification Center. The app won't store or upload your location data.";
 
 "NSLocationWhenInUseUsageDescription" = "This allows the app to keep running in background, so it can dynamically update lyrics on Lock Screen and Notification Center. The app won't store or upload your location data.";
+
+"NSPhotoLibraryAddUsageDescription" = "Save album cover to iOS Photo Library.";
