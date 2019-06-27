@@ -32,11 +32,11 @@ class AlbumArtworkViewController : UIViewController {
         trailingMarginConstraint.priority = .defaultHigh
         
         NSLayoutConstraint.activate([
-            artworkView.topAnchor.constraint(equalToSystemSpacingBelow: view.safeAreaLayoutGuide.topAnchor, multiplier: 2),
+            artworkView.topAnchor.constraint(equalTo: customTopMarginLayoutGuide.bottomAnchor),
             artworkView.leadingAnchor.constraint(equalTo: view.layoutMarginsGuide.leadingAnchor),
             artworkView.heightAnchor.constraint(equalTo: artworkView.widthAnchor),
             trailingMarginConstraint,
-            view.safeAreaLayoutGuide.bottomAnchor.constraint(greaterThanOrEqualToSystemSpacingBelow: artworkView.bottomAnchor, multiplier: 2),
+            customBottomMarginLayoutGuide.topAnchor.constraint(greaterThanOrEqualTo: artworkView.bottomAnchor),
         ])
         
         updateArtworkIfNeeded()
@@ -52,6 +52,33 @@ class AlbumArtworkViewController : UIViewController {
         
         artworkView.artworkButton.addTarget(self, action: #selector(tapArtworkButton), for: .touchUpInside)
     }
+    
+    private lazy var customTopMarginLayoutGuide: UILayoutGuide = {
+        let layoutGuide = UILayoutGuide()
+        view.addLayoutGuide(layoutGuide)
+        
+        NSLayoutConstraint.activate([
+            layoutGuide.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),
+            layoutGuide.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor),
+            layoutGuide.trailingAnchor.constraint(equalTo: view.layoutMarginsGuide.leadingAnchor),
+            layoutGuide.heightAnchor.constraint(equalTo: layoutGuide.widthAnchor),
+        ])
+        return layoutGuide
+    }()
+    
+    private lazy var customBottomMarginLayoutGuide: UILayoutGuide = {
+        let layoutGuide = UILayoutGuide()
+        view.addLayoutGuide(layoutGuide)
+        
+        NSLayoutConstraint.activate([
+            layoutGuide.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor),
+            layoutGuide.trailingAnchor.constraint(equalTo: view.layoutMarginsGuide.leadingAnchor),
+            layoutGuide.heightAnchor.constraint(equalTo: layoutGuide.widthAnchor),
+            layoutGuide.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor),
+            ])
+        return layoutGuide
+    }()
+    
     
     /// Default is false.
     var updatesArtwork = false {
