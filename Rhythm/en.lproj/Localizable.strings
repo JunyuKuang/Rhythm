@@ -3,3 +3,4 @@
 "enableNotifications" = "Enable Notifications";
 "enableNotificationsDescription" = "This allows the app to show lyrics on the Lock Screen and Notification Center.";
 "enableLocation" = "Enable Location Services";
+"enableLocationAdditionalDescriptionForIOS13" = "If you want to hide blue location indicator bar on status bar, go to Settings and change location permission to Always Allow.";

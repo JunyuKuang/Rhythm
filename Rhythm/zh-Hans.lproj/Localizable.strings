@@ -3,3 +3,4 @@
 "enableNotifications" = "开启通知";
 "enableNotificationsDescription" = "此权限允许 app 在“锁定屏幕”和“通知中心”显示歌词。";
 "enableLocation" = "开启定位服务";
+"enableLocationAdditionalDescriptionForIOS13" = "如要隐藏状态栏上的蓝色定位指示条，请在“设置”中将定位权限更改为“始终允许”。";
