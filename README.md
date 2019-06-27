@@ -8,7 +8,7 @@ Tap the [Test Invitation Link](https://testflight.apple.com/join/PGzq9arn) on yo
 
 ### via Xcode
 1. Clone the project
-2. Open the project using Xcode 10.2 or later
+2. Open the project using Xcode 11 or later
 3. Set Development Team to your team
 4. Configure App Group settings by Find and Replace all of the occurrence "group.com.jonny.lyrics" with your own App Group identifier
 5. Build & run
