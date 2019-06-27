@@ -92,7 +92,13 @@ public class LyricsContainerViewController : UIViewController {
         ])
         
         navigationItem.leftBarButtonItem = {
-            let item = UIBarButtonItem(image: img("More"), style: .plain, target: self, action: #selector(tapMoreButtonItem))
+            let icon: UIImage?
+            if #available(iOS 13, *) {
+                icon = UIImage(systemName: "ellipsis.circle")
+            } else {
+                icon = img("More")
+            }
+            let item = UIBarButtonItem(image: icon, style: .plain, target: self, action: #selector(tapMoreButtonItem))
             item.hudTitle = localized("more")
             return item
         }()
