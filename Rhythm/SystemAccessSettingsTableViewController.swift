@@ -117,6 +117,9 @@ class SystemAccessSettingsTableViewController : UITableViewController {
                     var setting = Setting()
                     setting.title = NSLocalizedString("enableLocation", comment: "")
                     setting.usageDescription = infoDictionary["NSLocationWhenInUseUsageDescription"] as? String ?? ""
+                    if #available(iOS 13, *) {
+                        setting.usageDescription += "\n" + NSLocalizedString("enableLocationAdditionalDescriptionForIOS13", comment: "")
+                    }
                     
                     switch CLLocationManager.authorizationStatus() {
                     case .notDetermined:

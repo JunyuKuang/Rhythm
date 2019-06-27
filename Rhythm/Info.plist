@@ -30,7 +30,7 @@
 		</dict>
 	</array>
 	<key>CFBundleVersion</key>
-	<string>3</string>
+	<string>$(CURRENT_PROJECT_VERSION)</string>
 	<key>ITSAppUsesNonExemptEncryption</key>
 	<false/>
 	<key>LSRequiresIPhoneOS</key>
@@ -47,6 +47,8 @@
 	<key>NSLocationAlwaysUsageDescription</key>
 	<string>PRIVACY</string>
 	<key>NSLocationWhenInUseUsageDescription</key>
+	<string>PRIVACY</string>
+	<key>NSPhotoLibraryAddUsageDescription</key>
 	<string>PRIVACY</string>
 	<key>UIBackgroundModes</key>
 	<array>

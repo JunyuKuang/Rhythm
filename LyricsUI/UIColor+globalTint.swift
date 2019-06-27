@@ -20,5 +20,10 @@
 
 public extension UIColor {
     /// match Apple Music
-    static let globalTint = UIColor(red: 1, green: 45/255, blue: 85/255, alpha: 1)
+    static let globalTint: UIColor = {
+        if #available(iOS 13, *) {
+            return .systemPink
+        }
+        return UIColor(red: 1, green: 45/255, blue: 85/255, alpha: 1)
+    }()
 }

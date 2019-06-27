@@ -22,12 +22,12 @@ import AVFoundation
 
 class AlbumArtworkView : UIView {
 
-    private let placeholderImage = img("PlaceholderAlbumArtwork")
-    private lazy var imageView = AlbumArtworkImageView(image: placeholderImage)
+    private let button = AlbumArtworkButton()
+    var artworkButton: UIButton { return button }
     
     init() {
         super.init(frame: .zero)
-        addSubview(imageView)
+        addSubview(button)
     }
     
     required init?(coder aDecoder: NSCoder) {
@@ -35,29 +35,46 @@ class AlbumArtworkView : UIView {
     }
     
     override func layoutSubviews() {
-        if let image = imageView.image {
-            imageView.frame = AVMakeRect(aspectRatio: image.size, insideRect: bounds)
+        super.layoutSubviews()
+        
+        if let image = button.artwork {
+            button.frame = AVMakeRect(aspectRatio: image.size, insideRect: bounds)
         } else {
-            imageView.frame = bounds
+            button.frame = bounds
         }
     }
     
     var artwork: UIImage? {
-        didSet {
-            imageView.image = artwork ?? placeholderImage
-            setNeedsLayout()
-        }
+        get { return button.artwork }
+        set { button.artwork = newValue }
     }
 }
 
-private class AlbumArtworkImageView : UIImageView {
+private class AlbumArtworkButton : UIButton {
     
-    override init(image: UIImage?) {
-        super.init(image: image)
+    private let placeholderImage = img("PlaceholderAlbumArtwork")
+    
+    var artwork: UIImage? {
+        didSet {
+            setImage(artwork ?? placeholderImage, for: .normal)
+            setNeedsLayout()
+        }
+    }
+    
+    override var buttonType: ButtonType {
+        return .system
+    }
+    
+    init() {
+        super.init(frame: .zero)
         
-        backgroundColor = UIColor(white: 0.95, alpha: 1)
         clipsToBounds = true
-        layer.setValue(true, forKey: "continuousCorners")
+        if #available(iOS 13, *) {
+            layer.cornerCurve = .continuous
+        } else {
+            layer.setValue(true, forKey: "continuousCorners")
+        }
+        setImage(artwork ?? placeholderImage, for: .normal)
     }
     
     required init?(coder aDecoder: NSCoder) {
@@ -65,6 +82,8 @@ private class AlbumArtworkImageView : UIImageView {
     }
     
     override func layoutSubviews() {
+        super.layoutSubviews()
         layer.cornerRadius = round(min(bounds.width, bounds.height) / 30)
+        imageView?.frame = bounds
     }
 }

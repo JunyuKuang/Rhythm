@@ -51,7 +51,7 @@ public class LyricsContainerViewController : UIViewController {
     
     public override func viewDidLoad() {
         super.viewDidLoad()
-        view.backgroundColor = .white
+        view.backgroundColor = .kjy_systemBackground
         
         title = tableViewController.title
         titleObserver = tableViewController.observe(\.title, options: .new) { [weak self] _, change in
@@ -92,7 +92,13 @@ public class LyricsContainerViewController : UIViewController {
         ])
         
         navigationItem.leftBarButtonItem = {
-            let item = UIBarButtonItem(image: img("More"), style: .plain, target: self, action: #selector(tapMoreButtonItem))
+            let icon: UIImage?
+            if #available(iOS 13, *) {
+                icon = UIImage(systemName: "ellipsis.circle")
+            } else {
+                icon = img("More")
+            }
+            let item = UIBarButtonItem(image: icon, style: .plain, target: self, action: #selector(tapMoreButtonItem))
             item.hudTitle = localized("more")
             return item
         }()
@@ -240,9 +246,7 @@ private extension LyricsContainerViewController {
     
     func configureToolbars() {
         let openMusicAppButtonItem: UIBarButtonItem = {
-            let icons = ["AppleMusic", "AppleMusic-compact"].map {
-                UIImage(named: $0, in: Bundle(for: type(of: self)), compatibleWith: nil)!
-            }
+            let icons = ["AppleMusic", "AppleMusic-compact"].map { img($0)! }
             let buttonItem = UIBarButtonItem(
                 image: icons.first,
                 landscapeImagePhone: icons.last,
@@ -257,17 +261,19 @@ private extension LyricsContainerViewController {
         let fixedSpace = UIBarButtonItem(barButtonSystemItem: .fixedSpace, target: nil, action: nil)
         fixedSpace.width = 32
         
+        let flexibleSpace = UIBarButtonItem(barButtonSystemItem: .flexibleSpace, target: nil, action: nil)
+        
         updatePlayPauseButtonItemIfNeeded() // setup playPauseButtonItem
         
         toolbarItems = [
             openMusicAppButtonItem,
-            UIBarButtonItem(barButtonSystemItem: .flexibleSpace, target: nil, action: nil),
+            flexibleSpace,
             UIBarButtonItem(barButtonSystemItem: .rewind, target: self, action: #selector(skipToPreviousItem)),
             fixedSpace,
             playPauseButtonItem!,
             fixedSpace,
             UIBarButtonItem(barButtonSystemItem: .fastForward, target: self, action: #selector(skipToNextItem)),
-            UIBarButtonItem(barButtonSystemItem: .flexibleSpace, target: nil, action: nil),
+            flexibleSpace,
             translationButtonItem,
         ]
     }

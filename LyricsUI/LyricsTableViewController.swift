@@ -135,7 +135,7 @@ public class LyricsTableViewController : UITableViewController {
         }
     }
     
-    private static let idleDuration: TimeInterval = 3
+    private static let idleDuration: TimeInterval = 1.5
     private var lastInteractionDate = Date.distantPast
     
     public override func scrollViewDidScroll(_ scrollView: UIScrollView) {
