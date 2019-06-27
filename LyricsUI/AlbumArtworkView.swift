@@ -69,7 +69,11 @@ private class AlbumArtworkButton : UIButton {
         super.init(frame: .zero)
         
         clipsToBounds = true
-        layer.setValue(true, forKey: "continuousCorners")
+        if #available(iOS 13, *) {
+            layer.cornerCurve = .continuous
+        } else {
+            layer.setValue(true, forKey: "continuousCorners")
+        }
         setImage(artwork ?? placeholderImage, for: .normal)
     }
     
@@ -80,5 +84,6 @@ private class AlbumArtworkButton : UIButton {
     override func layoutSubviews() {
         super.layoutSubviews()
         layer.cornerRadius = round(min(bounds.width, bounds.height) / 30)
+        imageView?.frame = bounds
     }
 }

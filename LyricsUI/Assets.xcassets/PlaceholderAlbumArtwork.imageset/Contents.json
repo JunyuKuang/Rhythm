@@ -3,6 +3,16 @@
     {
       "idiom" : "universal",
       "filename" : "PlaceholderAlbumArtwork.pdf"
+    },
+    {
+      "idiom" : "universal",
+      "filename" : "PlaceholderAlbumArtwork-Dark.pdf",
+      "appearances" : [
+        {
+          "appearance" : "luminosity",
+          "value" : "dark"
+        }
+      ]
     }
   ],
   "info" : {
@@ -10,7 +20,6 @@
     "author" : "xcode"
   },
   "properties" : {
-    "template-rendering-intent" : "original",
-    "preserves-vector-representation" : true
+    "template-rendering-intent" : "original"
   }
 }
