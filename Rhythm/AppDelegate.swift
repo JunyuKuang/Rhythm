@@ -52,7 +52,7 @@ class AppDelegate : UIResponder, UIApplicationDelegate {
         
         let navigationController = UINavigationController(rootViewController: accessSettingsController)
         navigationController.isToolbarHidden = false
-        navigationController.view.backgroundColor = .white
+        navigationController.view.backgroundColor = .kjy_systemBackground
         accessSettingsController.view.isHidden = true
         
         mainWindow.rootViewController = navigationController

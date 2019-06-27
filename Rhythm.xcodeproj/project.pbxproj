@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		FB4F71DA22C4DC5300986F11 /* UIColor+.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB4F71D922C4DC5300986F11 /* UIColor+.swift */; };
 		FB8A1C4F22871C5700571A63 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB8A1C4E22871C5700571A63 /* AppDelegate.swift */; };
 		FB8A1C5622871C5700571A63 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = FB8A1C5522871C5700571A63 /* Assets.xcassets */; };
 		FB8A1C5922871C5700571A63 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = FB8A1C5722871C5700571A63 /* LaunchScreen.storyboard */; };
@@ -161,6 +162,7 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		FB4F71D922C4DC5300986F11 /* UIColor+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIColor+.swift"; sourceTree = "<group>"; };
 		FB8A1C4B22871C5700571A63 /* Rhythm.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Rhythm.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		FB8A1C4E22871C5700571A63 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		FB8A1C5522871C5700571A63 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -534,6 +536,7 @@
 				FBF08E31228BB9D700383D6D /* UIView+Constraints.swift */,
 				FBF08E61228E6B8900383D6D /* UIBarButtonItem+HUD.swift */,
 				FBF08E63228E6BDE00383D6D /* Bundle+.swift */,
+				FB4F71D922C4DC5300986F11 /* UIColor+.swift */,
 				FBF08E65228E714700383D6D /* MailComposeViewController.swift */,
 				FBF08E81228E964000383D6D /* Localizable.strings */,
 				FBF08E2B228B09CA00383D6D /* Assets.xcassets */,
@@ -911,6 +914,7 @@
 				FBF08E62228E6B8900383D6D /* UIBarButtonItem+HUD.swift in Sources */,
 				FBF08E64228E6BDE00383D6D /* Bundle+.swift in Sources */,
 				FBF08E8B228FAC0000383D6D /* AlbumArtworkViewController.swift in Sources */,
+				FB4F71DA22C4DC5300986F11 /* UIColor+.swift in Sources */,
 				FBF08E66228E714700383D6D /* MailComposeViewController.swift in Sources */,
 				FBF08E85228EB17000383D6D /* LyricsTableViewCell.swift in Sources */,
 				FBF08E87228EB48500383D6D /* LyricsProviderPickerController.swift in Sources */,

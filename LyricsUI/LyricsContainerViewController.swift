@@ -51,7 +51,7 @@ public class LyricsContainerViewController : UIViewController {
     
     public override func viewDidLoad() {
         super.viewDidLoad()
-        view.backgroundColor = .white
+        view.backgroundColor = .kjy_systemBackground
         
         title = tableViewController.title
         titleObserver = tableViewController.observe(\.title, options: .new) { [weak self] _, change in
