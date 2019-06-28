@@ -32,8 +32,8 @@ class SystemAccessSettingsTableViewController : UITableViewController {
         var accessLevel = AccessLevel.notDetermined
         var handler = {}
         
-        enum AccessLevel {
-            case notDetermined, authorized, denied
+        enum AccessLevel : Equatable {
+            case notDetermined, authorized, denied(isSkippable: Bool)
         }
     }
     
@@ -85,7 +85,7 @@ class SystemAccessSettingsTableViewController : UITableViewController {
                     case .authorized:
                         setting.accessLevel = .authorized
                     default:
-                        setting.accessLevel = .denied
+                        setting.accessLevel = .denied(isSkippable: false)
                         setting.handler = openSystemSettingsHandler
                     }
                     settings.append(setting)
@@ -108,7 +108,7 @@ class SystemAccessSettingsTableViewController : UITableViewController {
                     case .authorized:
                         setting.accessLevel = .authorized
                     default:
-                        setting.accessLevel = .denied
+                        setting.accessLevel = .denied(isSkippable: true)
                         setting.handler = openSystemSettingsHandler
                     }
                     settings.append(setting)
@@ -130,13 +130,13 @@ class SystemAccessSettingsTableViewController : UITableViewController {
                     case .authorizedAlways, .authorizedWhenInUse:
                         setting.accessLevel = .authorized
                     default:
-                        setting.accessLevel = .denied
+                        setting.accessLevel = .denied(isSkippable: true)
                         setting.handler = openSystemSettingsHandler
                     }
                     settings.append(setting)
                 }
                 
-                if settings.contains(where: { $0.accessLevel != .authorized }) {
+                if settings.contains(where: { $0.accessLevel != .authorized && $0.accessLevel != .denied(isSkippable: true) }) {
                     self?.preparationHandler?()
                     self?.preparationHandler = nil
                     
