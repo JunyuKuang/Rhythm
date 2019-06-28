@@ -114,7 +114,10 @@ public class LyricsTableViewController : UITableViewController {
             labels.forEach { $0.textAlignment = .natural }
         }
         
-        cell.selectionStyle = .none
+        class BackgroundView : UIView {}
+        if !(cell.selectedBackgroundView is BackgroundView) {
+            cell.selectedBackgroundView = BackgroundView()
+        }
         
         return cell
     }
