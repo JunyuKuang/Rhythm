@@ -124,7 +124,7 @@ public class LyricsContainerViewController : UIViewController {
         }
         navigationItem.rightBarButtonItem = composeButtonItem
         
-        configureToolbars()
+        configureToolbar()
         
         NotificationCenter.default.addObserver(self, selector: #selector(playbackStateDidChange), name: .MPMusicPlayerControllerPlaybackStateDidChange, object: player)
         
@@ -175,7 +175,10 @@ public class LyricsContainerViewController : UIViewController {
     
     public override func viewWillLayoutSubviews() {
         super.viewWillLayoutSubviews()
-        performIfViewSizeChanged(handler: updateLayout)
+        performIfViewSizeChanged {
+            updateLayout()
+            updateToolbarFixedSpaceItem()
+        }
     }
     
     private func updateLayout() {
@@ -193,6 +196,19 @@ public class LyricsContainerViewController : UIViewController {
         }
     }
     
+    
+    private lazy var openMusicAppButtonItem: UIBarButtonItem = {
+        let icons = ["AppleMusic", "AppleMusic-compact"].map { img($0)! }
+        let buttonItem = UIBarButtonItem(
+            image: icons.first,
+            landscapeImagePhone: icons.last,
+            style: .plain,
+            target: self,
+            action: #selector(openMusicApp)
+        )
+        buttonItem.hudTitle = localized("appleMusic")
+        return buttonItem
+    }()
     
     private lazy var translationButtonItem: UIBarButtonItem = {
         let buttonItem = UIBarButtonItem(image: nil, style: .plain, target: self, action: #selector(toggleTranslation))
@@ -244,41 +260,37 @@ public class LyricsContainerViewController : UIViewController {
             }
         }
     }
+    
+    private let toolbarFixedSpaceItem = UIBarButtonItem(barButtonSystemItem: .fixedSpace, target: nil, action: nil)
+    
+    private func updateToolbarFixedSpaceItem() {
+        let buttonWidths: CGFloat
+        if #available(iOS 13, *) {
+            buttonWidths = 43 * 5 + 10 * 2
+        } else {
+            buttonWidths = 34 * 5 + 14 * 2
+        }
+        let centralItemSpacing: CGFloat = 32
+        toolbarFixedSpaceItem.width = (view.safeAreaLayoutGuide.layoutFrame.width - buttonWidths - centralItemSpacing * 2) / 2
+    }
 }
 
 
 private extension LyricsContainerViewController {
     
-    func configureToolbars() {
-        let openMusicAppButtonItem: UIBarButtonItem = {
-            let icons = ["AppleMusic", "AppleMusic-compact"].map { img($0)! }
-            let buttonItem = UIBarButtonItem(
-                image: icons.first,
-                landscapeImagePhone: icons.last,
-                style: .plain,
-                target: self,
-                action: #selector(openMusicApp)
-            )
-            buttonItem.hudTitle = localized("appleMusic")
-            return buttonItem
-        }()
-        
-        let fixedSpace = UIBarButtonItem(barButtonSystemItem: .fixedSpace, target: nil, action: nil)
-        fixedSpace.width = 32
-        
+    func configureToolbar() {
         let flexibleSpace = UIBarButtonItem(barButtonSystemItem: .flexibleSpace, target: nil, action: nil)
-        
         updatePlayPauseButtonItemIfNeeded() // setup playPauseButtonItem
         
         toolbarItems = [
             openMusicAppButtonItem,
-            flexibleSpace,
+            toolbarFixedSpaceItem,
             UIBarButtonItem(barButtonSystemItem: .rewind, target: self, action: #selector(skipToPreviousItem)),
-            fixedSpace,
-            playPauseButtonItem!,
-            fixedSpace,
-            UIBarButtonItem(barButtonSystemItem: .fastForward, target: self, action: #selector(skipToNextItem)),
             flexibleSpace,
+            playPauseButtonItem!,
+            flexibleSpace,
+            UIBarButtonItem(barButtonSystemItem: .fastForward, target: self, action: #selector(skipToNextItem)),
+            toolbarFixedSpaceItem,
             translationButtonItem,
         ]
     }
