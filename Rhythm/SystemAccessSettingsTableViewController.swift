@@ -32,8 +32,8 @@ class SystemAccessSettingsTableViewController : UITableViewController {
         var accessLevel = AccessLevel.notDetermined
         var handler = {}
         
-        enum AccessLevel {
-            case notDetermined, authorized, denied
+        enum AccessLevel : Equatable {
+            case notDetermined, authorized, denied(isSkippable: Bool)
         }
     }
     
@@ -79,13 +79,17 @@ class SystemAccessSettingsTableViewController : UITableViewController {
                         #else
                         setting.accessLevel = .notDetermined
                         setting.handler = {
-                            MPMediaLibrary.requestAuthorization { _ in }
+                            MPMediaLibrary.requestAuthorization { _ in
+                                DispatchQueue.main.async {
+                                    self?.updateSettings()
+                                }
+                            }
                         }
                         #endif
                     case .authorized:
                         setting.accessLevel = .authorized
                     default:
-                        setting.accessLevel = .denied
+                        setting.accessLevel = .denied(isSkippable: false)
                         setting.handler = openSystemSettingsHandler
                     }
                     settings.append(setting)
@@ -103,12 +107,16 @@ class SystemAccessSettingsTableViewController : UITableViewController {
                             if #available(iOS 12.0, *) {
                                 options.insert(.providesAppNotificationSettings)
                             }
-                            UNUserNotificationCenter.current().requestAuthorization(options: options) { _, _ in }
+                            UNUserNotificationCenter.current().requestAuthorization(options: options) { _, _ in
+                                DispatchQueue.main.async {
+                                    self?.updateSettings()
+                                }
+                            }
                         }
                     case .authorized:
                         setting.accessLevel = .authorized
                     default:
-                        setting.accessLevel = .denied
+                        setting.accessLevel = .denied(isSkippable: true)
                         setting.handler = openSystemSettingsHandler
                     }
                     settings.append(setting)
@@ -130,13 +138,13 @@ class SystemAccessSettingsTableViewController : UITableViewController {
                     case .authorizedAlways, .authorizedWhenInUse:
                         setting.accessLevel = .authorized
                     default:
-                        setting.accessLevel = .denied
+                        setting.accessLevel = .denied(isSkippable: true)
                         setting.handler = openSystemSettingsHandler
                     }
                     settings.append(setting)
                 }
                 
-                if settings.contains(where: { $0.accessLevel != .authorized }) {
+                if settings.contains(where: { $0.accessLevel != .authorized && $0.accessLevel != .denied(isSkippable: true) }) {
                     self?.preparationHandler?()
                     self?.preparationHandler = nil
                     

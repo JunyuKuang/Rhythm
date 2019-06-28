@@ -21,7 +21,7 @@
 public class LyricsContainerViewController : UIViewController {
     
     private let artworkViewController = AlbumArtworkViewController()
-    private let tableViewController = LyricsTableViewController()
+    public let tableViewController = LyricsTableViewController()
     
     private let player = MPMusicPlayerController.systemMusicPlayer
     private let progressView = UIProgressView()
@@ -30,6 +30,29 @@ public class LyricsContainerViewController : UIViewController {
     
     private var constraintsForRegularLayout = [NSLayoutConstraint]()
     private var constraintsForCompactLayout = [NSLayoutConstraint]()
+    
+    /// Default value is true.
+    public var showsPlaybackProgressBar = true {
+        didSet {
+            guard showsPlaybackProgressBar != oldValue else { return }
+            [artworkViewController, tableViewController].forEach {
+                $0.additionalSafeAreaInsets.bottom = showsPlaybackProgressBar ? progressView.intrinsicContentSize.height : 0
+            }
+            progressView.isHidden = !showsPlaybackProgressBar
+        }
+    }
+    
+    private lazy var moreButtonItem: UIBarButtonItem = {
+        let icon: UIImage?
+        if #available(iOS 13, *) {
+            icon = UIImage(systemName: "ellipsis.circle")
+        } else {
+            icon = img("More")
+        }
+        let item = UIBarButtonItem(image: icon, style: .plain, target: self, action: #selector(tapMoreButtonItem))
+        item.hudTitle = localized("more")
+        return item
+    }()
     
     public init() {
         super.init(nibName: nil, bundle: nil)
@@ -59,7 +82,7 @@ public class LyricsContainerViewController : UIViewController {
         }
         
         [artworkViewController, tableViewController].forEach {
-            $0.additionalSafeAreaInsets.bottom = progressView.intrinsicContentSize.height
+            $0.additionalSafeAreaInsets.bottom = showsPlaybackProgressBar ? progressView.intrinsicContentSize.height : 0
             view.addSubview($0.view)
             $0.view.translatesAutoresizingMaskIntoConstraints = false
         }
@@ -90,18 +113,9 @@ public class LyricsContainerViewController : UIViewController {
             progressView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
             progressView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor),
         ])
+        progressView.isHidden = !showsPlaybackProgressBar
         
-        navigationItem.leftBarButtonItem = {
-            let icon: UIImage?
-            if #available(iOS 13, *) {
-                icon = UIImage(systemName: "ellipsis.circle")
-            } else {
-                icon = img("More")
-            }
-            let item = UIBarButtonItem(image: icon, style: .plain, target: self, action: #selector(tapMoreButtonItem))
-            item.hudTitle = localized("more")
-            return item
-        }()
+        navigationItem.leftBarButtonItem = moreButtonItem
         
         let composeButtonItem = UIBarButtonItem(barButtonSystemItem: .compose, target: self, action: #selector(tapComposeButtonItem))
         composeButtonItem.isEnabled = player.nowPlayingItem != nil
@@ -110,7 +124,7 @@ public class LyricsContainerViewController : UIViewController {
         }
         navigationItem.rightBarButtonItem = composeButtonItem
         
-        configureToolbars()
+        configureToolbar()
         
         NotificationCenter.default.addObserver(self, selector: #selector(playbackStateDidChange), name: .MPMusicPlayerControllerPlaybackStateDidChange, object: player)
         
@@ -150,16 +164,7 @@ public class LyricsContainerViewController : UIViewController {
         
         LyricsNotificationController.shared.changeLyricsHandler = { [weak self] _ in
             DispatchQueue.main.async {
-                guard let self = self else { return }
-                if let presented = self.presentedViewController {
-                    if !(presented is LyricsProviderPickerController) {
-                        self.dismiss(animated: false) {
-                            self.present(LyricsProviderPickerController(), animated: true)
-                        }
-                    }
-                } else {
-                    self.present(LyricsProviderPickerController(), animated: true)
-                }
+                self?.presentLyricsProviderPickerController()
             }
         }
         NotificationCenter.default.addObserver(forName: UIContentSizeCategory.didChangeNotification, object: nil, queue: .main) { [weak self] _ in
@@ -170,7 +175,10 @@ public class LyricsContainerViewController : UIViewController {
     
     public override func viewWillLayoutSubviews() {
         super.viewWillLayoutSubviews()
-        updateLayout()
+        performIfViewSizeChanged {
+            updateLayout()
+            updateToolbarFixedSpaceItem()
+        }
     }
     
     private func updateLayout() {
@@ -188,6 +196,19 @@ public class LyricsContainerViewController : UIViewController {
         }
     }
     
+    
+    private lazy var openMusicAppButtonItem: UIBarButtonItem = {
+        let icons = ["AppleMusic", "AppleMusic-compact"].map { img($0)! }
+        let buttonItem = UIBarButtonItem(
+            image: icons.first,
+            landscapeImagePhone: icons.last,
+            style: .plain,
+            target: self,
+            action: #selector(openMusicApp)
+        )
+        buttonItem.hudTitle = localized("appleMusic")
+        return buttonItem
+    }()
     
     private lazy var translationButtonItem: UIBarButtonItem = {
         let buttonItem = UIBarButtonItem(image: nil, style: .plain, target: self, action: #selector(toggleTranslation))
@@ -239,41 +260,37 @@ public class LyricsContainerViewController : UIViewController {
             }
         }
     }
+    
+    private let toolbarFixedSpaceItem = UIBarButtonItem(barButtonSystemItem: .fixedSpace, target: nil, action: nil)
+    
+    private func updateToolbarFixedSpaceItem() {
+        let buttonWidths: CGFloat
+        if #available(iOS 13, *) {
+            buttonWidths = 43 * 5 + 10 * 2
+        } else {
+            buttonWidths = 34 * 5 + 14 * 2
+        }
+        let centralItemSpacing: CGFloat = 32
+        toolbarFixedSpaceItem.width = (view.safeAreaLayoutGuide.layoutFrame.width - buttonWidths - centralItemSpacing * 2) / 2
+    }
 }
 
 
 private extension LyricsContainerViewController {
     
-    func configureToolbars() {
-        let openMusicAppButtonItem: UIBarButtonItem = {
-            let icons = ["AppleMusic", "AppleMusic-compact"].map { img($0)! }
-            let buttonItem = UIBarButtonItem(
-                image: icons.first,
-                landscapeImagePhone: icons.last,
-                style: .plain,
-                target: self,
-                action: #selector(openMusicApp)
-            )
-            buttonItem.hudTitle = localized("appleMusic")
-            return buttonItem
-        }()
-        
-        let fixedSpace = UIBarButtonItem(barButtonSystemItem: .fixedSpace, target: nil, action: nil)
-        fixedSpace.width = 32
-        
+    func configureToolbar() {
         let flexibleSpace = UIBarButtonItem(barButtonSystemItem: .flexibleSpace, target: nil, action: nil)
-        
         updatePlayPauseButtonItemIfNeeded() // setup playPauseButtonItem
         
         toolbarItems = [
             openMusicAppButtonItem,
-            flexibleSpace,
+            toolbarFixedSpaceItem,
             UIBarButtonItem(barButtonSystemItem: .rewind, target: self, action: #selector(skipToPreviousItem)),
-            fixedSpace,
-            playPauseButtonItem!,
-            fixedSpace,
-            UIBarButtonItem(barButtonSystemItem: .fastForward, target: self, action: #selector(skipToNextItem)),
             flexibleSpace,
+            playPauseButtonItem!,
+            flexibleSpace,
+            UIBarButtonItem(barButtonSystemItem: .fastForward, target: self, action: #selector(skipToNextItem)),
+            toolbarFixedSpaceItem,
             translationButtonItem,
         ]
     }
@@ -316,6 +333,38 @@ private extension LyricsContainerViewController {
     }
     
     func tapMoreButtonItem(_ buttonItem: UIBarButtonItem) {
+        presentMoreActionsViewController()
+    }
+    
+    func tapComposeButtonItem(_ buttonItem: UIBarButtonItem) {
+        presentLyricsProviderPickerController()
+    }
+}
+
+
+private extension LyricsContainerViewController {
+    
+    func presentLyricsProviderPickerController() {
+        if let extensionContext = extensionContext {
+            openDeepLinkURL(with: DeepLink.QueryValue.changeLyrics, extensionContext: extensionContext)
+        } else {
+            prepareForDeepLink {
+                self.present(LyricsProviderPickerController(), animated: true)
+            }
+        }
+    }
+    
+    func presentMoreActionsViewController() {
+        if let extensionContext = extensionContext {
+            openDeepLinkURL(with: DeepLink.QueryValue.showActions, extensionContext: extensionContext)
+        } else {
+            prepareForDeepLink {
+                self._presentMoreActionsViewController()
+            }
+        }
+    }
+    
+    func _presentMoreActionsViewController() {
         let controller = UIAlertController(title: nil, message: nil, preferredStyle: .actionSheet)
         
         let actions = [
@@ -323,9 +372,7 @@ private extension LyricsContainerViewController {
                 UIApplication.shared.open(URL(string: UIApplication.openSettingsURLString)!)
             },
             UIAlertAction(title: localized("sendFeedback"), style: .default) { _ in
-                if let controller = MailComposeViewController(text: "") {
-                    self.present(controller, animated: true)
-                }
+                MailComposeController.compose()
             },
             UIAlertAction(title: localized("followOnWeibo"), style: .default) { _ in
                 UIApplication.shared.open(URL(string: "https://weibo.com/lightscreen")!)
@@ -340,13 +387,60 @@ private extension LyricsContainerViewController {
         ]
         actions.forEach(controller.addAction)
         
-        controller.popoverPresentationController?.barButtonItem = buttonItem
+        controller.popoverPresentationController?.barButtonItem = moreButtonItem
         present(controller, animated: true) {
             controller.popoverPresentationController?.passthroughViews = []
         }
     }
     
-    func tapComposeButtonItem(_ buttonItem: UIBarButtonItem) {
-        present(LyricsProviderPickerController(), animated: true)
+    func prepareForDeepLink(_ completionHandler: @escaping () -> Void) {
+        if presentedViewController != nil {
+            dismiss(animated: false) {
+                completionHandler()
+            }
+        } else {
+            completionHandler()
+        }
+    }
+}
+
+
+// MARK: - Deep Link
+extension LyricsContainerViewController {
+    
+    public func handleApplicationURL(_ url: URL) -> Bool {
+        let urlComponents = URLComponents(url: url, resolvingAgainstBaseURL: false)
+        
+        if let query = urlComponents?.queryItems?.first(where: { $0.name == DeepLink.queryName }),
+            let queryValue = query.value
+        {
+            switch queryValue {
+            case DeepLink.QueryValue.showActions:
+                presentMoreActionsViewController()
+                return true
+            case DeepLink.QueryValue.changeLyrics:
+                presentLyricsProviderPickerController()
+                return true
+            default: ()
+            }
+        }
+        return false
+    }
+    
+    private func openDeepLinkURL(with queryValue: String, extensionContext: NSExtensionContext) {
+        var urlComponents = URLComponents(string: "com.jonny.lyrics://")!
+        urlComponents.queryItems = [URLQueryItem(name: DeepLink.queryName, value: queryValue)]
+        
+        let url = urlComponents.url!
+        extensionContext.open(url)
+    }
+    
+    private struct DeepLink {
+        static let queryName = "deepLink"
+        
+        struct QueryValue {
+            static let showActions = "showActions"
+            static let changeLyrics = "changeLyrics"
+        }
     }
 }
