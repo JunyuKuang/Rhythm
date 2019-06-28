@@ -26,19 +26,6 @@ class AlbumArtworkViewController : UIViewController {
         super.viewDidLoad()
         view.addSubview(artworkView)
         
-        artworkView.translatesAutoresizingMaskIntoConstraints = false
-        
-        let trailingMarginConstraint = artworkView.trailingAnchor.constraint(equalTo: view.layoutMarginsGuide.trailingAnchor)
-        trailingMarginConstraint.priority = .defaultHigh
-        
-        NSLayoutConstraint.activate([
-            artworkView.topAnchor.constraint(equalTo: customTopMarginLayoutGuide.bottomAnchor),
-            artworkView.leadingAnchor.constraint(equalTo: view.layoutMarginsGuide.leadingAnchor),
-            artworkView.heightAnchor.constraint(equalTo: artworkView.widthAnchor),
-            trailingMarginConstraint,
-            customBottomMarginLayoutGuide.topAnchor.constraint(greaterThanOrEqualTo: artworkView.bottomAnchor),
-        ])
-        
         updateArtworkIfNeeded()
         NotificationCenter.default.addObserver(forName: SystemPlayerLyricsController.nowPlayingLyricsDidChangeNotification, object: nil, queue: .main) { [weak self] _ in
             self?.updateArtworkIfNeeded()
@@ -53,32 +40,23 @@ class AlbumArtworkViewController : UIViewController {
         artworkView.artworkButton.addTarget(self, action: #selector(tapArtworkButton), for: .touchUpInside)
     }
     
-    private lazy var customTopMarginLayoutGuide: UILayoutGuide = {
-        let layoutGuide = UILayoutGuide()
-        view.addLayoutGuide(layoutGuide)
+    override func viewWillLayoutSubviews() {
+        super.viewWillLayoutSubviews()
         
-        NSLayoutConstraint.activate([
-            layoutGuide.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),
-            layoutGuide.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor),
-            layoutGuide.trailingAnchor.constraint(equalTo: view.layoutMarginsGuide.leadingAnchor),
-            layoutGuide.heightAnchor.constraint(equalTo: layoutGuide.widthAnchor),
-        ])
-        return layoutGuide
-    }()
-    
-    private lazy var customBottomMarginLayoutGuide: UILayoutGuide = {
-        let layoutGuide = UILayoutGuide()
-        view.addLayoutGuide(layoutGuide)
+        let horizontalMargin = [view.safeAreaInsets.left, view.safeAreaInsets.right, view.layoutMargins.left, view.layoutMargins.right].max()!
+        let verticalMargin = max(view.safeAreaInsets.left, view.safeAreaInsets.right) > 16 ? 16 : horizontalMargin
         
-        NSLayoutConstraint.activate([
-            layoutGuide.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor),
-            layoutGuide.trailingAnchor.constraint(equalTo: view.layoutMarginsGuide.leadingAnchor),
-            layoutGuide.heightAnchor.constraint(equalTo: layoutGuide.widthAnchor),
-            layoutGuide.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor),
-            ])
-        return layoutGuide
-    }()
-    
+        let maxWidth = view.bounds.width - horizontalMargin // only add margin for leading side
+        let maxHeight = view.safeAreaLayoutGuide.layoutFrame.height - verticalMargin * 2
+        
+        if maxHeight - maxWidth > 100 { // top edge
+            artworkView.frame = CGRect(x: horizontalMargin, y: view.safeAreaInsets.top + verticalMargin, width: maxWidth, height: maxWidth)
+        } else { // vertical center
+            let length = min(maxWidth, maxHeight)
+            artworkView.frame = CGRect(x: horizontalMargin, y: 0, width: length, height: length)
+            artworkView.center.y = view.safeAreaLayoutGuide.layoutFrame.midY
+        }
+    }
     
     /// Default is false.
     var updatesArtwork = false {
