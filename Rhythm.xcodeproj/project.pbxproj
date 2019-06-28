@@ -97,7 +97,7 @@
 		FBF08E60228E46DE00383D6D /* Settings.bundle in Resources */ = {isa = PBXBuildFile; fileRef = FBF08E5F228E46DE00383D6D /* Settings.bundle */; };
 		FBF08E62228E6B8900383D6D /* UIBarButtonItem+HUD.swift in Sources */ = {isa = PBXBuildFile; fileRef = FBF08E61228E6B8900383D6D /* UIBarButtonItem+HUD.swift */; };
 		FBF08E64228E6BDE00383D6D /* Bundle+.swift in Sources */ = {isa = PBXBuildFile; fileRef = FBF08E63228E6BDE00383D6D /* Bundle+.swift */; };
-		FBF08E66228E714700383D6D /* MailComposeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FBF08E65228E714700383D6D /* MailComposeViewController.swift */; };
+		FBF08E66228E714700383D6D /* MailComposeController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FBF08E65228E714700383D6D /* MailComposeController.swift */; };
 		FBF08E69228E88EB00383D6D /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = FBF08E6B228E88EB00383D6D /* Localizable.strings */; };
 		FBF08E6F228E8AB200383D6D /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = FBF08E71228E8AB200383D6D /* InfoPlist.strings */; };
 		FBF08E7B228E93E800383D6D /* LyricsProviderSource+Name.swift in Sources */ = {isa = PBXBuildFile; fileRef = FBF08E73228E923E00383D6D /* LyricsProviderSource+Name.swift */; };
@@ -287,7 +287,7 @@
 		FBF08E5F228E46DE00383D6D /* Settings.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = Settings.bundle; sourceTree = "<group>"; };
 		FBF08E61228E6B8900383D6D /* UIBarButtonItem+HUD.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIBarButtonItem+HUD.swift"; sourceTree = "<group>"; };
 		FBF08E63228E6BDE00383D6D /* Bundle+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Bundle+.swift"; sourceTree = "<group>"; };
-		FBF08E65228E714700383D6D /* MailComposeViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MailComposeViewController.swift; sourceTree = "<group>"; };
+		FBF08E65228E714700383D6D /* MailComposeController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MailComposeController.swift; sourceTree = "<group>"; };
 		FBF08E6A228E88EB00383D6D /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
 		FBF08E6C228E88EC00383D6D /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/Localizable.strings"; sourceTree = "<group>"; };
 		FBF08E70228E8AB200383D6D /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
@@ -601,7 +601,7 @@
 				FBF08E63228E6BDE00383D6D /* Bundle+.swift */,
 				FB4F71D922C4DC5300986F11 /* UIColor+.swift */,
 				FBFE26FC22C6103800EEE12D /* UIViewController+performIfViewSizeChanged.swift */,
-				FBF08E65228E714700383D6D /* MailComposeViewController.swift */,
+				FBF08E65228E714700383D6D /* MailComposeController.swift */,
 				FBF08E81228E964000383D6D /* Localizable.strings */,
 				FBF08E2B228B09CA00383D6D /* Assets.xcassets */,
 				FB8A1CFF228955CA00571A63 /* Info.plist */,
@@ -1020,7 +1020,7 @@
 				FBF08E64228E6BDE00383D6D /* Bundle+.swift in Sources */,
 				FBF08E8B228FAC0000383D6D /* AlbumArtworkViewController.swift in Sources */,
 				FB4F71DA22C4DC5300986F11 /* UIColor+.swift in Sources */,
-				FBF08E66228E714700383D6D /* MailComposeViewController.swift in Sources */,
+				FBF08E66228E714700383D6D /* MailComposeController.swift in Sources */,
 				FBF08E85228EB17000383D6D /* LyricsTableViewCell.swift in Sources */,
 				FBF08E87228EB48500383D6D /* LyricsProviderPickerController.swift in Sources */,
 				FB8A1D092289581000571A63 /* LyricsTableViewController.swift in Sources */,

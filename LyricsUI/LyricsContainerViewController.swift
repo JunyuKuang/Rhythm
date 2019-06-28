@@ -335,9 +335,7 @@ private extension LyricsContainerViewController {
                 UIApplication.shared.open(URL(string: UIApplication.openSettingsURLString)!)
             },
             UIAlertAction(title: localized("sendFeedback"), style: .default) { _ in
-                if let controller = MailComposeViewController(text: "") {
-                    self.present(controller, animated: true)
-                }
+                MailComposeController.compose()
             },
             UIAlertAction(title: localized("followOnWeibo"), style: .default) { _ in
                 UIApplication.shared.open(URL(string: "https://weibo.com/lightscreen")!)
