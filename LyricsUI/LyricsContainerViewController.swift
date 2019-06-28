@@ -42,6 +42,18 @@ public class LyricsContainerViewController : UIViewController {
         }
     }
     
+    private lazy var moreButtonItem: UIBarButtonItem = {
+        let icon: UIImage?
+        if #available(iOS 13, *) {
+            icon = UIImage(systemName: "ellipsis.circle")
+        } else {
+            icon = img("More")
+        }
+        let item = UIBarButtonItem(image: icon, style: .plain, target: self, action: #selector(tapMoreButtonItem))
+        item.hudTitle = localized("more")
+        return item
+    }()
+    
     public init() {
         super.init(nibName: nil, bundle: nil)
         player.beginGeneratingPlaybackNotifications()
@@ -103,17 +115,7 @@ public class LyricsContainerViewController : UIViewController {
         ])
         progressView.isHidden = !showsPlaybackProgressBar
         
-        navigationItem.leftBarButtonItem = {
-            let icon: UIImage?
-            if #available(iOS 13, *) {
-                icon = UIImage(systemName: "ellipsis.circle")
-            } else {
-                icon = img("More")
-            }
-            let item = UIBarButtonItem(image: icon, style: .plain, target: self, action: #selector(tapMoreButtonItem))
-            item.hudTitle = localized("more")
-            return item
-        }()
+        navigationItem.leftBarButtonItem = moreButtonItem
         
         let composeButtonItem = UIBarButtonItem(barButtonSystemItem: .compose, target: self, action: #selector(tapComposeButtonItem))
         composeButtonItem.isEnabled = player.nowPlayingItem != nil
@@ -162,16 +164,7 @@ public class LyricsContainerViewController : UIViewController {
         
         LyricsNotificationController.shared.changeLyricsHandler = { [weak self] _ in
             DispatchQueue.main.async {
-                guard let self = self else { return }
-                if let presented = self.presentedViewController {
-                    if !(presented is LyricsProviderPickerController) {
-                        self.dismiss(animated: false) {
-                            self.present(LyricsProviderPickerController(), animated: true)
-                        }
-                    }
-                } else {
-                    self.present(LyricsProviderPickerController(), animated: true)
-                }
+                self?.presentLyricsProviderPickerController()
             }
         }
         NotificationCenter.default.addObserver(forName: UIContentSizeCategory.didChangeNotification, object: nil, queue: .main) { [weak self] _ in
@@ -328,6 +321,38 @@ private extension LyricsContainerViewController {
     }
     
     func tapMoreButtonItem(_ buttonItem: UIBarButtonItem) {
+        presentMoreActionsViewController()
+    }
+    
+    func tapComposeButtonItem(_ buttonItem: UIBarButtonItem) {
+        presentLyricsProviderPickerController()
+    }
+}
+
+
+private extension LyricsContainerViewController {
+    
+    func presentLyricsProviderPickerController() {
+        if let extensionContext = extensionContext {
+            openDeepLinkURL(with: DeepLink.QueryValue.changeLyrics, extensionContext: extensionContext)
+        } else {
+            prepareForDeepLink {
+                self.present(LyricsProviderPickerController(), animated: true)
+            }
+        }
+    }
+    
+    func presentMoreActionsViewController() {
+        if let extensionContext = extensionContext {
+            openDeepLinkURL(with: DeepLink.QueryValue.showActions, extensionContext: extensionContext)
+        } else {
+            prepareForDeepLink {
+                self._presentMoreActionsViewController()
+            }
+        }
+    }
+    
+    func _presentMoreActionsViewController() {
         let controller = UIAlertController(title: nil, message: nil, preferredStyle: .actionSheet)
         
         let actions = [
@@ -350,13 +375,60 @@ private extension LyricsContainerViewController {
         ]
         actions.forEach(controller.addAction)
         
-        controller.popoverPresentationController?.barButtonItem = buttonItem
+        controller.popoverPresentationController?.barButtonItem = moreButtonItem
         present(controller, animated: true) {
             controller.popoverPresentationController?.passthroughViews = []
         }
     }
     
-    func tapComposeButtonItem(_ buttonItem: UIBarButtonItem) {
-        present(LyricsProviderPickerController(), animated: true)
+    func prepareForDeepLink(_ completionHandler: @escaping () -> Void) {
+        if presentedViewController != nil {
+            dismiss(animated: false) {
+                completionHandler()
+            }
+        } else {
+            completionHandler()
+        }
+    }
+}
+
+
+// MARK: - Deep Link
+extension LyricsContainerViewController {
+    
+    public func handleApplicationURL(_ url: URL) -> Bool {
+        let urlComponents = URLComponents(url: url, resolvingAgainstBaseURL: false)
+        
+        if let query = urlComponents?.queryItems?.first(where: { $0.name == DeepLink.queryName }),
+            let queryValue = query.value
+        {
+            switch queryValue {
+            case DeepLink.QueryValue.showActions:
+                presentMoreActionsViewController()
+                return true
+            case DeepLink.QueryValue.changeLyrics:
+                presentLyricsProviderPickerController()
+                return true
+            default: ()
+            }
+        }
+        return false
+    }
+    
+    private func openDeepLinkURL(with queryValue: String, extensionContext: NSExtensionContext) {
+        var urlComponents = URLComponents(string: "com.jonny.lyrics://")!
+        urlComponents.queryItems = [URLQueryItem(name: DeepLink.queryName, value: queryValue)]
+        
+        let url = urlComponents.url!
+        extensionContext.open(url)
+    }
+    
+    private struct DeepLink {
+        static let queryName = "deepLink"
+        
+        struct QueryValue {
+            static let showActions = "showActions"
+            static let changeLyrics = "changeLyrics"
+        }
     }
 }

@@ -71,6 +71,9 @@ class AppDelegate : UIResponder, UIApplicationDelegate {
     }
     
     func application(_ app: UIApplication, open url: URL, options: [UIApplication.OpenURLOptionsKey : Any]) -> Bool {
-        return true
+        guard let navigationController = mainWindow.rootViewController as? UINavigationController,
+            let lyricsController = navigationController.viewControllers.first as? LyricsContainerViewController
+            else { return false }
+        return lyricsController.handleApplicationURL(url)
     }
 }
