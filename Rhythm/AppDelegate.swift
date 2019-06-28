@@ -71,9 +71,21 @@ class AppDelegate : UIResponder, UIApplicationDelegate {
     }
     
     func application(_ app: UIApplication, open url: URL, options: [UIApplication.OpenURLOptionsKey : Any]) -> Bool {
-        guard let navigationController = mainWindow.rootViewController as? UINavigationController,
-            let lyricsController = navigationController.viewControllers.first as? LyricsContainerViewController
-            else { return false }
-        return lyricsController.handleApplicationURL(url)
+        handleApplicationURL(url)
+        return true
+    }
+    
+    private func handleApplicationURL(_ url: URL) {
+        if let navigationController = mainWindow.rootViewController as? UINavigationController,
+            let lyricsController = navigationController.viewControllers.first as? LyricsContainerViewController,
+            lyricsController.view.window != nil
+        {
+            _ = lyricsController.handleApplicationURL(url)
+        } else {
+            DispatchQueue.main.asyncAfter(deadline: .now() + 0.1) { [weak self] in
+                dprint("retry")
+                self?.handleApplicationURL(url)
+            }
+        }
     }
 }
