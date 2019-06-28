@@ -8,6 +8,12 @@
 
 /* Begin PBXBuildFile section */
 		FB4F71DA22C4DC5300986F11 /* UIColor+.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB4F71D922C4DC5300986F11 /* UIColor+.swift */; };
+		FB4F71E122C5CFB900986F11 /* NotificationCenter.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FB4F71E022C5CFB900986F11 /* NotificationCenter.framework */; };
+		FB4F71E422C5CFB900986F11 /* TodayViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB4F71E322C5CFB900986F11 /* TodayViewController.swift */; };
+		FB4F71EB22C5CFB900986F11 /* TodayExtension.appex in Embed App Extensions */ = {isa = PBXBuildFile; fileRef = FB4F71DF22C5CFB900986F11 /* TodayExtension.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
+		FB4F71EF22C5D00B00986F11 /* LyricsUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FB8A1CFC228955CA00571A63 /* LyricsUI.framework */; };
+		FB4F71F022C5D00B00986F11 /* LyricsUI.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = FB8A1CFC228955CA00571A63 /* LyricsUI.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		FB4F71F622C5D37100986F11 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = FB4F71F822C5D37100986F11 /* Localizable.strings */; };
 		FB8A1C4F22871C5700571A63 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB8A1C4E22871C5700571A63 /* AppDelegate.swift */; };
 		FB8A1C5622871C5700571A63 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = FB8A1C5522871C5700571A63 /* Assets.xcassets */; };
 		FB8A1C5922871C5700571A63 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = FB8A1C5722871C5700571A63 /* LaunchScreen.storyboard */; };
@@ -104,6 +110,20 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
+		FB4F71E922C5CFB900986F11 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = FB8A1C4322871C5700571A63 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = FB4F71DE22C5CFB900986F11;
+			remoteInfo = TodayExtension;
+		};
+		FB4F71F122C5D00B00986F11 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = FB8A1C4322871C5700571A63 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = FB8A1CFB228955CA00571A63;
+			remoteInfo = LyricsUI;
+		};
 		FB8A1C7422882ABC00571A63 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = FB8A1C4322871C5700571A63 /* Project object */;
@@ -135,6 +155,17 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXCopyFilesBuildPhase section */
+		FB4F71F322C5D00B00986F11 /* Embed Frameworks */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 10;
+			files = (
+				FB4F71F022C5D00B00986F11 /* LyricsUI.framework in Embed Frameworks */,
+			);
+			name = "Embed Frameworks";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		FB8A1C7B22882ABC00571A63 /* Embed Frameworks */ = {
 			isa = PBXCopyFilesBuildPhase;
 			buildActionMask = 2147483647;
@@ -154,6 +185,7 @@
 			dstPath = "";
 			dstSubfolderSpec = 13;
 			files = (
+				FB4F71EB22C5CFB900986F11 /* TodayExtension.appex in Embed App Extensions */,
 				FB8A1D3522897C4500571A63 /* NotificationContentExtension.appex in Embed App Extensions */,
 			);
 			name = "Embed App Extensions";
@@ -163,6 +195,13 @@
 
 /* Begin PBXFileReference section */
 		FB4F71D922C4DC5300986F11 /* UIColor+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIColor+.swift"; sourceTree = "<group>"; };
+		FB4F71DF22C5CFB900986F11 /* TodayExtension.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = TodayExtension.appex; sourceTree = BUILT_PRODUCTS_DIR; };
+		FB4F71E022C5CFB900986F11 /* NotificationCenter.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = NotificationCenter.framework; path = System/Library/Frameworks/NotificationCenter.framework; sourceTree = SDKROOT; };
+		FB4F71E322C5CFB900986F11 /* TodayViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TodayViewController.swift; sourceTree = "<group>"; };
+		FB4F71E822C5CFB900986F11 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		FB4F71F722C5D37100986F11 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
+		FB4F71F922C5D37300986F11 /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/Localizable.strings"; sourceTree = "<group>"; };
+		FB4F71FA22C5D50800986F11 /* TodayExtension.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = TodayExtension.entitlements; sourceTree = "<group>"; };
 		FB8A1C4B22871C5700571A63 /* Rhythm.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Rhythm.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		FB8A1C4E22871C5700571A63 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		FB8A1C5522871C5700571A63 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -266,6 +305,15 @@
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
+		FB4F71DC22C5CFB900986F11 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				FB4F71EF22C5D00B00986F11 /* LyricsUI.framework in Frameworks */,
+				FB4F71E122C5CFB900986F11 /* NotificationCenter.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		FB8A1C4822871C5700571A63 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
@@ -312,11 +360,23 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		FB4F71E222C5CFB900986F11 /* TodayExtension */ = {
+			isa = PBXGroup;
+			children = (
+				FB4F71E322C5CFB900986F11 /* TodayViewController.swift */,
+				FB4F71F822C5D37100986F11 /* Localizable.strings */,
+				FB4F71E822C5CFB900986F11 /* Info.plist */,
+				FB4F71FA22C5D50800986F11 /* TodayExtension.entitlements */,
+			);
+			path = TodayExtension;
+			sourceTree = "<group>";
+		};
 		FB8A1C4222871C5700571A63 = {
 			isa = PBXGroup;
 			children = (
 				FB8A1C4D22871C5700571A63 /* Rhythm */,
 				FB8A1D2C22897C4500571A63 /* NotificationContentExtension */,
+				FB4F71E222C5CFB900986F11 /* TodayExtension */,
 				FB8A1C7022882ABB00571A63 /* LyricsProvider */,
 				FB8A1CFD228955CA00571A63 /* LyricsUI */,
 				FB8A1D122289736D00571A63 /* LyricsCore */,
@@ -333,6 +393,7 @@
 				FB8A1CFC228955CA00571A63 /* LyricsUI.framework */,
 				FB8A1D112289736D00571A63 /* LyricsCore.framework */,
 				FB8A1D2722897C4500571A63 /* NotificationContentExtension.appex */,
+				FB4F71DF22C5CFB900986F11 /* TodayExtension.appex */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -550,6 +611,7 @@
 			children = (
 				FB8A1D2822897C4500571A63 /* UserNotifications.framework */,
 				FB8A1D2A22897C4500571A63 /* UserNotificationsUI.framework */,
+				FB4F71E022C5CFB900986F11 /* NotificationCenter.framework */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -613,6 +675,25 @@
 /* End PBXHeadersBuildPhase section */
 
 /* Begin PBXNativeTarget section */
+		FB4F71DE22C5CFB900986F11 /* TodayExtension */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = FB4F71EE22C5CFB900986F11 /* Build configuration list for PBXNativeTarget "TodayExtension" */;
+			buildPhases = (
+				FB4F71DB22C5CFB900986F11 /* Sources */,
+				FB4F71DC22C5CFB900986F11 /* Frameworks */,
+				FB4F71DD22C5CFB900986F11 /* Resources */,
+				FB4F71F322C5D00B00986F11 /* Embed Frameworks */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				FB4F71F222C5D00B00986F11 /* PBXTargetDependency */,
+			);
+			name = TodayExtension;
+			productName = TodayExtension;
+			productReference = FB4F71DF22C5CFB900986F11 /* TodayExtension.appex */;
+			productType = "com.apple.product-type.app-extension";
+		};
 		FB8A1C4A22871C5700571A63 /* Rhythm */ = {
 			isa = PBXNativeTarget;
 			buildConfigurationList = FB8A1C5D22871C5700571A63 /* Build configuration list for PBXNativeTarget "Rhythm" */;
@@ -631,6 +712,7 @@
 				FB8A1D02228955CA00571A63 /* PBXTargetDependency */,
 				FB8A1D172289736D00571A63 /* PBXTargetDependency */,
 				FB8A1D3422897C4500571A63 /* PBXTargetDependency */,
+				FB4F71EA22C5CFB900986F11 /* PBXTargetDependency */,
 			);
 			name = Rhythm;
 			productName = AppleMusicLyrics;
@@ -714,10 +796,13 @@
 		FB8A1C4322871C5700571A63 /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
-				LastSwiftUpdateCheck = 1020;
+				LastSwiftUpdateCheck = 1100;
 				LastUpgradeCheck = 1020;
 				ORGANIZATIONNAME = "Jonny Kuang";
 				TargetAttributes = {
+					FB4F71DE22C5CFB900986F11 = {
+						CreatedOnToolsVersion = 11.0;
+					};
 					FB8A1C4A22871C5700571A63 = {
 						CreatedOnToolsVersion = 10.2.1;
 						LastSwiftMigration = 1020;
@@ -766,6 +851,7 @@
 			targets = (
 				FB8A1C4A22871C5700571A63 /* Rhythm */,
 				FB8A1D2622897C4500571A63 /* NotificationContentExtension */,
+				FB4F71DE22C5CFB900986F11 /* TodayExtension */,
 				FB8A1C6E22882ABB00571A63 /* LyricsProvider */,
 				FB8A1D102289736D00571A63 /* LyricsCore */,
 				FB8A1CFB228955CA00571A63 /* LyricsUI */,
@@ -774,6 +860,14 @@
 /* End PBXProject section */
 
 /* Begin PBXResourcesBuildPhase section */
+		FB4F71DD22C5CFB900986F11 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				FB4F71F622C5D37100986F11 /* Localizable.strings in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		FB8A1C4922871C5700571A63 /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -842,6 +936,14 @@
 /* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
+		FB4F71DB22C5CFB900986F11 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				FB4F71E422C5CFB900986F11 /* TodayViewController.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		FB8A1C4722871C5700571A63 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -949,6 +1051,16 @@
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
+		FB4F71EA22C5CFB900986F11 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = FB4F71DE22C5CFB900986F11 /* TodayExtension */;
+			targetProxy = FB4F71E922C5CFB900986F11 /* PBXContainerItemProxy */;
+		};
+		FB4F71F222C5D00B00986F11 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = FB8A1CFB228955CA00571A63 /* LyricsUI */;
+			targetProxy = FB4F71F122C5D00B00986F11 /* PBXContainerItemProxy */;
+		};
 		FB8A1C7522882ABC00571A63 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			target = FB8A1C6E22882ABB00571A63 /* LyricsProvider */;
@@ -972,6 +1084,15 @@
 /* End PBXTargetDependency section */
 
 /* Begin PBXVariantGroup section */
+		FB4F71F822C5D37100986F11 /* Localizable.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				FB4F71F722C5D37100986F11 /* en */,
+				FB4F71F922C5D37300986F11 /* zh-Hans */,
+			);
+			name = Localizable.strings;
+			sourceTree = "<group>";
+		};
 		FB8A1C5722871C5700571A63 /* LaunchScreen.storyboard */ = {
 			isa = PBXVariantGroup;
 			children = (
@@ -1028,6 +1149,50 @@
 /* End PBXVariantGroup section */
 
 /* Begin XCBuildConfiguration section */
+		FB4F71EC22C5CFB900986F11 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_ENTITLEMENTS = TodayExtension/TodayExtension.entitlements;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = FF973S8UP2;
+				INFOPLIST_FILE = TodayExtension/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@executable_path/../../Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = com.jonny.lyrics.TodayExtension;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SKIP_INSTALL = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		FB4F71ED22C5CFB900986F11 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_ENTITLEMENTS = TodayExtension/TodayExtension.entitlements;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = FF973S8UP2;
+				INFOPLIST_FILE = TodayExtension/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@executable_path/../../Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = com.jonny.lyrics.TodayExtension;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SKIP_INSTALL = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Release;
+		};
 		FB8A1C5B22871C5700571A63 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
@@ -1415,6 +1580,15 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
+		FB4F71EE22C5CFB900986F11 /* Build configuration list for PBXNativeTarget "TodayExtension" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				FB4F71EC22C5CFB900986F11 /* Debug */,
+				FB4F71ED22C5CFB900986F11 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
 		FB8A1C4622871C5700571A63 /* Build configuration list for PBXProject "Rhythm" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (

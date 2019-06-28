@@ -69,6 +69,19 @@ public class LyricsTableViewController : UITableViewController {
         ]
     }
     
+    private var cachedViewSize = CGSize.zero
+    
+    public override func viewDidLayoutSubviews() {
+        super.viewDidLayoutSubviews()
+        
+        guard cachedViewSize != view.bounds.size else { return }
+        cachedViewSize = view.bounds.size
+        
+        if let indexPath = tableView.indexPathForSelectedRow {
+            tableView.scrollToRow(at: indexPath, at: .middle, animated: false)
+        }
+    }
+    
     private var kvoObservers = [NSKeyValueObservation]()
 
     

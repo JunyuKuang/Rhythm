@@ -79,7 +79,11 @@ class SystemAccessSettingsTableViewController : UITableViewController {
                         #else
                         setting.accessLevel = .notDetermined
                         setting.handler = {
-                            MPMediaLibrary.requestAuthorization { _ in }
+                            MPMediaLibrary.requestAuthorization { _ in
+                                DispatchQueue.main.async {
+                                    self?.updateSettings()
+                                }
+                            }
                         }
                         #endif
                     case .authorized:
@@ -103,7 +107,11 @@ class SystemAccessSettingsTableViewController : UITableViewController {
                             if #available(iOS 12.0, *) {
                                 options.insert(.providesAppNotificationSettings)
                             }
-                            UNUserNotificationCenter.current().requestAuthorization(options: options) { _, _ in }
+                            UNUserNotificationCenter.current().requestAuthorization(options: options) { _, _ in
+                                DispatchQueue.main.async {
+                                    self?.updateSettings()
+                                }
+                            }
                         }
                     case .authorized:
                         setting.accessLevel = .authorized
