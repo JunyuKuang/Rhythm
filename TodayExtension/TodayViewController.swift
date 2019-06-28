@@ -26,6 +26,16 @@ class TodayViewController : UIViewController, NCWidgetProviding {
     
     // MARK: - Lifecycle
     
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        
+        NotificationCenter.default.addObserver(forName: .MPMusicPlayerControllerNowPlayingItemDidChange, object: nil, queue: .main) { [weak self] _ in
+            guard let self = self,
+                let extensionContext = self.extensionContext else { return }
+            self.updateBarVisibility(for: extensionContext.widgetActiveDisplayMode, animated: true)
+        }
+    }
+    
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         
@@ -107,8 +117,10 @@ class TodayViewController : UIViewController, NCWidgetProviding {
     }
     
     private func updateBarVisibility(for mode: NCWidgetDisplayMode, animated: Bool) {
-        guard let navigationController = children.first as? UINavigationController else { return }
-        let hidden = mode == .compact
+        guard let navigationController = children.first as? UINavigationController,
+            navigationController == lyricsNavigationController else { return }
+        
+        let hidden = mode == .compact && MPMusicPlayerController.systemMusicPlayer.nowPlayingItem != nil
         navigationController.setNavigationBarHidden(hidden, animated: animated)
         navigationController.setToolbarHidden(hidden, animated: animated)
     }
