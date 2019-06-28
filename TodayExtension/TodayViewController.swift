@@ -29,6 +29,9 @@ class TodayViewController : UIViewController, NCWidgetProviding {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        UIColor.globalTint = .highContrastiveGlobalTint
+        view.tintColor = .globalTint
+        
         NotificationCenter.default.addObserver(forName: .MPMusicPlayerControllerNowPlayingItemDidChange, object: nil, queue: .main) { [weak self] _ in
             guard let self = self,
                 let extensionContext = self.extensionContext else { return }
@@ -38,8 +41,6 @@ class TodayViewController : UIViewController, NCWidgetProviding {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        
-        view.tintColor = .globalTint
         
         #if targetEnvironment(simulator)
         // MPMediaLibrary.requestAuthorization is unusable on simulator
@@ -89,6 +90,8 @@ class TodayViewController : UIViewController, NCWidgetProviding {
         
         extensionContext.widgetLargestAvailableDisplayMode = .expanded
         updateBarVisibility(for: extensionContext.widgetActiveDisplayMode, animated: false)
+        
+        lyricsNavigationController.navigationBar.titleTextAttributes = [.foregroundColor : UIColor.kjy_secondaryLabel]
     }
     
     private lazy var noMusicAccessButton: UIButton = {

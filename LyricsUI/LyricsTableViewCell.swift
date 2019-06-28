@@ -31,7 +31,7 @@ class LyricsTableViewCell : UITableViewCell {
     }
     
     private func updateTextColor() {
-        let textColor = isSelected ? tintColor! : .kjy_label
+        let textColor = isSelected ? tintColor! : UIColor.globalTint == .highContrastiveGlobalTint ? .kjy_secondaryLabel : .kjy_label
         textLabel?.textColor = textColor
         detailTextLabel?.textColor = textColor
     }

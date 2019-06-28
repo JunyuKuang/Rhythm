@@ -109,13 +109,7 @@ private class LyricsProviderPickerTableViewController : UITableViewController {
         
         cell.textLabel?.font = UIFont.preferredFont(forTextStyle: .headline)
         cell.detailTextLabel?.font = UIFont.preferredFont(forTextStyle: .subheadline)
-        cell.detailTextLabel?.textColor = {
-            if #available(iOS 13, *) {
-                return .secondaryLabel
-            } else {
-                return .darkGray
-            }
-        }()
+        cell.detailTextLabel?.textColor = .kjy_secondaryLabel
         
         let labels = [cell.textLabel, cell.detailTextLabel].compactMap { $0 }
         labels.forEach { $0.numberOfLines = 0 }
