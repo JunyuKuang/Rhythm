@@ -59,15 +59,15 @@ private class LyricsProviderPickerTableViewController : UITableViewController {
         super.viewDidLoad()
         
         updateContent()
-        NotificationCenter.default.addObserver(forName: SystemPlayerLyricsController.availableLyricsArrayDidChangeNotification, object: nil, queue: nil) { [weak self] _ in
+        NotificationCenter.default.addObserver(forName: SystemPlayerLyricsController.availableLyricsArrayDidChangeNotification, object: nil, queue: .main) { [weak self] _ in
             self?.updateContent()
         }
     }
     
     private func updateContent() {
+        let availableLyricsArray = SystemPlayerLyricsController.shared.nowPlaying?.availableLyricsArray ?? []
+        
         DispatchQueue.global(qos: .utility).async { [weak self] in
-            let availableLyricsArray = SystemPlayerLyricsController.shared.nowPlaying?.availableLyricsArray ?? []
-            
             // By not involving `Set`, the lyrics order keeps the same across multiple updates when two `Lyrics` have same `quality`.
             var filteredLyricsArray = [Lyrics]()
             availableLyricsArray.forEach {
