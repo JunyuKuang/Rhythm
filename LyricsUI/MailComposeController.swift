@@ -18,11 +18,11 @@
 //  along with this program.  If not, see <http://www.gnu.org/licenses/>.
 //
 
-public struct MailComposeController {
+struct MailComposeController {
     
     static func compose() {
         let mailAddress = FeedbackPlaceholders.mailAddress.addingPercentEncoding(withAllowedCharacters: .urlHostAllowed)!
-        let subject = FeedbackPlaceholders.subject.addingPercentEncoding(withAllowedCharacters: .urlHostAllowed)!
+        let subject = FeedbackPlaceholders.subject.addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed)!
         
         let url = URL(string: "mailto:\(mailAddress)?subject=\(subject)")!
         UIApplication.shared.open(url)
