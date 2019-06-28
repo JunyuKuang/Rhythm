@@ -21,7 +21,7 @@
 public class LyricsContainerViewController : UIViewController {
     
     private let artworkViewController = AlbumArtworkViewController()
-    private let tableViewController = LyricsTableViewController()
+    public let tableViewController = LyricsTableViewController()
     
     private let player = MPMusicPlayerController.systemMusicPlayer
     private let progressView = UIProgressView()
@@ -30,6 +30,17 @@ public class LyricsContainerViewController : UIViewController {
     
     private var constraintsForRegularLayout = [NSLayoutConstraint]()
     private var constraintsForCompactLayout = [NSLayoutConstraint]()
+    
+    /// Default value is true.
+    public var showsPlaybackProgressBar = true {
+        didSet {
+            guard showsPlaybackProgressBar != oldValue else { return }
+            [artworkViewController, tableViewController].forEach {
+                $0.additionalSafeAreaInsets.bottom = showsPlaybackProgressBar ? progressView.intrinsicContentSize.height : 0
+            }
+            progressView.isHidden = !showsPlaybackProgressBar
+        }
+    }
     
     public init() {
         super.init(nibName: nil, bundle: nil)
@@ -59,7 +70,7 @@ public class LyricsContainerViewController : UIViewController {
         }
         
         [artworkViewController, tableViewController].forEach {
-            $0.additionalSafeAreaInsets.bottom = progressView.intrinsicContentSize.height
+            $0.additionalSafeAreaInsets.bottom = showsPlaybackProgressBar ? progressView.intrinsicContentSize.height : 0
             view.addSubview($0.view)
             $0.view.translatesAutoresizingMaskIntoConstraints = false
         }
@@ -90,6 +101,7 @@ public class LyricsContainerViewController : UIViewController {
             progressView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
             progressView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor),
         ])
+        progressView.isHidden = !showsPlaybackProgressBar
         
         navigationItem.leftBarButtonItem = {
             let icon: UIImage?
@@ -170,7 +182,7 @@ public class LyricsContainerViewController : UIViewController {
     
     public override func viewWillLayoutSubviews() {
         super.viewWillLayoutSubviews()
-        updateLayout()
+        performIfViewSizeChanged(handler: updateLayout)
     }
     
     private func updateLayout() {

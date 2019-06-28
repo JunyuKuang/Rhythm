@@ -69,16 +69,12 @@ public class LyricsTableViewController : UITableViewController {
         ]
     }
     
-    private var cachedViewSize = CGSize.zero
-    
     public override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
-        
-        guard cachedViewSize != view.bounds.size else { return }
-        cachedViewSize = view.bounds.size
-        
-        if let indexPath = tableView.indexPathForSelectedRow {
-            tableView.scrollToRow(at: indexPath, at: .middle, animated: false)
+        performIfViewSizeChanged {
+            if let indexPath = tableView.indexPathForSelectedRow {
+                tableView.scrollToRow(at: indexPath, at: .middle, animated: false)
+            }
         }
     }
     
@@ -175,16 +171,20 @@ private extension LyricsTableViewController {
             }
             self?.lyrics = SystemPlayerLyricsController.shared.nowPlaying?.lyrics
         }
-        lyricsUpdateHandler()
-        
         NotificationCenter.default.addObserver(forName: SystemPlayerLyricsController.nowPlayingLyricsDidChangeNotification, object: nil, queue: .main) { _ in
             lyricsUpdateHandler()
         }
-        NotificationCenter.default.addObserver(forName: SystemPlayerLyricsController.lyricsLineDidChangeNotification, object: nil, queue: .main) { [weak self] _ in
+        lyricsUpdateHandler()
+        
+        let lineUpdateHandler = { [weak self] in
             if let line = SystemPlayerLyricsController.shared.currentLyricsLine {
                 self?.moveFocus(to: line)
             }
         }
+        NotificationCenter.default.addObserver(forName: SystemPlayerLyricsController.lyricsLineDidChangeNotification, object: nil, queue: .main) { _ in
+            lineUpdateHandler()
+        }
+        lineUpdateHandler()
     }
     
     func moveFocus(to line: LyricsLine) {

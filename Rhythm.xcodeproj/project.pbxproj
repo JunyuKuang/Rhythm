@@ -107,6 +107,7 @@
 		FBF08E87228EB48500383D6D /* LyricsProviderPickerController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FBF08E86228EB48500383D6D /* LyricsProviderPickerController.swift */; };
 		FBF08E8B228FAC0000383D6D /* AlbumArtworkViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FBF08E8A228FAC0000383D6D /* AlbumArtworkViewController.swift */; };
 		FBF08E8D228FCEFE00383D6D /* AlbumArtworkView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FBF08E8C228FCEFE00383D6D /* AlbumArtworkView.swift */; };
+		FBFE26FD22C6103800EEE12D /* UIViewController+performIfViewSizeChanged.swift in Sources */ = {isa = PBXBuildFile; fileRef = FBFE26FC22C6103800EEE12D /* UIViewController+performIfViewSizeChanged.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -302,6 +303,7 @@
 		FBF08E89228EF76700383D6D /* NotificationContentExtension.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = NotificationContentExtension.entitlements; sourceTree = "<group>"; };
 		FBF08E8A228FAC0000383D6D /* AlbumArtworkViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlbumArtworkViewController.swift; sourceTree = "<group>"; };
 		FBF08E8C228FCEFE00383D6D /* AlbumArtworkView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlbumArtworkView.swift; sourceTree = "<group>"; };
+		FBFE26FC22C6103800EEE12D /* UIViewController+performIfViewSizeChanged.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIViewController+performIfViewSizeChanged.swift"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -598,6 +600,7 @@
 				FBF08E61228E6B8900383D6D /* UIBarButtonItem+HUD.swift */,
 				FBF08E63228E6BDE00383D6D /* Bundle+.swift */,
 				FB4F71D922C4DC5300986F11 /* UIColor+.swift */,
+				FBFE26FC22C6103800EEE12D /* UIViewController+performIfViewSizeChanged.swift */,
 				FBF08E65228E714700383D6D /* MailComposeViewController.swift */,
 				FBF08E81228E964000383D6D /* Localizable.strings */,
 				FBF08E2B228B09CA00383D6D /* Assets.xcassets */,
@@ -1023,6 +1026,7 @@
 				FB8A1D092289581000571A63 /* LyricsTableViewController.swift in Sources */,
 				FBF08E8D228FCEFE00383D6D /* AlbumArtworkView.swift in Sources */,
 				FBF08E32228BB9D700383D6D /* UIView+Constraints.swift in Sources */,
+				FBFE26FD22C6103800EEE12D /* UIViewController+performIfViewSizeChanged.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
