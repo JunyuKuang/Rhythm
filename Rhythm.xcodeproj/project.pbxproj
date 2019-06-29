@@ -12,7 +12,6 @@
 		FB4F71E422C5CFB900986F11 /* TodayViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB4F71E322C5CFB900986F11 /* TodayViewController.swift */; };
 		FB4F71EB22C5CFB900986F11 /* TodayExtension.appex in Embed App Extensions */ = {isa = PBXBuildFile; fileRef = FB4F71DF22C5CFB900986F11 /* TodayExtension.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
 		FB4F71EF22C5D00B00986F11 /* LyricsUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FB8A1CFC228955CA00571A63 /* LyricsUI.framework */; };
-		FB4F71F022C5D00B00986F11 /* LyricsUI.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = FB8A1CFC228955CA00571A63 /* LyricsUI.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		FB4F71F622C5D37100986F11 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = FB4F71F822C5D37100986F11 /* Localizable.strings */; };
 		FB8A1C4F22871C5700571A63 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB8A1C4E22871C5700571A63 /* AppDelegate.swift */; };
 		FB8A1C5622871C5700571A63 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = FB8A1C5522871C5700571A63 /* Assets.xcassets */; };
@@ -156,17 +155,6 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXCopyFilesBuildPhase section */
-		FB4F71F322C5D00B00986F11 /* Embed Frameworks */ = {
-			isa = PBXCopyFilesBuildPhase;
-			buildActionMask = 2147483647;
-			dstPath = "";
-			dstSubfolderSpec = 10;
-			files = (
-				FB4F71F022C5D00B00986F11 /* LyricsUI.framework in Embed Frameworks */,
-			);
-			name = "Embed Frameworks";
-			runOnlyForDeploymentPostprocessing = 0;
-		};
 		FB8A1C7B22882ABC00571A63 /* Embed Frameworks */ = {
 			isa = PBXCopyFilesBuildPhase;
 			buildActionMask = 2147483647;
@@ -685,7 +673,6 @@
 				FB4F71DB22C5CFB900986F11 /* Sources */,
 				FB4F71DC22C5CFB900986F11 /* Frameworks */,
 				FB4F71DD22C5CFB900986F11 /* Resources */,
-				FB4F71F322C5D00B00986F11 /* Embed Frameworks */,
 			);
 			buildRules = (
 			);
