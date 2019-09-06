@@ -42,6 +42,11 @@ public final class ViewLyrics: _LyricsProvider {
     }
     
     func searchTask(request: LyricsSearchRequest, completionHandler: @escaping ([ViewLyricsResponseSearchResult]) -> Void) -> Progress {
+        
+        completionHandler([])
+        return Progress.completedProgress()
+        
+        /* This cause random crashes
         guard case let .info(title, artist) = request.searchTerm else {
             // cannot search by keyword
             completionHandler([])
@@ -63,6 +68,7 @@ public final class ViewLyrics: _LyricsProvider {
             try? parser.parseResponse(data: decrypted)
             completionHandler(parser.result)
         }
+        */
     }
     
     func fetchTask(token: ViewLyricsResponseSearchResult, completionHandler: @escaping (Lyrics?) -> Void) -> Progress {
