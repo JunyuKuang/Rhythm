@@ -25,9 +25,26 @@ public extension UserDefaults {
 
 @objc public extension UserDefaults {
     
+    dynamic var disablesIdleTimer: Bool {
+        get {
+            if let value = value(forKey: "disablesIdleTimer") as? Bool {
+                return value
+            }
+            self.disablesIdleTimer = false
+            return false
+        }
+        set {
+            set(newValue, forKey: "disablesIdleTimer")
+        }
+    }
+    
     dynamic var showsLyricsTranslationIfAvailable: Bool {
         get {
-            return value(forKey: "showsLyricsTranslationIfAvailable") as? Bool ?? true
+            if let value = value(forKey: "showsLyricsTranslationIfAvailable") as? Bool {
+                return value
+            }
+            self.showsLyricsTranslationIfAvailable = true
+            return true
         }
         set {
             set(newValue, forKey: "showsLyricsTranslationIfAvailable")
@@ -36,7 +53,11 @@ public extension UserDefaults {
     
     dynamic var maximumNotificationCount: Int {
         get {
-            return value(forKey: "maximumNotificationCount") as? Int ?? 3
+            if let value = value(forKey: "maximumNotificationCount") as? Int {
+                return value
+            }
+            self.maximumNotificationCount = 3
+            return 3
         }
         set {
             set(newValue, forKey: "maximumNotificationCount")
@@ -45,7 +66,11 @@ public extension UserDefaults {
     
     dynamic var allowsNowPlayingItemNotification: Bool {
         get {
-            return value(forKey: "allowsNowPlayingItemNotification") as? Bool ?? true
+            if let value = value(forKey: "allowsNowPlayingItemNotification") as? Bool {
+                return value
+            }
+            self.allowsNowPlayingItemNotification = true
+            return true
         }
         set {
             set(newValue, forKey: "allowsNowPlayingItemNotification")
@@ -54,7 +79,11 @@ public extension UserDefaults {
     
     dynamic var prefersCenterAlignedLayout: Bool {
         get {
-            return bool(forKey: "prefersCenterAlignedLayout")
+            if let value = value(forKey: "prefersCenterAlignedLayout") as? Bool {
+                return value
+            }
+            self.prefersCenterAlignedLayout = false
+            return false
         }
         set {
             set(newValue, forKey: "prefersCenterAlignedLayout")
@@ -64,7 +93,11 @@ public extension UserDefaults {
     /// Use `MPMediaItem.kjy_userSpecifiedSources` to set and get actual value.
     fileprivate(set) dynamic var userSpecifiedLyricsByMediaIDs: [String : Any] {
         get {
-            return dictionary(forKey: "userSpecifiedLyricsByMediaIDs") ?? [:]
+            if let value = dictionary(forKey: "userSpecifiedLyricsByMediaIDs") {
+                return value
+            }
+            self.userSpecifiedLyricsByMediaIDs = [:]
+            return [:]
         }
         set {
             set(newValue, forKey: "userSpecifiedLyricsByMediaIDs")

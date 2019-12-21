@@ -41,6 +41,7 @@ public class SystemPlayerLyricsController {
             self.updateLyricsLineIfNeeded()
         }
         
+        _ = UserDefaults.appGroup.userSpecifiedLyricsByMediaIDs
         userSpecifiedLyricsObserver = UserDefaults.appGroup.observe(\.userSpecifiedLyricsByMediaIDs) { _, _ in
             DispatchQueue.main.async {
                 guard let nowPlaying = self.nowPlaying,

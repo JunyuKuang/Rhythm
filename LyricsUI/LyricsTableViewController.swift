@@ -63,6 +63,12 @@ public class LyricsTableViewController : UITableViewController {
                 self.tableView.selectRow(at: indexPath, animated: false, scrollPosition: .middle)
             }
         }
+        
+        // Avoid KVO failure
+        _ = [
+            UserDefaults.appGroup.showsLyricsTranslationIfAvailable,
+            UserDefaults.appGroup.prefersCenterAlignedLayout,
+        ]
         kvoObservers = [
             UserDefaults.appGroup.observe(\.showsLyricsTranslationIfAvailable) { _, _ in kvoUpdateHandler() },
             UserDefaults.appGroup.observe(\.prefersCenterAlignedLayout) { _, _ in kvoUpdateHandler() },

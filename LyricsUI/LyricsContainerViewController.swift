@@ -27,6 +27,7 @@ public class LyricsContainerViewController : UIViewController {
     private let progressView = UIProgressView()
     private var titleObserver: NSKeyValueObservation?
     private var showsTranslationObserver: NSKeyValueObservation?
+    private var disablesIdleTimerObserver: NSKeyValueObservation?
     
     private var constraintsForRegularLayout = [NSLayoutConstraint]()
     private var constraintsForCompactLayout = [NSLayoutConstraint]()
@@ -143,11 +144,16 @@ public class LyricsContainerViewController : UIViewController {
         }
         RunLoop.main.add(timer, forMode: .common)
         
+        _ = UserDefaults.appGroup.showsLyricsTranslationIfAvailable
         showsTranslationObserver = UserDefaults.appGroup.observe(\.showsLyricsTranslationIfAvailable) { [weak self] _, _ in
             guard let self = self else { return }
             DispatchQueue.main.async {
                 self.updateState(forTranslationButtonItem: self.translationButtonItem)
             }
+        }
+        _ = UserDefaults.appGroup.disablesIdleTimer
+        disablesIdleTimerObserver = UserDefaults.appGroup.observe(\.disablesIdleTimer) { [weak self] _, _ in
+            self?.updateIdleTimerStatus()
         }
         
         let translationAvailabilityUpdateHandler = { [weak self] in
@@ -158,8 +164,9 @@ public class LyricsContainerViewController : UIViewController {
             self?.translationButtonItem.isEnabled = isEnabled
         }
         translationAvailabilityUpdateHandler()
-        NotificationCenter.default.addObserver(forName: SystemPlayerLyricsController.nowPlayingLyricsDidChangeNotification, object: nil, queue: .main) { _ in
+        NotificationCenter.default.addObserver(forName: SystemPlayerLyricsController.nowPlayingLyricsDidChangeNotification, object: nil, queue: .main) { [weak self] _ in
             translationAvailabilityUpdateHandler()
+            self?.updateIdleTimerStatus()
         }
         
         LyricsNotificationController.shared.changeLyricsHandler = { [weak self] _ in
@@ -301,6 +308,7 @@ private extension LyricsContainerViewController {
     
     func playbackStateDidChange() {
         updatePlayPauseButtonItemIfNeeded()
+        updateIdleTimerStatus()
     }
     
     func togglePlayPauseState() {
@@ -391,6 +399,13 @@ private extension LyricsContainerViewController {
         present(controller, animated: true) {
             controller.popoverPresentationController?.passthroughViews = []
         }
+    }
+    
+    func updateIdleTimerStatus() {
+        UIApplication.shared.isIdleTimerDisabled
+            = player.nowPlayingItem != nil
+            && player.playbackState == .playing
+            && UserDefaults.appGroup.disablesIdleTimer
     }
     
     func prepareForDeepLink(_ completionHandler: @escaping () -> Void) {

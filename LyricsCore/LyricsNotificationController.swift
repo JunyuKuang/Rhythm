@@ -49,6 +49,7 @@ public class LyricsNotificationController : NSObject {
     private override init() {
         super.init()
         
+        _ = UserDefaults.appGroup.maximumNotificationCount
         kvoObservers = [
             UserDefaults.appGroup.observe(\.maximumNotificationCount, options: .new) { _, change in
                 self.maximumNotificationCount = change.newValue ?? 1

@@ -53,6 +53,7 @@ public class NowPlayingNotificationManager {
             }
         }
         
+        _ = UserDefaults.appGroup.allowsNowPlayingItemNotification
         kvoObservers = [
             UserDefaults.appGroup.observe(\.allowsNowPlayingItemNotification) { _, _ in
                 self.allowsNowPlayingItemNotification = UserDefaults.appGroup.allowsNowPlayingItemNotification
