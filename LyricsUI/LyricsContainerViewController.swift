@@ -277,7 +277,7 @@ public class LyricsContainerViewController : UIViewController {
         } else {
             buttonWidths = 34 * 5 + 14 * 2
         }
-        let centralItemSpacing: CGFloat = view.bounds.width <= 320 ? 8 : 32 
+        let centralItemSpacing: CGFloat = view.bounds.width <= 320 ? 8 : 32
         toolbarFixedSpaceItem.width = (view.safeAreaLayoutGuide.layoutFrame.width - buttonWidths - centralItemSpacing * 2) / 2
     }
 }
