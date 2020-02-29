@@ -23,34 +23,36 @@ public class SystemPlayerLyricsController {
     public static let shared = SystemPlayerLyricsController()
     
     private init() {
-        let player = MPMusicPlayerController.systemMusicPlayer
-        if let nowPlayingItem = player.nowPlayingItem {
-            self.update(for: nowPlayingItem)
-        }
-        player.beginGeneratingPlaybackNotifications()
-        NotificationCenter.default.addObserver(forName: .MPMusicPlayerControllerNowPlayingItemDidChange, object: player, queue: .main) { _ in
-            self.nowPlaying = nil
-            NotificationCenter.default.post(name: SystemPlayerLyricsController.nowPlayingLyricsDidChangeNotification, object: self)
-            NotificationCenter.default.post(name: SystemPlayerLyricsController.availableLyricsArrayDidChangeNotification, object: self)
-            
+        DispatchQueue.main.async {
+            let player = MPMusicPlayerController.systemMusicPlayer
             if let nowPlayingItem = player.nowPlayingItem {
                 self.update(for: nowPlayingItem)
             }
-        }
-        Timer.scheduledTimer(withTimeInterval: 0.1, repeats: true) { _ in
-            self.updateLyricsLineIfNeeded()
-        }
-        
-        _ = UserDefaults.appGroup.userSpecifiedLyricsByMediaIDs
-        userSpecifiedLyricsObserver = UserDefaults.appGroup.observe(\.userSpecifiedLyricsByMediaIDs) { _, _ in
-            DispatchQueue.main.async {
-                guard let nowPlaying = self.nowPlaying,
-                    let lyrics = nowPlaying.item.kjy_userSpecifiedLyrics else { return }
-                nowPlaying.lyrics = lyrics
-                nowPlaying.isLyricsUserSpecified = true
-                
+            player.beginGeneratingPlaybackNotifications()
+            NotificationCenter.default.addObserver(forName: .MPMusicPlayerControllerNowPlayingItemDidChange, object: player, queue: .main) { _ in
+                self.nowPlaying = nil
                 NotificationCenter.default.post(name: SystemPlayerLyricsController.nowPlayingLyricsDidChangeNotification, object: self)
+                NotificationCenter.default.post(name: SystemPlayerLyricsController.availableLyricsArrayDidChangeNotification, object: self)
+                
+                if let nowPlayingItem = player.nowPlayingItem {
+                    self.update(for: nowPlayingItem)
+                }
+            }
+            Timer.scheduledTimer(withTimeInterval: 0.1, repeats: true) { _ in
                 self.updateLyricsLineIfNeeded()
+            }
+            
+            _ = UserDefaults.appGroup.userSpecifiedLyricsByMediaIDs
+            self.userSpecifiedLyricsObserver = UserDefaults.appGroup.observe(\.userSpecifiedLyricsByMediaIDs) { _, _ in
+                DispatchQueue.main.async {
+                    guard let nowPlaying = self.nowPlaying,
+                        let lyrics = nowPlaying.item.kjy_userSpecifiedLyrics else { return }
+                    nowPlaying.lyrics = lyrics
+                    nowPlaying.isLyricsUserSpecified = true
+                    
+                    NotificationCenter.default.post(name: SystemPlayerLyricsController.nowPlayingLyricsDidChangeNotification, object: self)
+                    self.updateLyricsLineIfNeeded()
+                }
             }
         }
     }
