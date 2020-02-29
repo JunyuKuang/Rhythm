@@ -65,15 +65,12 @@ public class LyricsNotificationController : NSObject {
         center.delegate = self
         
         let category: UNNotificationCategory = {
-            let actions = [
-                UNNotificationAction(identifier: changeLyricsActionIdentifier, title: NSLocalizedString("changeLyrics", bundle: .current, comment: ""), options: .foreground),
-            ]
             let options: UNNotificationCategoryOptions = [.hiddenPreviewsShowTitle, .hiddenPreviewsShowSubtitle]
             
             if #available(iOS 12.0, *) {
                 return UNNotificationCategory(
                     identifier: LyricsNotificationController.categoryIdentifier,
-                    actions: actions,
+                    actions: [],
                     intentIdentifiers: [],
                     hiddenPreviewsBodyPlaceholder: "lyricsNotificationHiddenPreview",
                     categorySummaryFormat: "lyricsNotificationSummary",
@@ -82,7 +79,7 @@ public class LyricsNotificationController : NSObject {
             } else {
                 return UNNotificationCategory(
                     identifier: LyricsNotificationController.categoryIdentifier,
-                    actions: actions,
+                    actions: [],
                     intentIdentifiers: [],
                     options: options
                 )

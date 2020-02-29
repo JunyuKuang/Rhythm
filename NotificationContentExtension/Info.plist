@@ -34,8 +34,8 @@
 			<key>UNNotificationExtensionDefaultContentHidden</key>
 			<true/>
 			<key>UNNotificationExtensionInitialContentSizeRatio</key>
-			<real>1</real>
-			<key>UNNotificationExtensionOverridesDefaultTitle</key>
+			<real>1.5</real>
+			<key>UNNotificationExtensionUserInteractionEnabled</key>
 			<true/>
 		</dict>
 		<key>NSExtensionPointIdentifier</key>

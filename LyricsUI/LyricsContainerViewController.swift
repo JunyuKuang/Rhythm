@@ -134,7 +134,7 @@ public class LyricsContainerViewController : UIViewController {
                 timer.invalidate()
                 return
             }
-            guard UIApplication.shared.applicationState != .background else { return }
+            guard UIApplication.shared.applicationState != .background || self.extensionContext != nil else { return }
             
             var progress: Float = 0
             if let nowPlayingItem = self.player.nowPlayingItem {
