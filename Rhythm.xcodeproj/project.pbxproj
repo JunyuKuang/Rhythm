@@ -84,6 +84,7 @@
 		FB8A1D2E22897C4500571A63 /* NotificationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB8A1D2D22897C4500571A63 /* NotificationViewController.swift */; };
 		FB8A1D3522897C4500571A63 /* NotificationContentExtension.appex in Embed App Extensions */ = {isa = PBXBuildFile; fileRef = FB8A1D2722897C4500571A63 /* NotificationContentExtension.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
 		FB8A1D3B22897E6D00571A63 /* LyricsUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FB8A1CFC228955CA00571A63 /* LyricsUI.framework */; };
+		FBE3071F240A79410086FE60 /* UITraitCollection+Notch.swift in Sources */ = {isa = PBXBuildFile; fileRef = FBE3071E240A79410086FE60 /* UITraitCollection+Notch.swift */; };
 		FBF08E2C228B09CA00383D6D /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = FBF08E2B228B09CA00383D6D /* Assets.xcassets */; };
 		FBF08E2D228B0B1400383D6D /* LyricsProvider.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FB8A1C6F22882ABB00571A63 /* LyricsProvider.framework */; };
 		FBF08E2F228BB87500383D6D /* LyricsContainerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FBF08E2E228BB87500383D6D /* LyricsContainerViewController.swift */; };
@@ -264,6 +265,7 @@
 		FB8A1D2D22897C4500571A63 /* NotificationViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationViewController.swift; sourceTree = "<group>"; };
 		FB8A1D3222897C4500571A63 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		FB8A1D3C22897F5B00571A63 /* UIColor+globalTint.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIColor+globalTint.swift"; sourceTree = "<group>"; };
+		FBE3071E240A79410086FE60 /* UITraitCollection+Notch.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UITraitCollection+Notch.swift"; sourceTree = "<group>"; };
 		FBF08E2B228B09CA00383D6D /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		FBF08E2E228BB87500383D6D /* LyricsContainerViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LyricsContainerViewController.swift; sourceTree = "<group>"; };
 		FBF08E31228BB9D700383D6D /* UIView+Constraints.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIView+Constraints.swift"; sourceTree = "<group>"; };
@@ -629,6 +631,7 @@
 			isa = PBXGroup;
 			children = (
 				FB8A1D2D22897C4500571A63 /* NotificationViewController.swift */,
+				FBE3071E240A79410086FE60 /* UITraitCollection+Notch.swift */,
 				FB8A1D3222897C4500571A63 /* Info.plist */,
 				FBF08E89228EF76700383D6D /* NotificationContentExtension.entitlements */,
 			);
@@ -1036,6 +1039,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				FB8A1D2E22897C4500571A63 /* NotificationViewController.swift in Sources */,
+				FBE3071F240A79410086FE60 /* UITraitCollection+Notch.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
