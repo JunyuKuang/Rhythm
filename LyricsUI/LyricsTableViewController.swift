@@ -129,6 +129,40 @@ public class LyricsTableViewController : UITableViewController {
     }
     
     
+    // MARK: - UITableViewDelegate
+    
+    /// This works around an iOS bug where currentPlaybackTime sometimes seek back and cause selection flashing after we adjust it.
+    private struct PlaybackTimeOverride {
+        let time: TimeInterval
+        let id = UUID()
+    }
+    private var playbackTimeOverride: PlaybackTimeOverride?
+    
+    public override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        let player = MPMusicPlayerController.systemMusicPlayer
+        
+        guard let lyrics = lyrics,
+            let nowPlayingItem = player.nowPlayingItem else { return }
+        
+        var playbackTime = lyrics.lines[indexPath.row].position
+        playbackTime = max(0, min(playbackTime, nowPlayingItem.playbackDuration))
+        
+        let override = PlaybackTimeOverride(time: playbackTime)
+        self.playbackTimeOverride = override
+        
+        DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) { [weak self] in
+            if let self = self, self.playbackTimeOverride?.id == override.id {
+                self.playbackTimeOverride = nil
+            }
+        }
+        player.currentPlaybackTime = playbackTime
+        
+        if player.currentPlaybackRate == 0 {
+            player.play()
+        }
+    }
+    
+    
     // MARK: - Auto Scroll
     
     private var isDeferredScrollingScheduled = false
@@ -161,11 +195,6 @@ public class LyricsTableViewController : UITableViewController {
             lastInteractionDate = Date()
         }
     }
-    
-    // forbidden user interaction initiated selection.
-    public override func tableView(_ tableView: UITableView, willSelectRowAt indexPath: IndexPath) -> IndexPath? {
-        return nil
-    }
 }
 
 
@@ -197,7 +226,8 @@ private extension LyricsTableViewController {
     }
     
     func moveFocus(to line: LyricsLine) {
-        guard let lyrics = lyrics,
+        guard playbackTimeOverride == nil,
+            let lyrics = lyrics,
             let index = lyrics.lines.firstIndex(where: { $0.position == line.position }) else { return }
         
         let indexPath = IndexPath(row: index, section: 0)
