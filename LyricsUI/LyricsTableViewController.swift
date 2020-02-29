@@ -77,7 +77,11 @@ public class LyricsTableViewController : UITableViewController {
     
     public override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
+        
         performIfViewSizeChanged {
+            tableView.tableFooterView = nil
+            tableView.tableFooterView = UIView(frame: CGRect(x: 0, y: 0, width: 0, height: view.bounds.height / 2 - view.safeAreaInsets.bottom))
+            
             if let indexPath = tableView.indexPathForSelectedRow {
                 tableView.scrollToRow(at: indexPath, at: .middle, animated: false)
             }
@@ -131,6 +135,11 @@ public class LyricsTableViewController : UITableViewController {
     
     // MARK: - UITableViewDelegate
     
+    public override func tableView(_ tableView: UITableView, shouldHighlightRowAt indexPath: IndexPath) -> Bool {
+        let content = lyrics!.lines[indexPath.row].content.trimmingCharacters(in: .whitespacesAndNewlines)
+        return !content.isEmpty
+    }
+    
     /// This works around an iOS bug where currentPlaybackTime sometimes seek back and cause selection flashing after we adjust it.
     private struct PlaybackTimeOverride {
         let time: TimeInterval
@@ -160,6 +169,7 @@ public class LyricsTableViewController : UITableViewController {
         if player.currentPlaybackRate == 0 {
             player.play()
         }
+        tableView.scrollToRow(at: indexPath, at: .middle, animated: true)
     }
     
     
