@@ -1295,6 +1295,7 @@
 				CODE_SIGN_ENTITLEMENTS = Rhythm/Rhythm.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 19;
 				DEVELOPMENT_TEAM = FF973S8UP2;
 				INFOPLIST_FILE = "$(SRCROOT)/Rhythm/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -1319,6 +1320,7 @@
 				CODE_SIGN_ENTITLEMENTS = Rhythm/Rhythm.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 19;
 				DEVELOPMENT_TEAM = FF973S8UP2;
 				INFOPLIST_FILE = "$(SRCROOT)/Rhythm/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = (
