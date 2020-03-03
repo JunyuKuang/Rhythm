@@ -42,9 +42,6 @@ public class LyricsNotificationController : NSObject {
     }
     
     public var openSettingsHandler: ((UNNotification?) -> Void)?
-    public var changeLyricsHandler: ((UNNotificationResponse) -> Void)?
-    
-    private let changeLyricsActionIdentifier = "changeLyrics"
     
     private override init() {
         super.init()
@@ -181,16 +178,6 @@ extension LyricsNotificationController : UNUserNotificationCenterDelegate {
                                        withCompletionHandler completionHandler: @escaping (UNNotificationPresentationOptions) -> Void)
     {
         completionHandler(UIApplication.shared.applicationState != .active ? .alert : [])
-    }
-    
-    public func userNotificationCenter(_ center: UNUserNotificationCenter,
-                                       didReceive response: UNNotificationResponse,
-                                       withCompletionHandler completionHandler: @escaping () -> Void)
-    {
-        if response.actionIdentifier == changeLyricsActionIdentifier {
-            changeLyricsHandler?(response)
-        }
-        completionHandler()
     }
     
     public func userNotificationCenter(_ center: UNUserNotificationCenter, openSettingsFor notification: UNNotification?) {

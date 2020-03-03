@@ -168,12 +168,6 @@ public class LyricsContainerViewController : UIViewController {
             translationAvailabilityUpdateHandler()
             self?.updateIdleTimerStatus()
         }
-        
-        LyricsNotificationController.shared.changeLyricsHandler = { [weak self] _ in
-            DispatchQueue.main.async {
-                self?.presentLyricsProviderPickerController()
-            }
-        }
         NotificationCenter.default.addObserver(forName: UIContentSizeCategory.didChangeNotification, object: nil, queue: .main) { [weak self] _ in
             self?.updateLayout()
         }
