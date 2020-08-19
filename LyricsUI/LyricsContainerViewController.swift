@@ -373,14 +373,8 @@ private extension LyricsContainerViewController {
             UIAlertAction(title: localized("settings"), style: .default) { _ in
                 UIApplication.shared.open(URL(string: UIApplication.openSettingsURLString)!)
             },
-            UIAlertAction(title: localized("sendFeedback"), style: .default) { _ in
-                MailComposeController.compose()
-            },
             UIAlertAction(title: localized("followOnWeibo"), style: .default) { _ in
                 UIApplication.shared.open(URL(string: "https://weibo.com/lightscreen")!)
-            },
-            UIAlertAction(title: localized("followOnTwitter"), style: .default) { _ in
-                UIApplication.shared.open(URL(string: "https://twitter.com/kuangjunyu")!)
             },
             UIAlertAction(title: localized("followOnGitHub"), style: .default) { _ in
                 UIApplication.shared.open(URL(string: "https://github.com/JunyuKuang/Rhythm")!)
