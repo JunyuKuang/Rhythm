@@ -1,6 +1,8 @@
 # Rhythm
 Real-time lyrics on iOS Lock Screen. Made for Apple Music.
 
+This project is NOT working by default. Lyrics Provider needs to be updated.
+
 ## Install…
 
 ### via Xcode
