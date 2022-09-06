@@ -11,6 +11,7 @@ public extension UIApplication {
     static let kjy_shared = value(forKey: "sharedApplication") as! UIApplication
     
     func kjy_open(_ url: URL, options: [OpenExternalURLOptionsKey : Any] = [:], completionHandler: ((Bool) -> Void)? = nil) {
+        Self.configureOpenURLSwizzle
         kjy_swizzle_open(url, options: options, completionHandler: completionHandler)
     }
 }
