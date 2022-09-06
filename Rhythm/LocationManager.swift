@@ -35,7 +35,9 @@ class LocationManager : NSObject {
     
     /// Start the location updates so the app can be constantly running in background.
     func start() {
-        guard !isRunning else { return }
+        if isRunning || ProcessInfo.processInfo.kjy_isiOSAppOnMac {
+            return
+        }
         
         switch CLLocationManager.authorizationStatus() {
         case .notDetermined:

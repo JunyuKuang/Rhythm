@@ -121,7 +121,7 @@ class SystemAccessSettingsTableViewController : UITableViewController {
                     }
                     settings.append(setting)
                 }
-                do {
+                if !ProcessInfo.processInfo.kjy_isiOSAppOnMac {
                     var setting = Setting()
                     setting.title = NSLocalizedString("enableLocation", comment: "")
                     setting.usageDescription = infoDictionary["NSLocationWhenInUseUsageDescription"] as? String ?? ""
@@ -191,5 +191,15 @@ class SystemAccessSettingsTableViewController : UITableViewController {
         if setting.accessLevel == .authorized {
             tableView.deselectRow(at: indexPath, animated: true)
         }
+    }
+}
+
+extension ProcessInfo {
+    
+    var kjy_isiOSAppOnMac: Bool {
+        if #available(iOS 14, *) {
+            return isiOSAppOnMac
+        }
+        return false
     }
 }
