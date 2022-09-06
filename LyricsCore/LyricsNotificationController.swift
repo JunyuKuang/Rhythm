@@ -177,10 +177,11 @@ extension LyricsNotificationController : UNUserNotificationCenterDelegate {
                                        willPresent notification: UNNotification,
                                        withCompletionHandler completionHandler: @escaping (UNNotificationPresentationOptions) -> Void)
     {
-        completionHandler(UIApplication.shared.applicationState != .active ? .alert : [])
+        completionHandler(UIApplication.kjy_shared.applicationState != .active ? .alert : [])
     }
     
     public func userNotificationCenter(_ center: UNUserNotificationCenter, openSettingsFor notification: UNNotification?) {
         openSettingsHandler?(notification)
     }
 }
+

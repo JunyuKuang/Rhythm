@@ -30,7 +30,7 @@ class AppDelegate : UIResponder, UIApplicationDelegate {
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         
         LyricsNotificationController.shared.openSettingsHandler = { _ in
-            application.open(URL(string: UIApplication.openSettingsURLString)!)
+            application.kjy_open(URL(string: UIApplication.openSettingsURLString)!)
         }
         
         mainWindow.tintColor = .globalTint

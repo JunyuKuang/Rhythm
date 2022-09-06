@@ -134,7 +134,7 @@ public class LyricsContainerViewController : UIViewController {
                 timer.invalidate()
                 return
             }
-            guard UIApplication.shared.applicationState != .background || self.extensionContext != nil else { return }
+            guard UIApplication.kjy_shared.applicationState != .background || self.extensionContext != nil else { return }
             
             var progress: Float = 0
             if let nowPlayingItem = self.player.nowPlayingItem {
@@ -327,7 +327,7 @@ private extension LyricsContainerViewController {
     
     func openMusicApp() {
         let url = URL(string: "music://")!
-        UIApplication.shared.open(url)
+        UIApplication.kjy_shared.kjy_open(url)
     }
     
     func toggleTranslation() {
@@ -371,13 +371,13 @@ private extension LyricsContainerViewController {
         
         let actions = [
             UIAlertAction(title: localized("settings"), style: .default) { _ in
-                UIApplication.shared.open(URL(string: UIApplication.openSettingsURLString)!)
+                UIApplication.kjy_shared.kjy_open(URL(string: UIApplication.openSettingsURLString)!)
             },
-            UIAlertAction(title: localized("followOnWeibo"), style: .default) { _ in
-                UIApplication.shared.open(URL(string: "https://weibo.com/lightscreen")!)
+            UIAlertAction(title: "Twitter", style: .default) { _ in
+                UIApplication.kjy_shared.kjy_open(URL(string: "https://twitter.com/theSpringApp")!)
             },
-            UIAlertAction(title: localized("followOnGitHub"), style: .default) { _ in
-                UIApplication.shared.open(URL(string: "https://github.com/JunyuKuang/Rhythm")!)
+            UIAlertAction(title: "GitHub", style: .default) { _ in
+                UIApplication.kjy_shared.kjy_open(URL(string: "https://github.com/JunyuKuang/Rhythm")!)
             },
             UIAlertAction(title: localized("cancel"), style: .cancel),
         ]
@@ -390,7 +390,7 @@ private extension LyricsContainerViewController {
     }
     
     func updateIdleTimerStatus() {
-        UIApplication.shared.isIdleTimerDisabled
+        UIApplication.kjy_shared.isIdleTimerDisabled
             = player.nowPlayingItem != nil
             && player.playbackState == .playing
             && UserDefaults.appGroup.disablesIdleTimer

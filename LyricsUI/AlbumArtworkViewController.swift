@@ -69,7 +69,7 @@ class AlbumArtworkViewController : UIViewController {
     private var mediaItem: MPMediaItem?
     
     private func updateArtworkIfNeeded() {
-        guard updatesArtwork, UIApplication.shared.applicationState != .background || extensionContext != nil else { return }
+        guard updatesArtwork, UIApplication.kjy_shared.applicationState != .background || extensionContext != nil else { return }
         
         guard let nowPlayingItem = MPMusicPlayerController.systemMusicPlayer.nowPlayingItem else {
             artworkView.artwork = nil

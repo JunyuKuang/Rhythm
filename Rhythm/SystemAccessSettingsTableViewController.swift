@@ -60,7 +60,7 @@ class SystemAccessSettingsTableViewController : UITableViewController {
         UNUserNotificationCenter.current().getNotificationSettings { [weak self] notificationSettings in
             DispatchQueue.main.async {
                 let openSystemSettingsHandler = {
-                    UIApplication.shared.open(URL(string: UIApplication.openSettingsURLString)!)
+                    UIApplication.kjy_shared.kjy_open(URL(string: UIApplication.openSettingsURLString)!)
                 }
                 let infoDictionary = Bundle.main.localizedInfoDictionary ?? Bundle.main.infoDictionary ?? [:]
                 

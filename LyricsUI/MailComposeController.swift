@@ -25,7 +25,7 @@ struct MailComposeController {
         let subject = FeedbackPlaceholders.subject.addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed)!
         
         let url = URL(string: "mailto:\(mailAddress)?subject=\(subject)")!
-        UIApplication.shared.open(url)
+        UIApplication.kjy_shared.kjy_open(url)
     }
 }
 
